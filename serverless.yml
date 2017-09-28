@@ -18,9 +18,11 @@ functions:
       - http:
           path: dynamo-db
           method: post
+          cors: true
+          integration: LAMBDA
   moves-api-authentication:
-    handler: index
-    cljs: djinnii-serverless.moves-api.auth
+    handler: djinnii-serverless.moves-api
+    cljs: djinnii-serverless.moves-api/init-auth
     environment:
       MOVES_API_KEY: kdiz90L264WQ72Sc7OO0_0IUM4ZRrcB6
       MOVES_API_SECRET: ctvltqaFM1y6BaEe1IdE7_c7St82X6sHmIuD4597QAQr4zl930o23F8mnF3t7NEn
@@ -28,9 +30,13 @@ functions:
       - http:
           path: init-auth
           method: post
+          cors: true
+          integration: LAMBDA
       - http:
           path: init-auth
           method: get
+          cors: true
+          integration: LAMBDA
 
 plugins:
   - serverless-cljs-plugin

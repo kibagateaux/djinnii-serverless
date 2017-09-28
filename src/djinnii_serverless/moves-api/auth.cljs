@@ -1,9 +1,10 @@
-(ns djinnii-serverless.moves-api.auth
+(ns djinnii-serverless.moves-api
   (:require [cljs-lambda.macros :refer-macros [deflambda]])
   (:require-macros [adzerk.env :as env]))
 
 (def log (.-log js/console))
 (def env-var (.-env js/process))
+
 (deflambda init-auth
   [event context]
   ;; switch case on invocation method get/post
