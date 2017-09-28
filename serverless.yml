@@ -1,0 +1,37 @@
+service: djinnii-serverless
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+
+functions:
+  echo:
+    cljs: djinnii-serverless.core/echo
+    events:
+      - http:
+          path: echo
+          method: post
+  dynamo-db:
+    handler: index
+    cljs: djinnii-serverless.core/dynamo-db
+    events:
+      - http:
+          path: dynamo-db
+          method: post
+  moves-api-authentication:
+    handler: index
+    cljs: djinnii-serverless.moves-api.auth
+    environment:
+      MOVES_API_KEY: kdiz90L264WQ72Sc7OO0_0IUM4ZRrcB6
+      MOVES_API_SECRET: ctvltqaFM1y6BaEe1IdE7_c7St82X6sHmIuD4597QAQr4zl930o23F8mnF3t7NEn
+    events:
+      - http:
+          path: init-auth
+          method: post
+      - http:
+          path: init-auth
+          method: get
+
+plugins:
+  - serverless-cljs-plugin
+  - serverless-offline
