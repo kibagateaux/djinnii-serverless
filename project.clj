@@ -7,8 +7,12 @@
             [io.nervous/lein-cljs-lambda "0.6.6"]]
   :npm {:dependencies [[serverless-cljs-plugin "0.1.2"]
                         [serverless-offline "3.16.0"]]}
-  :cljs-lambda {:compiler
-                {:inputs  ["src"]
+  :cljs-lambda {
+    :defaults {:role "kiba"}
+    :functions
+     [{:name   "init-mvoes-auth"
+       :invoke djinnii-serverless.moves-api/init-auth}]
+    :compiler   {:inputs  ["src"]
                  :options {:output-to     "target/djinnii-serverless/djinnii_serverless.js"
                            :output-dir    "target/djinnii-serverless"
                            :target        :nodejs

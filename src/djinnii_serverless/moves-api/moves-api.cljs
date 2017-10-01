@@ -18,15 +18,13 @@
   [event context]
   ;; switch case on invocation method get/post
 
-
+  ;; should be own lambdafunc called "handle-auth-tokens"
   ;; on post and code respond back to moves api
   ;; auth code for token url https://api.moves-app.com/oauth/v1/access_token?grant_type=authorization_code&code=<code>&client_id=<client_id>&client_secret=<client_secret>&redirect_uri=<redirect_uri>
 
-  ;;if post
-  ;; if code in params 
-  ;;  send code back to moves and receive token
-  ;; else 
-  ;;  parse access and refresh token and save to db
+  ;; if post method
+  ;;   if code in params 
+  ;;    send code back to moves and receive token
   (if-let [code (get context [:params :code])]
       (let api-key (env-var "MOVES_API_KEY")
         api-secret (env-var "MOVES_API_SECRET")
@@ -36,9 +34,9 @@
     ;; else
       ;; destructure tokens from request and save to db
     (let [{:access_token refresh_token} (get context [:body])])
-
   )
 
+  ;; else get method
   ;; if get then initiate process
   (let [api-key (env-var "MOVES_API_KEY")
         redirect-uri (str "moves://app/authorize?client_id=" api-key "&redirect_uri=" "---this funcs url---" "&scope=activity,location")]
