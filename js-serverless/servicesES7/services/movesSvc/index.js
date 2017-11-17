@@ -1,10 +1,9 @@
-const moves = require('moves');
-const AWS = require('aws-sdk');
-const movesHelpers = require('../../lib/movesData');
-const {
+import moves from 'moves';
+import AWS from 'aws-sdk';
+import {
   createActivitiesList,
   normalizeStorylineData
-} = movesHelpers;
+} from '../../lib/movesData';
 
 AWS.config.update({
   region: "us-east-1"
@@ -12,9 +11,9 @@ AWS.config.update({
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-const movesAuthInitUrl = `https://api.moves-app.com/oauth/v1/authorize?response_type=code&client_id=${MOVES_API_KEY}&scope=activity+location`;
+const movesAuthInitUrl = `https://api.moves-app.com/oauth/v1/authorize?response_type=code&client_id=${process.env.MOVES_API_KEY}&scope=activity+location`;
 
-module.exports.getMovesStorylineData = (event, context) => {
+export const getMovesStorylineData = (event, context) => {
   const userId = event.pathParameters.userId;
   const queryParams = {
     table: process.env.DYNAMODB_TOKENS_TABLE,

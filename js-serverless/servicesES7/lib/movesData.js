@@ -1,11 +1,10 @@
-const timeLib = require('./time');
-const {
+import {
   _formatToUnix,
   _durationUnix,
   _getTimesInUnix,
   _sortByTime,
   _getFirstMSInDay
-} = timeLib;
+} from './time';
 
 const normalizeMovesAPILocation = (place) =>
   place ? {id: place.id, ...place.location, type: place.type } : null
@@ -64,7 +63,7 @@ const addFillerSpace = (activityList) => {
   return completeList
 };
 
-module.exports.createActivitiesList = (stories) => {
+export const createActivitiesList = (stories) => {
   // returns object of all the days activities
   // key = unixStartTime, value = activity obj
   let activityList = {};
@@ -82,7 +81,7 @@ module.exports.createActivitiesList = (stories) => {
   return organizedCompleteList;
 };
 
-module.exports.normalizeStorylineData = (stories) =>
+export const normalizeStorylineData = (stories) =>
 // should take all day segments and return flat object
   stories.map((day) => {
     const {date, calories, lastUpdate, summary} = day
