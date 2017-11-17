@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "babel-funcs": "babel 'servicesES7' --out-dir 'services' --presets=es2017 --copy-files --ignore 'node_modules'"
+    "babel-funcs": "babel 'src/servicesES7' --out-dir 'src/services' --presets=es2017 --copy-files --ignore 'node_modules'",
+    "deploy": "yarn run babel-funcs && sls deploy"
   },
   "dependencies": {
     "aws-sdk": "^2.152.0",

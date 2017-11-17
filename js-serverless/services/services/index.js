@@ -1,1 +1,0 @@
-Object.defineProperty(exports,"__esModule",{value:true});var _movesSvc=require('./movesSvc');var _movesSvc2=_interopRequireDefault(_movesSvc);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}exports.default={movesService:_movesSvc2.default};

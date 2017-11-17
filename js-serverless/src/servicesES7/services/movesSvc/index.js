@@ -11,7 +11,7 @@ AWS.config.update({
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-const movesAuthInitUrl = `https://api.moves-app.com/oauth/v1/authorize?response_type=code&client_id=${process.env.MOVES_API_KEY}&scope=activity+location`;
+// const movesAuthInitUrl = `https://api.moves-app.com/oauth/v1/authorize?response_type=code&client_id=${process.env.MOVES_API_KEY}&scope=activity+location`;
 
 export const getMovesStorylineData = (event, context) => {
   const userId = event.pathParameters.userId;
@@ -21,7 +21,7 @@ export const getMovesStorylineData = (event, context) => {
       userId
     }
   };
-  dynamoDb.getItem(params, (error, results) => {
+  dynamoDb.getItem(queryParams, (error, results) => {
     if(error) {
       console.log('moves storyline fetch user tokens failed', error)      
     } else if (results.moves) {   // if has tokens get data 

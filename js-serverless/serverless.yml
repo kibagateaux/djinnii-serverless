@@ -80,8 +80,8 @@ iamRoleStatements:
 
 functions:
   getMovesStoryline:
-    handler: handler.getMovesStorylineData
-    events: 
+    handler: src/services/movesSvc.getMovesStorylineData
+    events:
       - http:
           path: /moves/storyline/{userId}
           method: get

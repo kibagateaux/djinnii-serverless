@@ -2,6 +2,8 @@
 
 
 const services = require('./services/services');
+console.log('services', services);
+console.log(services.movesService.getMovesStorylineData, typeof services.movesService.getMovesStorylineData );
 module.exports = services;
 
 // module.exports.hello = (event, context, callback) => {
