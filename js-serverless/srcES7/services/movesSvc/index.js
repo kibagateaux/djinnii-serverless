@@ -37,6 +37,7 @@ export const getMovesStorylineData = (event, context) => {
         .then((response) => {
           const normalizeData = normalizeStorylineData(response.data)
           // console.log('norm moves data', normalizeData);
+          context.done(null, normalizeData)
           const newActivities = createActivitiesList(normalizeData);
           console.log('moves actlist', newActivities);
           // update activities table
@@ -45,10 +46,11 @@ export const getMovesStorylineData = (event, context) => {
         })
         .catch((error) => {
           console.log('moves storyline fetch data failed', error)
+          context.done(error)
         })
     } else {
       console.log('get moves tokens null', results);
-      context.done(error, results)
+      context.done(error)
       // no moves tokens, return error to init OAuth
      }
   })
