@@ -1,0 +1,24 @@
+[debug] [2017-08-23T10:07:33.773Z] ----------------------------------------------------------------------
+[debug] [2017-08-23T10:07:33.775Z] Command:       /Users/00y/.nvm/versions/node/v8.1.4/bin/node /Users/00y/.nvm/versions/node/v8.1.4/bin/firebase serve --only functions,hosting
+[debug] [2017-08-23T10:07:33.776Z] CLI Version:   3.9.2
+[debug] [2017-08-23T10:07:33.776Z] Platform:      darwin
+[debug] [2017-08-23T10:07:33.776Z] Node Version:  v8.1.4
+[debug] [2017-08-23T10:07:33.776Z] Time:          Wed Aug 23 2017 12:07:33 GMT+0200 (CEST)
+[debug] [2017-08-23T10:07:33.776Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-08-23T10:07:33.785Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-08-23T10:07:33.785Z] > authorizing via signed-in user
+[debug] [2017-08-23T10:07:33.787Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/djinn-64564  
+ Wed Aug 23 2017 12:07:33 GMT+0200 (CEST)
+[debug] [2017-08-23T10:07:46.255Z] ----------------------------------------------------------------------
+[debug] [2017-08-23T10:07:46.257Z] Command:       /Users/00y/.nvm/versions/node/v8.1.4/bin/node /Users/00y/.nvm/versions/node/v8.1.4/bin/firebase serve --only functions,hosting
+[debug] [2017-08-23T10:07:46.257Z] CLI Version:   3.9.2
+[debug] [2017-08-23T10:07:46.257Z] Platform:      darwin
+[debug] [2017-08-23T10:07:46.257Z] Node Version:  v8.1.4
+[debug] [2017-08-23T10:07:46.258Z] Time:          Wed Aug 23 2017 12:07:46 GMT+0200 (CEST)
+[debug] [2017-08-23T10:07:46.258Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-08-23T10:07:46.270Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-08-23T10:07:46.270Z] > authorizing via signed-in user
+[debug] [2017-08-23T10:07:46.272Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/djinn-64564  
+ Wed Aug 23 2017 12:07:46 GMT+0200 (CEST)

@@ -1,0 +1,1 @@
+(ns djinnii-serverless.handler)

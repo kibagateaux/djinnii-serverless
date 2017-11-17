@@ -1,0 +1,59 @@
+service: djinnii-serverless
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  iamRoleStatements: # permissions for all of your functions can be set here
+      - Effect: Allow
+        Action: # Gives permission to EC2
+          - ec2:*
+        Resource: "*"
+        
+functions:
+  dynamo-db:
+    handler: index
+    cljs: djinnii-serverless.core/dynamo-db
+    events:
+      - http:
+          path: dynamo-db
+          method: post
+          cors: true
+          integration: LAMBDA
+          # authorize using cognito pool
+          arn: arn:aws:cognito-idp:us-east-1:xxx:userpool/us-east-1_ZZZ
+  moves-auth-gateway-authorizer:
+    handler: djinnii-serverless-moves-api
+    cljs: djinnii-serverless.moves-api/moves-api-gateway-authorizer
+    events:
+      - http:
+          path: moves/auth/gateway
+          method: post
+          integration: LAMBDA
+  moves-auth-get-new-token: 
+    handler: djinnii-serverless-moves-api
+    cljs: djinnii-serverless.moves-api/get-new-access-token
+    events:
+      - http:
+          path: moves/auth/get-new-token
+          method: post
+          cors: true
+          integration: LAMBDA
+          authorizer:
+            name: moves-auth-gateway-authorizer
+            identitySource: method.request.header.origin
+            resultTtlInSeconds: 1
+      - http:
+          path: moves/auth/get-new-token
+          method: get
+          cors: true
+          integration: LAMBDA
+          authorizer:
+            name: moves-auth-gateway-authorizer
+            identitySource: method.request.header.origin
+            resultTtlInSeconds: 1
+
+
+
+plugins:
+  - serverless-cljs-plugin
+  - serverless-offline
