@@ -2,14 +2,17 @@ import Moves from 'moves';
 import AWS from 'aws-sdk';
 import {
   createActivitiesList,
+  createDailyLedger,
   normalizeStorylineData
 } from '../../lib/movesData';
 
-AWS.config.update({
-  region: "us-east-1"
-});
-
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+import {
+  blobify
+} from '../../lib/helpers';
+import {
+  DB, 
+  batchPut,
+} from '../../lib/database';
 
 // const movesAuthInitUrl = `https://api.moves-app.com/oauth/v1/authorize?response_type=code&client_id=${process.env.MOVES_API_KEY}&scope=activity+location`;
 
@@ -21,11 +24,11 @@ export const getMovesStorylineData = (event, context) => {
       userId: "+13472418464"
     }
   };
-  dynamoDb.get(queryParams, (error, results) => {
+  DB.get(queryParams, (error, results) => {
     if(error) {
       console.log('moves storyline fetch user tokens failed', error)      
       context.done(error);      
-    } else if (results.Item.moves) {   // if has tokens get data 
+    } else if (results.Item && results.Item.moves) {   // if has tokens get data 
       const {access_token, refresh_token} = results.Item.moves
       const moves = new Moves({
         client_id: process.env.MOVES_API_KEY || "kdiz90L264WQ72Sc7OO0_0IUM4ZRrcB6",
@@ -35,14 +38,23 @@ export const getMovesStorylineData = (event, context) => {
     
       moves.get('/user/storyline/daily?pastDays=7&trackPoints=true')
         .then((response) => {
-          const normalizeData = normalizeStorylineData(response.data)
-          // console.log('norm moves data', normalizeData);
-          context.done(null, normalizeData)
-          const newActivities = createActivitiesList(normalizeData);
-          console.log('moves actlist', newActivities);
+          const normalizedData = normalizeStorylineData(response.data)
+          const newActivities = createActivitiesList(normalizedData);
+          const dailySummaries = createDailyLedger(normalizedData);
+          // console.log('new acts', newActivities);
+          const actBlobs = blobify(newActivities);
+          // console.log('acts to update', actBlobs);
+          const activitiesTable = "djinii-mobilehub-1897344653-Activities"; // FIXME: env var
+          const writes = Promise.all(actBlobs.map((blob) => batchPut(activitiesTable, blob, "+13472418464")));
+          writes.then((results) => {
+            console.log('writes res', results);
+          })
+          .catch((error) => {
+            console.log('write err', error);
+          })
           // update activities table
           // call recalculate stats from timestamp
-            // need DAYS table that has summary and references to activities, stats, and meals with timekeys
+          context.done(null, {})
         })
         .catch((error) => {
           console.log('moves storyline fetch data failed', error)

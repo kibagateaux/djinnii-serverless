@@ -1,6 +1,5 @@
 import {
   _formatToUnix,
-  _durationUnix,
   _getTimesInUnix,
   _sortByTime,
   _getFirstMSInDay
@@ -9,60 +8,58 @@ import {
 const normalizeMovesAPILocation = (place) =>
   place ? {id: place.id, ...place.location, type: place.type } : null
 
-const normalizeMovesAPITrackingPoints = (activity) => 
-  activity.trackPoints ? 
-    activity.trackPoints.reduce((points, {time, lat, lon}) => {
-      console.log('norm track pnt', points);
+const normalizeMovesTrackPoints = (trackPoints) => 
+  trackPoints ? 
+    trackPoints.reduce((points, {time, lat, lon}) => {
       const trackTime = _formatToUnix(time);
       return {...points, [trackTime]: {lat, lon}}}, {}) : null;
 
-const normalizeActivities = (seg) =>
+
+const normalizeMovesActivities = (seg) =>
   seg.activities ? seg.activities.map(act => {
+    // check that start/end exisits, find some way to extrapolate if not
     const actTimes = _getTimesInUnix(act.startTime, act.endTime);
-    segTimes = _getTimesInUnix(seg.startTime, seg.endTime);
-    // console.log('norm track points', act, normalizeMovesAPITrackingPoints(act));  
+    const segTimes = _getTimesInUnix(seg.startTime, seg.endTime);
     const normAct = {
       ...act,
       ...actTimes,
-      trackPoints: normalizeMovesAPITrackingPoints(act),
+      trackPoints: normalizeMovesTrackPoints(act.trackPoints),
       activityGroup: {
         ...segTimes,
         type: seg.type, 
         place: normalizeMovesAPILocation(seg.place)
       }
-    }
+    };
     return normAct;
   }) : [];
 
 const addFillerSpace = (activityList) => {
   let completeList = {}
-  const activityTimes = Object.keys(activityList)
+  const activityTimes = activityList ? Object.keys(activityList) : {};
   // to make FP make last<Array> and take last[0].time instead
   activityTimes.reduce((last, next) => {
-    const endTime = activityList[last.time].endTime;
-    const startTime = activityList[next].startTime;
-
-    // console.log('add filler', activityList[next]);
+    const lastEndTime = activityList[last.time].endTime;
+    const nextStartTime = activityList[next].startTime;
     // if new place then update, else use last place
     const place = (activityList[next].activityGroup.place || last.place);
     
-    (endTime !== startTime + 1)
-      ? completeList[endTime + 1] = {
-          startTime: endTime + 1, // start right after last act
-          endTime: startTime - 1, // end right before next act
-          duration: startTime - endTime,
+    (lastEndTime !== nextStartTime + 1)
+      ? completeList[lastEndTime + 1] = {
+          startTime: lastEndTime + 1, // start right after last act
+          endTime: nextStartTime - 1, // end right before next act
+          duration: nextStartTime - lastEndTime,
           activity: 'idl',
           place,
           activityGroup: {
             type: 'filler',
-            startTime: endTime + 1,
-            endTime: startTime - 1
+            startTime: lastEndTime + 1,
+            endTime: nextStartTime - 1
           }
         }
       : null
     return {time: next, place};
   }, 
-  {time: activityTimes[0], place: {}}); // starter obj for formating
+  {time: activityTimes[0], place: activityList[activityTimes[0]].place || {}}); // starter obj for formating
   return completeList
 };
 
@@ -71,13 +68,11 @@ export const createActivitiesList = (stories) => {
   // key = unixStartTime, value = activity obj
   let activityList = {};
   // turn this into nested reduce for FP or map with reduce and then reduce that
-  stories.map((day) => {
-    day.activityGroups.map((acts) => {
-      acts.map(act => {
-        if(act.startTime) activityList[act.startTime] = act
-      })
+  stories ? stories.map((day) => {
+    day.activities.map((act) => {
+      if(act.startTime) activityList[act.startTime] = act
     });
-  });
+  }) : {};
   const fillerActs = addFillerSpace(activityList);
   const organizedCompleteList = _sortByTime({...fillerActs, ...activityList});
   // organized by time? Expression or reality!?!?
@@ -86,13 +81,44 @@ export const createActivitiesList = (stories) => {
 
 export const normalizeStorylineData = (stories) =>
 // should take all day segments and return flat object
-  stories.map((day) => {
-    const {date, lastUpdate, calories, summary} = day
+  stories ? stories.map((day) => {
+    const {date, lastUpdate, summary} = day
     const normSeg = day.segments
-      .map(seg => normalizeActivities(seg))
-      .filter(seg => seg.length > 0); // gets rid of empty segments
+      .map(seg => normalizeMovesActivities(seg)) // double array being created here
+      .filter(seg => seg.length > 0)
+      .reduce((ledger, seg) => {
+        return [...ledger, ...seg]
+      }, []);; // gets rid of empty segments
 
     const unixDate = _getFirstMSInDay(_formatToUnix(date));
-    const unixLastUpdate = _formatToUnix(lastUpdate);
-    return {date, lastUpdate, summary: {...summary, calories}, activityGroups: normSeg};
-  });
+    const unixLastUpdate = _formatToUnix(lastUpdate); // last update not changed because we are simply reformatting
+    return {date: unixDate, lastUpdate: unixLastUpdate, summary, activities: normSeg};
+  }) : [];
+
+
+export const createDailyLedger = (stories) => {
+  return stories ? stories.map((day) => {
+    const {summary, activities, lastUpdate, date, stats} = day;
+    const activityList = activities ?
+      activities.reduce((ledger, act) => [...ledger, act.startTime], [])
+      : [];
+    const statsList = stats ? Object.keys(stats) : [];
+    const locationList = createLocationLedger(activities);
+    return {
+      stats: statsList,
+      activities: activityList, // although everything IS an activity it will get exhaustive once adding in purchases, messaging, meals, ect.
+      locations: locationList,
+      summary,
+      lastUpdate,  // last update not changed because we are simply reformatting
+      date
+    };
+  }) : [];
+};
+
+const createLocationLedger = (activities) =>
+  activities ? activities.reduce((ledger, act) => {
+    const locationTimes = act.trackPoints ? Object.keys(act.trackPoints) : [];
+    const nonDuplicateLocations = locationTimes.filter((time) => ledger.indexOf(time) !== -1)
+    return [...ledger, ...locationTimes];
+  }, []) : [];
+

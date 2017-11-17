@@ -5,14 +5,15 @@
   },
   "dependencies": {
     "aws-sdk": "^2.152.0",
+    "lodash": "^4.17.4",
     "moment": "^2.19.2",
     "moves": "github:kibagateaux/iso-moves-api"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "6.17.0",
-    "babel-preset-react-native": "4.0.0",    
     "babel-preset-es2017": "^6.24.1",
+    "babel-preset-react-native": "4.0.0",
     "jest": "16.0.2",
     "serverless-offline": "^3.16.0"
   }
