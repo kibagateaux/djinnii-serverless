@@ -25,7 +25,7 @@ const normalizeActivities = (seg) =>
       trackingPoints: normalizeMovesAPITrackingPoints(act),
       activityGroup: {
         ...segTimes,
-        type: seg.type,
+        type: seg.type, 
         place: normalizeMovesAPILocation(seg.place)
       }
     }
@@ -40,7 +40,8 @@ const addFillerSpace = (activityList) => {
     const endTime = activityList[last.time].endTime;
     const startTime = activityList[next].startTime;
 
-    // if new place update, else use last place
+    console.log('add filler', next, activityList[next]);
+    // if new place then update, else use last place
     const place = (activityList[next].activityGroup.place || last.place);
     
     (endTime !== startTime + 1)
@@ -59,7 +60,7 @@ const addFillerSpace = (activityList) => {
       : null
     return {time: next, place};
   }, 
-  {time: activityTimes[0], place: activityList[activityTimes[0]].activityGroup.place}); // starter obj
+  {time: activityTimes[0], place: {}}); // starter obj for formating
   return completeList
 };
 
@@ -67,12 +68,12 @@ export const createActivitiesList = (stories) => {
   // returns object of all the days activities
   // key = unixStartTime, value = activity obj
   let activityList = {};
+  // turn this into nested reduce for FP or map with reduce and then reduce that
   stories.map((day) => {
-    day.activityGroups.map((seg) => {
-      seg.activities.map((act) => {
-        const startTime = act.startTime
-        activityList[startTime] = act;  
-      });
+    day.activityGroups.map((acts) => {
+      acts.map(act => {
+        if(act.startTime) activityList[act.startTime] = act
+      })
     });
   });
   const fillerActs = addFillerSpace(activityList);
@@ -84,24 +85,15 @@ export const createActivitiesList = (stories) => {
 export const normalizeStorylineData = (stories) =>
 // should take all day segments and return flat object
   stories.map((day) => {
-    const {date, calories, lastUpdate, summary} = day
+    const {date, lastUpdate, calories, summary} = day
     const normSeg = day.segments.map(seg => {
       const {startTime, endTime, type} = seg;
       const segmentTime = _getTimesInUnix(startTime, endTime);
       const activities = normalizeActivities(seg);
-
-      // console.log('norm story', activities);
-      // segmentActivity = activities.length > 0 ? activities[0].activity : 'idl';
-      // const meta = {type:seg.type, ...segmentTime, activity: segmentActivity};
-      // const normData = {
-      //   meta,
-      //   activities
-      // }
-
       // normalize track points so timestamp is key for lat/long
       return activities
-    });
+    }).filter(seg => seg.length > 0); // gets rid of empty segments
     const unixDate = _getFirstMSInDay(_formatToUnix(date));
     const unixLastUpdate = _formatToUnix(lastUpdate);
-    return {date, lastUpdate, summary, activityGroups: normSeg};
+    return {date, lastUpdate, summary: {...summary, calories}, activityGroups: normSeg};
   });
