@@ -39,7 +39,7 @@
 #  exclude:
 #    - exclude-me.js
 #    - exclude-me-dir/**
-service: jinni # NOTE: update this with your service name
+service: jinni-integrations # NOTE: update this with your service name
 
 plugins:
   - serverless-offline
