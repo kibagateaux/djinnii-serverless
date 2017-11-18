@@ -82,6 +82,8 @@ functions:
   getMovesStoryline:
     handler: src/services/movesSvc.getMovesStorylineData
     description: Uses stored access_key in database to pull new data from Moves App and update database activities, locations, and stats
+    tags:
+      runtime: nodejs6.10
     environment:
       DYNAMODB_TOKENS_TABLE: djinii-mobilehub-1897344653-Tokens
       DYNAMODB_ACTIVITIES_TABLE: djinii-mobilehub-1897344653-Activities
