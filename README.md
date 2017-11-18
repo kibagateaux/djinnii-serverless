@@ -8,10 +8,14 @@
 * Core Components of a Health Human - Purpose, Nutrition, Emotion, Social, Financial, Physical Activity, Mental Activity, Sleep ...more? (Human Performance Institute)
 
 # File Structure
-**cljs-serverless** - AWS Lambda functions written in ClojureScript using [cljs-lambda](https://github.com/nervous-systems/cljs-lambda/tree/master/cljs-lambda) and [Serverless framework](https://serverless.com/)
-**integrations** - AWS Lambda functions written in JavaScript. A quick port from front-end code toget app live to handle app integration logic such as OAuth, data normalizing, and database updates.
-**firebase** - I could only figure out how to do serverless OAuth through firebase functions. Only using one function for MovesAPI redirect. FIXME!!! Do not build more functions, this is a trap.
-**chatbot**
+
+- **chatbot** - Chatbot built during Hacking Arts, designed to be used with [Botsify](botsify.com) but maybe this should change? Botsify is quite handy and it intgrates with different messenging services including Facebook and Kik.
+
+- **cljs-serverless** - AWS Lambda functions written in ClojureScript using [cljs-lambda](https://github.com/nervous-systems/cljs-lambda/tree/master/cljs-lambda) and [Serverless framework](https://serverless.com/)
+
+- **integrations** - AWS Lambda functions written in JavaScript. A quick port from front-end code toget app live to handle app integration logic such as OAuth, data normalizing, and database updates.
+
+- **firebase** - I could only figure out how to do serverless OAuth through firebase functions. Only using one function for MovesAPI redirect. FIXME!!! Do not build more functions, this is a trap.
 
 
 # Documentation
