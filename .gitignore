@@ -1,0 +1,22 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Package Managers
+node_modules/
+
+# Environment
+.env
+
+# Serverless Framework
+.serverless
+
+# Clojure
+pom.xml
+*jar
+/lib/
+/classes/
+/out/
+/target/
+.lein*
