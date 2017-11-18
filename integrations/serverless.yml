@@ -81,6 +81,12 @@ iamRoleStatements:
 functions:
   getMovesStoryline:
     handler: src/services/movesSvc.getMovesStorylineData
+    description: Uses stored access_key in database to pull new data from Moves App and update database activities, locations, and stats
+    environment:
+      DYNAMODB_TOKENS_TABLE: djinii-mobilehub-1897344653-Tokens
+      DYNAMODB_ACTIVITIES_TABLE: djinii-mobilehub-1897344653-Activities
+      DYNAMODB_STATS_TABLE: djinii-mobilehub-1897344653-stats
+      DYNAMODB_LOCATIONS_TABLE: djinii-mobilehub-1897344653-Locations
     events:
       - http:
           path: /moves/storyline/{userId}

@@ -73,7 +73,7 @@ const addFillerSpace = (activityList) => {
       : null
     return {time: next, place};
   }, 
-  {time: activityTimes[0], place: activityList[activityTimes[0]].place || {}}); // starter obj for formating
+  {time: activityTimes[0], place: {}}); // starter obj for formating
   return completeList
 };
 
