@@ -8,7 +8,6 @@ export const _durationUnix = (start, end) => ( _formatToUnix(end) - _formatToUni
 export const  _getTimesInUnix = (start, end) => ({
   startTime: _formatToUnix(start),
   endTime:  _formatToUnix(end),
-  duration: _durationUnix(start, end)
 });
 
 export const _sortByTime = (obj) => Object.keys(obj)

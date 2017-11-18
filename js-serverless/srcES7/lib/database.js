@@ -10,7 +10,7 @@ AWS.config.update({
 export const DB = new AWS.DynamoDB.DocumentClient(); // FIXME: set standard version
 
 export const batchPut = (table, items =[], userId) => {
-  console.log('put', userId, items[0])
+  // console.log('put', items)
   const request = {
     RequestItems: {
       [table]: items.map((obj) => ({
@@ -22,8 +22,7 @@ export const batchPut = (table, items =[], userId) => {
     }
   };
   return new Promise((resolve, reject) =>
-    DB.batchWrite(request, (error, data) => {
-      console.log('batch write', error, data);
-      error ? reject(error) : resolve(data)
+    DB.batchWrite(request, (error, results) => {
+      error ? reject(error) : resolve(results)
   }))
 };

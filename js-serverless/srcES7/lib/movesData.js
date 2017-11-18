@@ -12,8 +12,22 @@ const normalizeMovesTrackPoints = (trackPoints) =>
   trackPoints ? 
     trackPoints.reduce((points, {time, lat, lon}) => {
       const trackTime = _formatToUnix(time);
-      return {...points, [trackTime]: {lat, lon}}}, {}) : null;
+      return {...points, [trackTime]: {lat, lon, time:trackTime}}}, {}) : null;
 
+const createLocationLedger = (activities) =>
+  activities ? Object.keys(activities).reduce((ledger, time) => {
+    const act = activities[time];
+    const locationTimes = act.trackPoints ? Object.keys(act.trackPoints) : [];
+    const nonDuplicateLocations = locationTimes.filter((time) => ledger.indexOf(time) !== -1)
+    return [...ledger, ...locationTimes];
+  }, []) : [];
+
+const createLocationsList = (activities) => {
+  return activities ? Object.keys(activities).reduce((list, time) => {
+    const act = activities[time];
+    return act.trackPoints ? {...list, ...act.trackPoints} : {...list};
+  }, {}) : {}
+};
 
 const normalizeMovesActivities = (seg) =>
   seg.activities ? seg.activities.map(act => {
@@ -63,16 +77,13 @@ const addFillerSpace = (activityList) => {
   return completeList
 };
 
-export const createActivitiesList = (stories) => {
+export const createActivitiesList = (activities) => {
   // returns object of all the days activities
   // key = unixStartTime, value = activity obj
-  let activityList = {};
-  // turn this into nested reduce for FP or map with reduce and then reduce that
-  stories ? stories.map((day) => {
-    day.activities.map((act) => {
-      if(act.startTime) activityList[act.startTime] = act
-    });
-  }) : {};
+  const activityList = activities ? 
+    activities.reduce((ledger, act) => 
+      ({...ledger, [act.startTime]: act}), {}) : {};
+
   const fillerActs = addFillerSpace(activityList);
   const organizedCompleteList = _sortByTime({...fillerActs, ...activityList});
   // organized by time? Expression or reality!?!?
@@ -92,33 +103,37 @@ export const normalizeStorylineData = (stories) =>
 
     const unixDate = _getFirstMSInDay(_formatToUnix(date));
     const unixLastUpdate = _formatToUnix(lastUpdate); // last update not changed because we are simply reformatting
-    return {date: unixDate, lastUpdate: unixLastUpdate, summary, activities: normSeg};
-  }) : [];
+    const activities = createActivitiesList(normSeg);
+    const locations = createLocationsList(activities);
+    // const stats = createStatsList(activities); // complicated because needs to pull stats from DB to incorp other API stats
 
-
-export const createDailyLedger = (stories) => {
-  return stories ? stories.map((day) => {
-    const {summary, activities, lastUpdate, date, stats} = day;
-    const activityList = activities ?
-      activities.reduce((ledger, act) => [...ledger, act.startTime], [])
-      : [];
-    const statsList = stats ? Object.keys(stats) : [];
-    const locationList = createLocationLedger(activities);
-    return {
-      stats: statsList,
-      activities: activityList, // although everything IS an activity it will get exhaustive once adding in purchases, messaging, meals, ect.
-      locations: locationList,
+    // create activities, stats, and locations timestamp list overview
+    const dayWithActivities = {
+      date: unixDate,
+      lastUpdate: unixLastUpdate,
       summary,
-      lastUpdate,  // last update not changed because we are simply reformatting
-      date
+      activities,
+      locations
     };
+    const fullSummary = createDailyLedger(dayWithActivities);
+    return {...dayWithActivities, summary: fullSummary};
   }) : [];
+
+
+export const createDailyLedger = (day) => {
+  const {summary, activities, lastUpdate, date, stats} = day;
+  const activityList = activities ? Object.keys(activities) : [];
+  const statsList = stats ? Object.keys(stats) : [];
+  const locationList = createLocationLedger(activities);
+  return {
+    overview: summary,
+    stats: statsList,
+    activities: activityList, // although everything IS an activity it will get exhaustive once adding in purchases, messaging, meals, ect.
+    locations: locationList,
+    lastUpdate,  // last update not changed because we are simply reformatting
+    date
+  };
 };
 
-const createLocationLedger = (activities) =>
-  activities ? activities.reduce((ledger, act) => {
-    const locationTimes = act.trackPoints ? Object.keys(act.trackPoints) : [];
-    const nonDuplicateLocations = locationTimes.filter((time) => ledger.indexOf(time) !== -1)
-    return [...ledger, ...locationTimes];
-  }, []) : [];
+
 
