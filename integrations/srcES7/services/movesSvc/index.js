@@ -38,7 +38,9 @@ export const getMovesStorylineData = (event, context) => {
                 [key]: normalizedData.reduce((ledger, day) => 
                   ({...ledger, ...day[key]}))})
               , {}); // compiles full list of new data from each day to update to DB
+            
 
+            // ideally normalized data is sent to general function for diffing instead of updating DB directly
             const dbWrites = Object.keys(newData).map((resource) => {
               const data = newData[resource];
               const ledger = Object.keys(data).map((time) => data[time]);
@@ -54,7 +56,7 @@ export const getMovesStorylineData = (event, context) => {
             //   .then((result) => console.log('dbwrite res', result))
             //   .catch((error) => console.log('write err', error))
 
-            context.done(null, {})
+            context.done(null, {}) // return blank because Database is singlesource of truth, don't want data from different sources
           })
           .catch((error) => {
             console.log('moves storyline fetch data failed', error)

@@ -103,11 +103,12 @@ export const normalizeStorylineData = (stories) =>
 
     const unixDate = _getFirstMSInDay(_formatToUnix(date));
     const unixLastUpdate = _formatToUnix(lastUpdate); // last update not changed because we are simply reformatting
+    
+    // create activities, stats, and locations timestamp ledger
     const activities = createActivitiesList(normSeg);
     const locations = createLocationsList(activities);
     // const stats = createStatsList(activities); // complicated because needs to pull stats from DB to incorp other API stats
 
-    // create activities, stats, and locations timestamp list overview
     const dayWithActivities = {
       date: unixDate,
       lastUpdate: unixLastUpdate,

@@ -7,6 +7,9 @@
 * “Abstraction of Self” - Is it you or its own being? Given all data about you, is it possible to recreate a virtual replica?
 * Core Components of a Health Human - Purpose, Nutrition, Emotion, Social, Financial, Physical Activity, Mental Activity, Sleep ...more? (Human Performance Institute)
 
+# Development
+In terminal change directory into service you are working on (e.g. `cd integrations/`) and run `serverles offline start` to deploy Lambda functions locally. This means that everything is being run off of your own computer and not servers in the cloud for faster feedback and so we don't pay. Everything is "hot-loaded" so anytime you save a file then the code you are running is automatically updated.
+
 # File Structure
 
 - **chatbot** - Chatbot built during Hacking Arts, designed to be used with [Botsify](botsify.com) but maybe this should change? Botsify is quite handy and it intgrates with different messenging services including Facebook and Kik.
