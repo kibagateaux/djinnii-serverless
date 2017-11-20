@@ -96,8 +96,23 @@ functions:
           request:
             parameters:
               paths:
-                intent: true
-
+                userId: true
+  updateAllDataSources:
+    handler: src/services/general.updateAllDataSources
+    description: Checks all available data integrations for a user and fetches data to update database
+    tags:
+      runtime: nodejs6.10
+    environment:
+      DYNAMODB_TOKENS_TABLE: djinii-mobilehub-1897344653-Tokens
+    events: 
+      - http:
+          path: /user/update-all-data/{userId}
+          method: get
+          request:
+            parameters:
+              paths:
+                userId: true
+                
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

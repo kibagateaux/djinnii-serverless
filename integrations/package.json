@@ -1,10 +1,11 @@
 {
   "scripts": {
-    "babel-funcs": "rm -rf src/services && babel 'srcES7/' --out-dir 'src/' --presets=es2017 --copy-files --ignore 'node_modules'",
+    "compile": "rm -rf src/services && babel 'srcES7/' --out-dir 'src/' --presets=es2017 --copy-files --ignore 'node_modules'",
     "deploy": "yarn run babel-funcs && sls deploy"
   },
   "dependencies": {
     "aws-sdk": "^2.152.0",
+    "axios": "^0.17.1",
     "lodash": "^4.17.4",
     "moment": "^2.19.2",
     "moves": "github:kibagateaux/iso-moves-api"
