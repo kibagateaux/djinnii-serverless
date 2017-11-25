@@ -19,7 +19,7 @@ export const getMovesStorylineData = (event, context, callback) => {
     };
     DB.get(queryParams, (error, results) => {
     if (!error && results.Item && results.Item.moves) {  // if has tokens get data 
-      const {access_token, refresh_token} = results.Item.moves;
+      const {access_token, refresh_token} = results.Item.moves; // add lastDataUpdate. only update if > 8 hours or something
       const moves = new Moves({
         client_id: process.env.MOVES_API_KEY || "kdiz90L264WQ72Sc7OO0_0IUM4ZRrcB6", // manually added in AWS console not in .yaml file
         access_token,

@@ -112,6 +112,16 @@ functions:
             parameters:
               paths:
                 userId: true
+  dataIntegrationsAggregator:
+    handler: src/services/general.dataIntegrationsAggregator
+    description: Checks all available data integrations for a user and fetches data to update database
+    tags:
+      runtime: nodejs6.10
+    environment:
+    events: 
+      - http:
+          path: /user/aggregate-data/
+          method: post
                 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

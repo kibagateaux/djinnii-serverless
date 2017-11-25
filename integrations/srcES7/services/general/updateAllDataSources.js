@@ -13,9 +13,16 @@ export const updateAllDataSources = (event, context, callback) => {
       TableName: process.env.DYNAMODB_TOKENS_TABLE,
       Key: {userId: "+13472418464"}
     };
-    const datafetchingFunctions = {
+    const dataIntegrationServices = {
       // these should be dynamic based on context of region, dev stage, and API gateway used
-      moves: `https://og1pdgpgji.execute-api.us-east-1.amazonaws.com/dev/moves/storyline/${userId}`
+      moves: {
+        FunctionName: "jinni-integrations-dev-getMovesStoryline",
+        data : {
+          "resource": "/",
+          "path": "/",
+          "httpMethod": "GET",
+        }
+      },
       // other integrations here
     }
     DB.get(queryParams, (error, results) => {
@@ -27,6 +34,7 @@ export const updateAllDataSources = (event, context, callback) => {
           .filter((func) => !!func) // filters only functions available, should be some kind of pattern checking for properly formatted region etc.
         const fetchingPromises = fetchingFunctionsForAvailableIntegrations.map((func) => 
           new Promise((reject, resolve) => {
+            const lambda = new AWS.Lambda({region: 'us-east-1'}); // FIXME replace with region in context
             console.log('fetch data func', func);
             axios.get(func).then(resolve).catch(reject)
           }))
