@@ -1,6 +1,5 @@
-import * as movesService from './movesSvc';
+import * as movesService from './movesService';
 import * as general from'./general';
-
 
 export {
   general,

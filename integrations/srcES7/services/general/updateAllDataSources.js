@@ -16,7 +16,7 @@ export const updateAllDataSources = (event, context, callback) => {
     const dataIntegrationServices = {
       // these should be dynamic based on context of region, dev stage, and API gateway used
       moves: {
-        FunctionName: "jinni-integrations-dev-getMovesStoryline",
+        FunctionName: "jinni-integrations-dev-getMovesStorylineData",
         data : {
           "resource": "/",
           "path": "/",

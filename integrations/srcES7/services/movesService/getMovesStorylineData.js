@@ -7,7 +7,7 @@ import {
   normalizeStorylineData
 } from '../../lib/movesData';
 import {blobify} from '../../lib/helpers';
-import {DB, batchPut} from '../../lib/database';
+import {DB, batchWrite} from '../../lib/database';
 
 
 export const getMovesStorylineData = (event, context) => {
@@ -40,6 +40,7 @@ export const getMovesStorylineData = (event, context) => {
                 ({...ledger, ...day[key]}))})
             , {}); // compiles full list of new data from each day to update to DB
           
+            console.log('newData', newData);
 
           const dbWrites = Object.keys(newData).map((resource) => {
             const data = newData[resource];
@@ -47,7 +48,7 @@ export const getMovesStorylineData = (event, context) => {
             const blobs = blobify(ledger);
             const table = process.env[`DYNAMODB_${_.toUpper(resource)}_TABLE`];
             return (blobs[0].length > 0) ? // checks that there is at least one item to put
-              blobs.map((blob) => batchPut(table, blob, userId)) : null;
+              blobs.map((blob) => batchWrite(table, blob, userId)) : null;
           });
 
           // don't think using results from writes is useful but this is how to handle it

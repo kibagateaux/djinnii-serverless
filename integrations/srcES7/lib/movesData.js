@@ -90,16 +90,16 @@ export const createActivitiesList = (activities) => {
   return organizedCompleteList;
 };
 
-export const normalizeStorylineData = (stories) =>
+export const normalizeStorylineData = (stories = []) =>
 // should take all day segments and return flat object
   stories ? stories.map((day) => {
-    const {date, lastUpdate, summary} = day
-    const normSeg = day.segments
+    const {date, lastUpdate, summary} = day;
+    const normSeg = day.segments ? day.segments
       .map(seg => normalizeMovesActivities(seg)) // double array being created here
       .filter(seg => seg.length > 0)
       .reduce((ledger, seg) => {
         return [...ledger, ...seg]
-      }, []);; // gets rid of empty segments
+      }, []) : []; // gets rid of empty segments
 
     const unixDate = _getFirstMSInDay(_formatToUnix(date));
     const unixLastUpdate = _formatToUnix(lastUpdate); // last update not changed because we are simply reformatting

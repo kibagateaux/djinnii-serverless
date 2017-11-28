@@ -1,2 +1,2 @@
 export * from './updateAllDataSources';
-export * from './diffingAlgorithm';
+export * from './diffingAlgorithms';
