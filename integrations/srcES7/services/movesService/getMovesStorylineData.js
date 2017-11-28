@@ -10,8 +10,10 @@ import {blobify} from '../../lib/helpers';
 import {DB, batchWrite} from '../../lib/database';
 
 
-export const getMovesStorylineData = (event, context) => {
+export const getMovesStorylineData = (event, context, callback) => {
+  console.log("event", event);
   const {userId} = event.pathParameters;
+  console.log('userId', userId);
   if(userId) {
     const queryParams = {
       TableName: process.env.DYNAMODB_TOKENS_TABLE,
@@ -27,8 +29,8 @@ export const getMovesStorylineData = (event, context) => {
       });
     
       moves.get('/user/storyline/daily?pastDays=7&trackPoints=true')
-        .then((response) => {
-          const normalizedData = normalizeStorylineData(response.data)
+        .then((res) => {
+          const normalizedData = normalizeStorylineData(res.data)
           // FIXME send normalized data to diffing functions instead of everything below e.g. stats calculation and updating DB directly
           
           // call recalculate stats from timestamp
@@ -40,7 +42,7 @@ export const getMovesStorylineData = (event, context) => {
                 ({...ledger, ...day[key]}))})
             , {}); // compiles full list of new data from each day to update to DB
           
-            console.log('newData', newData);
+          //   console.log('newData', newData);
 
           const dbWrites = Object.keys(newData).map((resource) => {
             const data = newData[resource];
@@ -56,15 +58,26 @@ export const getMovesStorylineData = (event, context) => {
           // Promise.all(dbWrites)
           //   .then((result) => console.log('dbwrite res', result))
           //   .catch((error) => console.log('write err', error))
-          context.done(null, {}) // end lambda invocation so no timeout
+
+          const response = {
+            isBase64Encoded: false,
+            statusCode: 200,
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Request-Method": "GET",
+              "Access-Control-Allow-Origin": "*"
+            },
+            body: JSON.stringify(normalizedData),
+          };
+          callback(null, response);
         })
         .catch((error) => {
           console.log('moves storyline fetch data failed', error)
-          context.done(error)
+          callback(error)
         })
       } else {
         console.log('get moves tokens failed', error, results);
-        context.done(error)
+        callback(error)
         // no moves tokens, return error to init OAuth
       }
     });

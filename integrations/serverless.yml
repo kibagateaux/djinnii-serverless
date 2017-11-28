@@ -106,6 +106,7 @@ functions:
             parameters:
               paths:
                 userId: true
+
   updateAllDataSources:
     handler: handler.general.updateAllDataSources
     description: Checks all available data integrations for a user and fetches data to update database
@@ -121,6 +122,7 @@ functions:
             parameters:
               paths:
                 userId: true
+
   dataIntegrationsAggregator:
     handler: handler.general.dataIntegrationsAggregator
     description: Checks all available data integrations for a user and fetches data to update database

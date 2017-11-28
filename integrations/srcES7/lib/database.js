@@ -23,8 +23,8 @@ export const batchWrite = (table, items =[], userId) => {
     })
     }
   };
-  // return new Promise((resolve, reject) =>
-  //   DB.batchWrite(request, (error, results) => {
-  //     error ? reject(error) : resolve(results)
-  // }))
+  return new Promise((resolve, reject) =>
+    DB.batchWrite(request, (error, results) => {
+      error ? reject(error) : resolve(results)
+  }))
 };
