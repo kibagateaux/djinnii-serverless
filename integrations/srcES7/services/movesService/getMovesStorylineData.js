@@ -1,5 +1,5 @@
 import AWS from 'aws-sdk';
-import Moves from 'moves';
+import Moves from 'react-native-moves-api';
 import _ from 'lodash';
 import {
   createActivitiesList,
