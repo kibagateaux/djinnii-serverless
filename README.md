@@ -21,5 +21,9 @@ In terminal change directory into service you are working on (e.g. `cd integrati
 - **firebase** - I could only figure out how to do serverless OAuth through firebase functions. Only using one function for MovesAPI redirect. FIXME!!! Do not build more functions, this is a trap.
 
 
+# Notes
+If lambda needs permissions, add roles to it's policy in IAM console.
+# TODOS
+Change DynamoDB "Tokens" table to "Integrations" to handle more metadata such as lastDataUpdate.
 # Documentation
 FIXME: I need to be documented so people know how to use me!
