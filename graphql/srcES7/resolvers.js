@@ -12,4 +12,9 @@ export default {
       return neo4jgraphql(object, params, ctx, resolveInfo);
     }
   },
+  User: {
+    avatar(user) {
+      return {};
+    }
+  }
 };

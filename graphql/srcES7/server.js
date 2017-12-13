@@ -26,10 +26,11 @@ app.use('/', bodyParser.json(), graphqlExpress(request => ({
   schema,
   rootValue: {},
   context: context(request.headers, process.env, request.apiGateway.event),
+  graphiql: true
 })));
 
 app.use('/graphiql', graphiqlExpress({
-  endpointURL: '/graphql'
+  endpointURL: '/'
 }));
 
 

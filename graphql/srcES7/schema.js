@@ -5,4 +5,4 @@ import resolvers from './resolvers';
 export default makeExecutableSchema({
   typeDefs,
   resolvers
-})
+});
