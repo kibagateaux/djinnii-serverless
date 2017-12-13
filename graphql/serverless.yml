@@ -31,14 +31,14 @@ package:
 
 
 functions:
-  graphServer:
-    handler: src/handler.GraphQLServer
+  GraphQLServer:
+    handler: src/handler.GraphQLServerHandler
     events:
       - http:
           path: /
           method: get
-  graphiql:
-    handler: src/handler.GraphQLServer
+  GraphQLInspector:
+    handler: src/handler.GraphQLInspectorHandler
     events:
       - http:
           path: /graphiql
