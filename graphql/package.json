@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "compile": "rm -rf handler.js && babel 'handlerES7.js' --presets=react-native --copy-files --ignore 'node_modules'",
+    "deploy": "yarn run babel-funcs && sls deploy"    
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-react-native": "^4.0.0",
+    "serverless-offline": "^3.16.0"
+  }
+}

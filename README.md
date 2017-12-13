@@ -23,6 +23,7 @@ In terminal change directory into service you are working on (e.g. `cd integrati
 
 # Notes
 If lambda needs permissions, add roles to it's policy in IAM console.
+If Lambda is inexplicably returning 502s, make sure respoonse codes are configured in API Gateway
 # TODOS
 Change DynamoDB "Tokens" table to "Integrations" to handle more metadata such as lastDataUpdate.
 # Documentation

@@ -11,15 +11,15 @@ export const updateAllDataSources = (event, context, callback) => {
   if(userId) {
     const queryParams = {
       TableName: process.env.DYNAMODB_TOKENS_TABLE,
-      Key: {userId: "+13472418464"}
+      Key: {userId}
     };
     const dataIntegrationServices = {
       // these should be dynamic based on context of region, dev stage, and API gateway used
       moves: {
         FunctionName: "jinni-integrations-dev-getMovesStorylineData",
-        data : {
+        options : {
           "resource": "/",
-          "path": "/",
+          "path": `/${userId}`,
           "httpMethod": "GET",
         }
       },
