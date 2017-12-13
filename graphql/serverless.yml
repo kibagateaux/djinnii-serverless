@@ -37,6 +37,9 @@ functions:
       - http:
           path: /
           method: get
+      - http:
+          path: /
+          method: post
   GraphQLInspector:
     handler: src/handler.GraphQLInspectorHandler
     events:
