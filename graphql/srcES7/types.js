@@ -1,8 +1,12 @@
 export default `
   type User {
-    id: ID!
+    uid: ID!
     avatarName: String
     age: Int
+    userName: String
+    firstName: String
+    lastName: String
+    email: String
     purpose: [String]
     overallRating: Float
     avatar: Avatar
@@ -15,6 +19,7 @@ export default `
     distance: Int
     calories: Int
   }
+
   type Avatar {
     name: String!
     stats: [Stat]
@@ -27,7 +32,8 @@ export default `
 
 
   type Query {
-    User(id: ID): User
+    User(uid: ID): User
+    AllUsers: [User]!
     Avatar(name: String, partner: ID): Avatar
     UserActivities(id: ID, type: String, startTime: Int): [Activity]
   }

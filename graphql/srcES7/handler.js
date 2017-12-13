@@ -5,8 +5,6 @@ import {
 import {v1 as neo4j} from 'neo4j-driver';
 import schema from './schema';
 
-console.log('server', graphiqlLambda);
-
 function graphContext(headers, secrets, event, ctx) {
   const driver = neo4j.driver(
     secrets.NEO4J_URI || "bolt://localhost:7687",

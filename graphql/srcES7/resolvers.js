@@ -2,19 +2,14 @@ import {neo4jgraphql} from 'neo4j-graphql-js';
 
 export default {
   Query: {
-    User(object, params, ctx, resolveInfo) {
-      return {};
+    User(object, args, ctx, resolveInfo) {
+      return neo4jgraphql(object, args, ctx, resolveInfo);
     },
-    Avatar(object, params, ctx, resolveInfo) {
-      return neo4jgraphql(object, params, ctx, resolveInfo);
+    Avatar(object, args, ctx, resolveInfo) {
+      return neo4jgraphql(object, args, ctx, resolveInfo);
     },
-    UserActivities(object, params, ctx, resolveInfo) {
-      return neo4jgraphql(object, params, ctx, resolveInfo);
-    }
-  },
-  User: {
-    avatar(user) {
-      return {};
+    UserActivities(object, args, ctx, resolveInfo) {
+      return neo4jgraphql(object, args, ctx, resolveInfo);
     }
   }
 };
