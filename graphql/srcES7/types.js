@@ -25,10 +25,14 @@ export default `
     value: Float!
   }
 
-  
+
   type Query {
     User(id: ID): User
     Avatar(name: String, partner: ID): Avatar
     UserActivities(id: ID, type: String, startTime: Int): [Activity]
+  }
+
+  schema {
+    query: Query
   }
 `;
