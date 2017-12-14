@@ -10,7 +10,9 @@ export default `
     purpose: [String]
     overallRating: Float
     avatar: Avatar
+    time: Time
   }
+
   type Activity {
     type: String
     startTime: Int
@@ -18,6 +20,11 @@ export default `
     duration: Int
     distance: Int
     calories: Int
+    time: Time
+  }
+  
+  type Time {
+    time: Int!
   }
 
   type Avatar {
@@ -25,15 +32,16 @@ export default `
     stats: [Stat]
     partners: [Avatar]
   }
+
   type Stat {
     attribute: String!
     value: Float!
+    time: Time
   }
-
 
   type Query {
     User(uid: ID): User
-    AllUsers: [User]!
+    AllUsers: [User!]
     Avatar(name: String, partner: ID): Avatar
     UserActivities(id: ID, type: String, startTime: Int): [Activity]
   }
