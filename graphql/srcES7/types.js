@@ -43,7 +43,7 @@ export default `
     User(uid: ID): User
     AllUsers: [User!]
     Avatar(name: String, partner: ID): Avatar
-    UserActivities(id: ID, type: String, startTime: Int): [Activity]
+    UserActivities(uid: ID, type: String, startTime: Int): [Activity]
   }
 
   schema {
