@@ -11,12 +11,17 @@ function graphContext(headers, secrets, event, ctx) {
     neo4j.auth.basic(secrets.NEO4J_USER || "neo4j",
     secrets.NEO4J_PASSWORD || "kiba")
   );
-  return {driver, headers, lambdaEvent: event, lambdaContext: ctx};
+  return {
+    driver,
+    headers: event.headers,
+    lambdaEvent: event,
+    lambdaContext: ctx
+  };
 };
 
 export const GraphQLServerHandler = graphqlLambda((event, ctx) => ({ 
   schema,
-  context: graphContext(event.headers, process.env, event, ctx)
+  context: graphContext(process.env, event, ctx)
 }));
 
 export const GraphQLInspectorHandler = graphiqlLambda({

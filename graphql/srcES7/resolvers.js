@@ -5,6 +5,9 @@ export default {
     User(object, args, ctx, resolveInfo) {
       return neo4jgraphql(object, args, ctx, resolveInfo);
     },
+    AllUsers(object, args, ctx, resolveInfo) {
+      return neo4jgraphql(object, args, ctx, resolveInfo);
+    },
     Avatar(object, args, ctx, resolveInfo) {
       return neo4jgraphql(object, args, ctx, resolveInfo);
     },
