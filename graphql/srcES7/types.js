@@ -1,5 +1,3 @@
-import createNewUser from './mutations/user/createNewUser';
-
 export default `
   type User {
     id: ID! @cypher(statement: "WITH {this} AS this RETURN ID(this)")

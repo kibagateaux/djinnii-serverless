@@ -1,6 +1,5 @@
 import {neo4jgraphql} from 'neo4j-graphql-js';
-import Mutation from './mutations';
-console.log('mutation', Mutation);
+import Mutations from './mutations';
 
 export default {
   Query: {
@@ -17,7 +16,7 @@ export default {
       return neo4jgraphql(object, args, ctx, resolveInfo);
     }
   },
-  Mutation
+  Mutations
 };
 
 

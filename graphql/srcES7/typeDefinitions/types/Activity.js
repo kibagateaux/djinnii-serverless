@@ -1,4 +1,5 @@
-import Time from '@types/Time';
+import Time from './Time';
+import HashNode from '../interfaces/HashNode';
 
 const Activity = `
   type Activity {
@@ -14,15 +15,4 @@ const Activity = `
 `;
 
 
-const ActivityInput = `
-  input ActivityInput {
-    type: String
-    startTime: Int
-    endTime: Int
-    duration: Int
-    calories: Int
-    distance: Int
-  }
-`;
-
-export default () => [Activity, ActivityInput, Time];
+export default Activity;

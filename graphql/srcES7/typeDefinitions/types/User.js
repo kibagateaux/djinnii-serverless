@@ -1,4 +1,4 @@
-import Time from '@types/Time';
+import Time from './Time';
 
 const User = `
   type User {
@@ -13,13 +13,8 @@ const User = `
   }
 `;
 
-const UserInput = `
-  input UserInput {
-    firstName: String
-  }
-`
 /*
   If you’re exporting array of schema strings and there are circular dependencies, the array can be wrapped in a function
   https://www.apollographql.com/docs/graphql-tools/generate-schema.html#modularizing
 */
-export default () => [User, UserInput, Avatar];
+export default User;

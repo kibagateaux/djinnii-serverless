@@ -1,4 +1,4 @@
-import Time from '@types/Time';
+import Time from './Time';
 
 const Stat = `
   type Stat {
@@ -11,11 +11,4 @@ const Stat = `
 `;
 
 
-const StatInput = `
-  input StatInPut {
-    attribute: String!
-    value: Float!
-  }
-`;
-
-export default () => [Stat, StatInput, Time];
+export default Stat;

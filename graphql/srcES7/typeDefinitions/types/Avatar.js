@@ -1,12 +1,12 @@
-import Stat from '@types/Stat';
-import User from '@types/User';
-import Time from '@types/Time';
+import Stat from './Stat';
+import User from './User';
+import Time from './Time';
 
 const Avatar = `
   type Avatar {
     name: String
     stats: [Stat!]
-    partners: [Avatar!, User!]
+    partners: [Avatar!]
     time: Time! @relation(name: "EXISTED_AT", direction: "OUT")
   }
 `;
@@ -17,4 +17,4 @@ const AvatarInput = `
   }
 `;
 
-export default () => [Avatar, AvatarInput, Stat, User, Time];
+export default Avatar;

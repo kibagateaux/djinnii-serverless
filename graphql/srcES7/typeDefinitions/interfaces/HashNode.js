@@ -5,4 +5,4 @@ const HashNode = `
   }
 `;
 
-export default HashNode;
+export default HashNode

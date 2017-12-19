@@ -1,4 +1,4 @@
-import {createCypherMutation, withSession} from '../../neo4j';
+import {createCypherMutation, withSession} from '../../../neo4j';
 import CreateNewUser from './CreateNewUser';
 
 export default {
