@@ -24,8 +24,6 @@ export const createCypherMutation = (query) => (args) => (session) =>
       return error;
     })
 
-
-// Should this just take a Cypher Query
 /* 
 
 Sample Mutation from https://github.com/theborderland/realities/blob/master/api/src/index.js
