@@ -2,7 +2,7 @@ import createNewUser from './mutations/user/createNewUser';
 
 export default `
   type User {
-    id: ID! @cypher(statement: "WITH {this} AS this RETURN ID(this)")
+    _id: ID @cypher(statement: "WITH {this} AS this RETURN ID(this)")
     avatarName: String
     age: Int
     userName: String
@@ -11,14 +11,7 @@ export default `
     email: String
     purpose: [String]
     avatar: Avatar
-    time: Time
-    ${""/*
-      Fix cypher query here to match on time relation 
-      then related Activity nodes 
-      ORDER BY timestamp 
-      LIMIT latest
-    activities(latest:Int = 100): [Activity!] @cypher(name:"ACTED_IN", direction:IN)
-    */}
+    time: Time! @relation(name: "CREATED_AT", direction: "OUT")
   }
 
   input UserInput {
@@ -27,13 +20,14 @@ export default `
 
 
   type Activity {
+    _id: ID @cypher(statement: "WITH {this} AS this RETURN ID(this)")    
     type: String
     startTime: Int
     endTime: Int
     duration: Int
     distance: Int
     calories: Int
-    time: Time!
+    time: Time! @relation(name: "ACTED_AT", direction: "IN")
   }
   
   input ActivityInput {
@@ -47,19 +41,24 @@ export default `
   }
 
   type Time {
+    _id: ID @cypher(statement: "WITH {this} AS this RETURN ID(this)")    
     time: Int!
+    activity: [Activity!] @relation(name: "ACTED_AT", direction: "OUT")
+    stat: [Stat!] @relation(name: "UPGRADED_AT", direction: "IN")
   }
   input TimeInput {
     time: Int!
   }
 
   type Avatar {
+    _id: ID @cypher(statement: "WITH {this} AS this RETURN ID(this)")    
     name: String!
     stats: [Stat]
     partners: [Avatar]
   }
 
   type Stat {
+    _id: ID @cypher(statement: "WITH {this} AS this RETURN ID(this)")    
     attribute: String!
     value: Float!
     time: Time
@@ -74,7 +73,7 @@ export default `
 
   type Mutation {
     CreateNewUser(user: UserInput, time: TimeInput) : User
-    CreateNewActivity(activity: ActivityInput) : Activity
+    CreateNewActivity(activity: ActivityInput, time: TimeInput, userId: ID) : Activity
   }
 
   ${/*
