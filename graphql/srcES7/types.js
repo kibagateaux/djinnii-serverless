@@ -76,16 +76,6 @@ export default `
     CreateNewActivity(activity: ActivityInput, time: TimeInput, userId: ID) : Activity
   }
 
-  ${/*
-    Sample Mutation from neo4j's graphql post
-    https://neo4j.com/developer/graphql/
-  type Mutations {
-    directed(movie:ID! director:ID!) : String
-      @cypher(statement:"MATCH (m:Movie {title: $movie}), (d:Person {name: $director})
-                         MERGE (d)-[:DIRECTED]->(m)")
-  }
-  */""}
-
   schema {
     query: Query
     mutation: Mutation

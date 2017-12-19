@@ -8,4 +8,4 @@ WITH (need)
 SET need.nodeId = ID(need)
 RETURN need`;
 
-export default `CREATE (u:User $user)-[:CREATED_AT]->(ts:Time $time) RETURN u`;
+export default `CREATE (u:User $user)-[:EXISTED_AT]->(ts:Time $time) RETURN u`;
