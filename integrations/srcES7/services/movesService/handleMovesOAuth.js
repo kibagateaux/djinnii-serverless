@@ -1,34 +1,66 @@
 import AWS from 'aws-sdk';
 import Moves from 'react-native-moves-api';
-import _ from 'lodash';
+import axios from 'axios';
+const lambda = new AWS.Lambda({apiVersion: '2015-03-31'});
+
+AWS.config.correctClockSkew = true;
 
 const moves = new Moves({
   client_secret: process.env.MOVES_CLIENT_SECRET,
   client_id: process.env.MOVES_CLIENT_ID,
 });
 
-export const initMovesOAuth = (event, context, callback) => {
+// no reason why majority of this code can't be abstracted to general OAuth handleing Lambda which redirects here
+export const handleMovesOAuth = (event, context, callback) => {
  const params = event.queryStringParameters || {};
  const {code, state} = params;
  if (code) {
-   // handle initial auth response
-   moves.token(code, () => ({}))
+   moves.token(code, () => ({})) // callback because I didn't remove required
     .then((res) => {
-      console.log('auth success', res.data); // code below can be extracted to general OAuth handler before being directed to initMoves via Lambda
+      const {access_token, refresh_token} = res.data;
       const stateParams = state.split(' ');
       const [redirectId, userId] = stateParams.map((param) => param.split('=')[1]);
+      const data = {
+        userId,
+        redirectId,
+        integrationName: "moves",
+        accessToken: access_token,
+        refreshToken: refresh_token
+      };
+
       if(userId.length && redirectId.length) {
-        console.log('update tokens', );
-        // update Tokens
+        // var params = {
+        //   FunctionName: "jinni-integrations-dev-updateOAuthTokens", 
+        //   InvocationType: "Event", 
+        //   Payload: JSON.stringify(data), 
+        //  };
+        // lambda.invoke(params, (error, data) => {
+        //   if(!error) {
+        //     console.log('update tokens success', data);
+        //   } else {
+        //     console.log('update tokens error', error);
+        //   }
+        // });
+        axios.post("http://localhost:3000/updateTokens", data)
+          .then((result) => {
+            console.log('Moves done updating tokens');
+            const response = {
+              statusCode: 303,
+              headers: {
+                location: "djinnii://moves/init-auth"
+              },
+              data: {}
+            }
+            callback(null, response)
+          })
+          .catch((error) => {
+            console.log('Moves error updating tokens', error); 
+            const tokenUpdateError = new Error("TokenUpdate Failed")
+            callback(tokenUpdateError, null)
+          });
       }
-      const response = {
-        statusCode: 303,
-        headers: {
-          location: "djinnii://moves/init-auth?redirectId="+redirectId
-        },
-        data: res.data
-      }
-      callback(null, response)
+      // maybe should be conditional redirect depending on response from update tokens
+      // that would only be necessary if tokens/code are not returned but this is all automated by servers so probs unnecessary
     })
     .catch((err) => {
       console.log('auth fail', err);

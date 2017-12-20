@@ -67,7 +67,7 @@ iamRoleStatements:
   - Effect: Allow
     Resource: "*"
     Action:
-      - dynamodb: "*"
+      - dynamodb: "*" # FIXME: all IAM roles should be at function level
       - lambda: "*"
   #    Action:
   #      - "s3:ListBucket"
@@ -89,9 +89,9 @@ iamRoleStatements:
 
 functions:
 
-  initMovesOAuth:
-    handler: src/services/movesService.initMovesOAuth
-    description:
+  handleMovesOAuth:
+    handler: src/services/movesService.handleMovesOAuth
+    description: Handles authorization process for Moves app
     tags:
       runtime: nodejs6.10
     environment:
@@ -107,12 +107,25 @@ functions:
                 code: true
                 state: true
 
+  updateOAuthTokens: 
+    handler: src/services/general.updateOAuthTokens
+    description: Updates user's oauth tokens for an integration in user meta data table
+    tags:
+      runtime: nodejs6.10
+      service: integrations
+    environment:
+      DYNAMO_USER_TABLE: djinii-mobilehub-1897344653-User_Meta_Data
+    events:
+      - http:
+          path: /updateTokens
+          method: post
 
   getMovesStorylineData:
     handler: src/services/movesService.getMovesStorylineData
     description: Uses stored access_key in database to pull new data from Moves App and update database activities, locations, and stats
     tags:
       runtime: nodejs6.10
+      service: integrations
     environment:
       DYNAMODB_TOKENS_TABLE: djinii-mobilehub-1897344653-Tokens
       DYNAMODB_ACTIVITIES_TABLE: djinii-mobilehub-1897344653-Activities
@@ -132,6 +145,7 @@ functions:
     description: Checks all available data integrations for a user and fetches data to update database
     tags:
       runtime: nodejs6.10
+      service: integrations
     environment:
       DYNAMODB_TOKENS_TABLE: djinii-mobilehub-1897344653-Tokens
     events: 
@@ -148,6 +162,7 @@ functions:
     description: Checks all available data integrations for a user and fetches data to update database
     tags:
       runtime: nodejs6.10
+      service: integrations
     environment:
     events: 
       - http:
