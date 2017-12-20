@@ -88,6 +88,26 @@ iamRoleStatements:
 #  artifact: my-service-code.zip
 
 functions:
+
+  initMovesOAuth:
+    handler: src/services/movesService.initMovesOAuth
+    description:
+    tags:
+      runtime: nodejs6.10
+    environment:
+      MOVES_CLIENT_SECRET: ctvltqaFM1y6BaEe1IdE7_c7St82X6sHmIuD4597QAQr4zl930o23F8mnF3t7NEn
+      MOVES_CLIENT_ID: kdiz90L264WQ72Sc7OO0_0IUM4ZRrcB6
+    events:
+      - http:
+          path: /auth/moves
+          method: get
+          request:
+            parameters:
+              querystrings:
+                code: true
+                state: true
+
+
   getMovesStorylineData:
     handler: src/services/movesService.getMovesStorylineData
     description: Uses stored access_key in database to pull new data from Moves App and update database activities, locations, and stats

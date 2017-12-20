@@ -9,6 +9,8 @@ import {
 import {blobify} from '../../lib/helpers';
 import {DB, batchWrite} from '../../lib/database';
 
+// Set pastDays query param to 1 and have scheduled invocation of this lambda every day 
+// this is so data is updated even if thy don't have to app and adds discrete discipline to data management 
 
 export const getMovesStorylineData = (event, context, callback) => {
   console.log("event", event);
@@ -20,8 +22,8 @@ export const getMovesStorylineData = (event, context, callback) => {
       Key: {userId: "+13472418464"}
     };
     DB.get(queryParams, (error, results) => {
-    if (!error && results.Item && results.Item.moves) {  // if has tokens get data 
-      const {access_token, refresh_token} = results.Item.moves; // add lastDataUpdate. only update if > 8 hours or something
+    if (!error && results.Item && results.Item.moves) {  // if has tokens get data; TODO add if !results.Item.moves, init oauth
+      const {access_token, refresh_token} = results.Item.moves; // add lastUpdateAt. only update if > 8 hours or something
       const moves = new Moves({
         client_id: process.env.MOVES_API_KEY || "kdiz90L264WQ72Sc7OO0_0IUM4ZRrcB6", // manually added in AWS console not in .yaml file
         access_token,
