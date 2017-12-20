@@ -24,7 +24,7 @@ export const initMovesOAuth = (event, context, callback) => {
       const response = {
         statusCode: 303,
         headers: {
-          location: "djinnii://moves/init-auth"
+          location: "djinnii://moves/init-auth?redirectId="+redirectId
         },
         data: res.data
       }
@@ -35,18 +35,9 @@ export const initMovesOAuth = (event, context, callback) => {
       callback(err);
     });
  } else {
-  // init auth process
-  // TODO: Fix rn-moves-api moves.authorize to not require exporess
+   const noCodeError = new Error("No authorization code supplied in query");
+   callback(noCodeError, params)
+   // init auth process
+   // TODO: Fix rn-moves-api moves.authorize to not require exporess
  }
-  // if event.query.code
-    // pull code from query params
-    // moves.token(code, cb);
-    // redirect to self with reirectId and userId
-  // if event.query.tokens
-    // setOAuthTokens with userId
-    // redirect to app with redirectIds
-}
-
-export const handleMovesTokens = (event,context,callback) => {
-  console.log('handle move tokens event', event);
-}
+};
