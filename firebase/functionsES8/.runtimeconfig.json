@@ -1,7 +1,0 @@
-{
-  "moves": {
-    "client_id": "kdiz90L264WQ72Sc7OO0_0IUM4ZRrcB6",
-    "client_secret": "ctvltqaFM1y6BaEe1IdE7_c7St82X6sHmIuD4597QAQr4zl930o23F8mnF3t7NEn",
-    "redirect_url": "http://localhost:5000/djinn-64564/us-central1/initMovesOAuth"
-  }
-}
