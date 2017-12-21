@@ -2,33 +2,32 @@ import AWS from 'aws-sdk';
 import {DB} from '../../lib/database';
 
 export const updateOAuthTokens = (event, context, callback) => {
-  // pull integrationName, tokens, and username from POST body
-  // update integrationName where username on tokens.
-  const integrationData = event.body ? JSON.parse(event.body) : {};
+  // pull from event.body if POST request else event itself if invoked
+  const integrationData = event.body ? event.body : event;
   const {
     userId,
     accessToken,
     refreshToken,
     integrationName,
   } = integrationData;
-  console.log('update tokens integrationData', integrationData);
   if(!userId || !integrationName) {
     const noIdentifiers = new Error("NoIdentifiers UserIdOrIntegrationName")
     callback(noIdentifiers, {})
   } else {
     const getParams = {
       TableName: process.env.DYNAMO_USER_TABLE,
-      Key: {userId},
+      Key: {userId}
     };
-    DB.get(getParams, (error, {Item} = {}) => {
-      const userIntegrations = Item.integrations || {};
+    DB.get(getParams, (getError, getData = {}) => {
+      console.log('get user metdata', getData, getError);
+      const userIntegrations = getData.Item ? getData.Item.integrations : {};
       const integrationData = userIntegrations[integrationName] || {}
       const putParams = {
         TableName: process.env.DYNAMO_USER_TABLE,
         ReturnValue: "ALL_NEW",
         Item: {
           userId,
-          ...Item,
+          ...getData.Item,
           integrations: {
             ...userIntegrations,
             [integrationName]: {
@@ -39,17 +38,20 @@ export const updateOAuthTokens = (event, context, callback) => {
           }
         }
       };
-      DB.put(putParams, (error, putData) => {
-        if(!error) {
+      console.log('putData params', putParams.Item);
+      DB.put(putParams, (putError, putData) => {
+        if(!putError) {
           const response = {
             statusCode: 200,
             headers: {
             },
             data: putData
           }
-          callback(null, response)
+          console.log("update tokens success", response)
+          callback(null, response);
         } else {
-          callback(error, putParams)
+          console.log("update Tokens failed", putError);
+          callback(putError, putParams);
         }
       })
     })

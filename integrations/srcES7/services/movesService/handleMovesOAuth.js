@@ -29,36 +29,37 @@ export const handleMovesOAuth = (event, context, callback) => {
       };
 
       if(userId.length && redirectId.length) {
-        // var params = {
-        //   FunctionName: "jinni-integrations-dev-updateOAuthTokens", 
-        //   InvocationType: "Event", 
-        //   Payload: JSON.stringify(data), 
-        //  };
-        // lambda.invoke(params, (error, data) => {
-        //   if(!error) {
-        //     console.log('update tokens success', data);
-        //   } else {
-        //     console.log('update tokens error', error);
-        //   }
-        // });
-        axios.post("http://localhost:3000/updateTokens", data)
-          .then((result) => {
-            console.log('Moves done updating tokens');
-            const response = {
-              statusCode: 303,
-              headers: {
-                location: "djinnii://moves/init-auth"
-              },
-              data: {}
-            }
-            callback(null, response)
-          })
-          .catch((error) => {
-            console.log('Moves error updating tokens', error); 
-            const tokenUpdateError = new Error("TokenUpdate Failed")
-            callback(tokenUpdateError, null)
-          });
+        var params = {
+          FunctionName: "jinni-integrations-dev-updateOAuthTokens", 
+          InvocationType: "Event", 
+          Payload: JSON.stringify(data),
+         };
+         // this fails in local testing because of time offsets
+        lambda.invoke(params, (error, data) => {
+          if(!error) {
+            console.log('update tokens success', data);
+          } else {
+            console.log('update tokens error', error);
+          }
+        });
+
+        // For dev testing
+        // axios.post("http://localhost:3000/updateTokens", data)
+        //   .then((result) => {
+        //     console.log('Moves done updating tokens');
+        //   })
+        //   .catch((error) => {
+        //     console.log('Moves error updating tokens', error);
+        //   });
       }
+      const response = {
+        statusCode: 303,
+        headers: {
+          location: "djinnii://moves/init-auth"
+        },
+        data: {}
+      }
+      callback(null, response)
       // maybe should be conditional redirect depending on response from update tokens
       // that would only be necessary if tokens/code are not returned but this is all automated by servers so probs unnecessary
     })
