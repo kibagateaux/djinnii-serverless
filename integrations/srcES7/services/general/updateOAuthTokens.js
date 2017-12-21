@@ -19,7 +19,6 @@ export const updateOAuthTokens = (event, context, callback) => {
       Key: {userId}
     };
     DB.get(getParams, (getError, getData = {}) => {
-      console.log('get user metdata', getData, getError);
       const userIntegrations = getData.Item ? getData.Item.integrations : {};
       const integrationData = userIntegrations[integrationName] || {}
       const putParams = {
@@ -38,7 +37,6 @@ export const updateOAuthTokens = (event, context, callback) => {
           }
         }
       };
-      console.log('putData params', putParams.Item);
       DB.put(putParams, (putError, putData) => {
         if(!putError) {
           const response = {

@@ -61,7 +61,7 @@ export const handleMovesOAuth = (event, context, callback) => {
       }
       callback(null, response)
       // maybe should be conditional redirect depending on response from update tokens
-      // that would only be necessary if tokens/code are not returned but this is all automated by servers so probs unnecessary
+      // that would only be necessary if tokens/query code fail but this is all automated by servers so probs unnecessary
     })
     .catch((err) => {
       console.log('auth fail', err);
