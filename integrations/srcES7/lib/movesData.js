@@ -39,7 +39,6 @@ const createActivitiesList = (activities) => {
 const addFillerSpace = (activityList) => {
   let completeList = {}
   const activityTimes = activityList ? Object.keys(activityList) : {};
-  // to make FP make last<Array> and take last[0].time instead
   activityTimes.reduce((last, next) => {
     const lastEndTime = activityList[last.time].endTime;
     const nextStartTime = activityList[next].startTime;
@@ -73,27 +72,30 @@ const normalizeMovesActivities = (seg) =>
     return {
       ...act,
       ...actTimes,
-      trackPoints: normalizeMovesTrackPoints(act.trackPoints), // :started_at, :included_in, :exercised_at
+      trackPoints: normalizeMovesTrackPoints(act.trackPoints),
       place: normalizeMovesAPILocation(seg.place)(segTimes.startTime) || {},
       source: "moves"
     };
   }) : [];
 
 export const normalizeStorylineData = (stories = []) =>
-// should take all day segments and return flatter object
+  // should take all day segments and return flat object
   stories ? stories.map((day) => {
     const {date, lastUpdate, summary} = day;
     const normSeg = day.segments ? day.segments
-      .map(seg => normalizeMovesActivities(seg)) // double array being created here
+      .map(seg => normalizeMovesActivities(seg))
       .filter(seg => seg.length > 0) // gets rid of empty segments
       .reduce((ledger, seg) => ([...ledger, ...seg]), []) : [];
 
     const unixDate = _getFirstMSInDay(_formatToUnix(date));
-    const unixLastUpdate = _formatToUnix(lastUpdate); // last update not changed because we are simply reformatting
+    // last update not changed because we are simply reformatting
+    const unixLastUpdate = _formatToUnix(lastUpdate);
+
     // create activities, and locations timestamp ledger
     const activities = createActivitiesList(normSeg);
     const locations = createLocationsList(activities);
 
+    // replaces location objects from original activity with timestamp references
     const actsWithLocationTimereference = _.mapValues(activities, (act) => ({
       ...act,
       trackPoints: act.trackPoints ? Object.keys(act.trackPoints) : [],
@@ -118,9 +120,9 @@ export const createDailySummary = (day) => {
   const locationList = locations ? Object.keys (locations) : [];
   return {
     summary,
-    activities: activityList, // although everything IS an activity it will get exhaustive once adding in purchases, messaging, meals, ect.
+    activities: activityList,
     locations: locationList,
-    lastUpdate,  // last update not changed because we are simply reformatting
+    lastUpdate,
     date
   };
 };
