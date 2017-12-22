@@ -35,34 +35,29 @@ export const getMovesStorylineData = (event, context, callback) => {
               const normalizedData = normalizeStorylineData(res.data)
               // FIXME send normalized data to diffing functions instead of everything below e.g. stats calculation and updating DB directly
               
-
-              // can be used to store indexes of users Activities and Locations
-              // const dailySummaries = normalizedData.reduce((ledger, day) => (
-              //   {...ledger, [day.date]: createDailySummary(day)}));
-              // console.log('daily sums', dailySummaries);
-
-
-              const newData = ["activities", "stats", "locations"]
-                .reduce((newData, key) => ({
+              const resources = ["activities", "locations"];
+              const aggregatedDataByResource = resources
+                .reduce((newData, resource) => ({
                   ...newData, 
-                  [key]: normalizedData.reduce((ledger, day) => 
-                    ({...ledger, ...day[key]}))})
-                , {}); // compiles full list of new data from each day to update to DB
+                  [resource]: normalizedData.reduce((ledger, day) => ({
+                    ...ledger, ...day[resource]}), {})
+                }), {}); // compiles full list of new data from each day to update to DB
                 // console.log('newData', newData);
               
               // update MetaData table with daily summaries 
               // update Activities with activities
               // update Locations with locations
 
-              // const dbWrites = Object.keys(newData).map((resource) => {
-              //   const data = newData[resource];
-              //   const ledger = Object.keys(data).map((time) => data[time]);
-              //   const blobs = blobify(ledger);
-              //   const table = process.env[`DYNAMODB_${_.toUpper(resource)}_TABLE`];
-              //   return (blobs[0].length > 0) ? // checks that there is at least one item to put
-              //     blobs.map((blob) => batchWrite(table, blob, userId)) : null;
-              // });
-    
+              const dbWrites = resources.map((resource) => {
+                const data = aggregatedDataByResource[resource];
+                const ledger = Object.keys(data).map((time) => data[time]);
+                const blobs = blobify(ledger);
+                const table = process.env[`DYNAMODB_${_.toUpper(resource)}_TABLE`];
+                // return (blobs[0].length > 0) ? // checks that there is at least one item to put
+                //   blobs.map((blob) => batchWrite(table, blob, userId)) : null;
+
+                // console.log('wrtie local', data);
+              });
               // don't think using results from writes is useful but this is how to handle it
               // .reduce((ledger, writes) => [...ledger, ...writes], []);
               // Promise.all(dbWrites)
@@ -77,8 +72,8 @@ export const getMovesStorylineData = (event, context, callback) => {
                   "Access-Control-Request-Method": "GET",
                   "Access-Control-Allow-Origin": "*"
                 },
-                // body: {}
-                body: JSON.stringify(normalizedData),
+                body: {}
+                // body: JSON.stringify(normalizedData),
               };
               callback(null, response);
             })

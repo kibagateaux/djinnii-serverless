@@ -7,7 +7,7 @@ import {
 import _ from 'lodash';
 
 const normalizeMovesAPILocation = (place) => (time) =>
-  place ? {time, id: place.id, ...place.location, category: place.type } : {}
+  _.isEmpty(place) ? {} : {[time]: {time, id: place.id, ...place.location, category: place.type }}
 
 const normalizeMovesTrackPoints = (trackPoints) => 
   trackPoints ?
@@ -17,11 +17,8 @@ const normalizeMovesTrackPoints = (trackPoints) =>
 
 const createLocationsList = (activities) => {
   return activities ? Object.keys(activities).reduce((list, time) => {
-    const {trackPoints, place} = activities[time];
-    const placeTime = _.isEmpty(place.place) ?
-      {} : 
-      {[place.time]: place}; // if act happened at a specific place track that
-    return trackPoints ? {...list, ...trackPoints, ...placeTime} : {...list};
+    const {trackPoints = {}, place = {}} = activities[time];
+    return {...list, ...trackPoints, ...place};
   }, {}) : {}
 };
 
@@ -55,7 +52,7 @@ const addFillerSpace = (activityList) => {
           endTime: nextStartTime - 1, // end right before next act
           duration: nextStartTime - lastEndTime,
           activity: "idle",
-          trackPoints: [],
+          trackPoints: {},
           place,
           source: "filler"
         }
@@ -73,7 +70,6 @@ const normalizeMovesActivities = (seg) =>
     // check that start/end exists, find some way to extrapolate if not
     const actTimes = _getTimesInUnix(act.startTime, act.endTime);
     const segTimes = _getTimesInUnix(seg.startTime, seg.endTime); 
-    const trackPoints = Object.keys(normalizeMovesTrackPoints(act.trackPoints));
     return {
       ...act,
       ...actTimes,
@@ -112,7 +108,6 @@ export const normalizeStorylineData = (stories = []) =>
       locations
     };
     const fullSummary = createDailySummary(dayWithActivities);
-    console.log("acts", activities, locations);
     return {...dayWithActivities, summary: fullSummary};
   }) : [];
 

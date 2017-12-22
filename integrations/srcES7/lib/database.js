@@ -9,7 +9,7 @@ AWS.config.update({
 
 export const DB = new AWS.DynamoDB.DocumentClient(); // FIXME: set standard version
 
-export const batchWrite = (table, items =[], userId) => {
+export const batchWrite = (table, items=[], userId) => {
   // console.log('put', items)
   const request = {
     RequestItems: {
