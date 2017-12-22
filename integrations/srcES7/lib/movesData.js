@@ -7,7 +7,7 @@ import {
 import _ from 'lodash';
 
 const normalizeMovesAPILocation = (place) => (time) =>
-  place ? {time, id: place.id, ...place.location, type: place.type } : {}
+  place ? {time, id: place.id, ...place.location, category: place.type } : {}
 
 const normalizeMovesTrackPoints = (trackPoints) => 
   trackPoints ?
@@ -54,16 +54,10 @@ const addFillerSpace = (activityList) => {
           startTime: lastEndTime + 1, // start right after last act
           endTime: nextStartTime - 1, // end right before next act
           duration: nextStartTime - lastEndTime,
-          activity: 'idl',
+          activity: "idle",
           trackPoints: [],
           place,
-          type: 'filler',
-          // activityGroup: {
-          //   place,
-          //   type: 'filler',
-          //   startTime: lastEndTime + 1,
-          //   endTime: nextStartTime - 1,
-          // }
+          source: "filler"
         }
       : null
     return {time: next, place};
@@ -84,13 +78,8 @@ const normalizeMovesActivities = (seg) =>
       ...act,
       ...actTimes,
       trackPoints: normalizeMovesTrackPoints(act.trackPoints), // :started_at, :included_in, :exercised_at
-      type: seg.type,
-      place: normalizeMovesAPILocation(seg.place)(seg.startTime) || {},
-      // activityGroup: { // how will this be portrayed in a graph? Time <- Segment <- Activity -> Time?
-      //   ...segTimes,
-      //   type: seg.type,
-      //   place: normalizeMovesAPILocation(seg.place) || {} // remove because startTime will reference to Locations table
-      // }
+      place: normalizeMovesAPILocation(seg.place)(segTimes.startTime) || {},
+      source: "moves"
     };
   }) : [];
 
@@ -113,10 +102,6 @@ export const normalizeStorylineData = (stories = []) =>
       ...act,
       trackPoints: act.trackPoints ? Object.keys(act.trackPoints) : [],
       place: act.place.time
-      // activityGroup: {
-      //   ...act.activityGroup,
-      //   place: act.activityGroup.startTime
-      // }
     }));
 
     const dayWithActivities = {
@@ -127,7 +112,7 @@ export const normalizeStorylineData = (stories = []) =>
       locations
     };
     const fullSummary = createDailySummary(dayWithActivities);
-    console.log('acts', activities, locations);
+    console.log("acts", activities, locations);
     return {...dayWithActivities, summary: fullSummary};
   }) : [];
 

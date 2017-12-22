@@ -77,8 +77,8 @@ export const getMovesStorylineData = (event, context, callback) => {
                   "Access-Control-Request-Method": "GET",
                   "Access-Control-Allow-Origin": "*"
                 },
-                body: {}
-                // body: JSON.stringify(normalizedData),
+                // body: {}
+                body: JSON.stringify(normalizedData),
               };
               callback(null, response);
             })
