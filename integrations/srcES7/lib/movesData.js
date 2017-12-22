@@ -6,8 +6,8 @@ import {
 } from './time';
 import _ from 'lodash';
 
-const normalizeMovesAPILocation = (place) =>
-  place ? {id: place.id, ...place.location, type: place.type } : null
+const normalizeMovesAPILocation = (place) => (time) =>
+  place ? {time, id: place.id, ...place.location, type: place.type } : {}
 
 const normalizeMovesTrackPoints = (trackPoints) => 
   trackPoints ?
@@ -17,10 +17,10 @@ const normalizeMovesTrackPoints = (trackPoints) =>
 
 const createLocationsList = (activities) => {
   return activities ? Object.keys(activities).reduce((list, time) => {
-    const {trackPoints, activityGroup} = activities[time];
-    const placeTime = _.isEmpty(activityGroup.place) ?
+    const {trackPoints, place} = activities[time];
+    const placeTime = _.isEmpty(place.place) ?
       {} : 
-      {[activityGroup.startTime]: activityGroup.place}; // if act happened at a specific place track that
+      {[place.time]: place}; // if act happened at a specific place track that
     return trackPoints ? {...list, ...trackPoints, ...placeTime} : {...list};
   }, {}) : {}
 };
@@ -47,7 +47,7 @@ const addFillerSpace = (activityList) => {
     const lastEndTime = activityList[last.time].endTime;
     const nextStartTime = activityList[next].startTime;
     // if new place then update, else use last place
-    const place = (activityList[next].activityGroup.place || last.place);
+    const place = (activityList[next].place || last.place);
     
     (lastEndTime !== nextStartTime + 1)
       ? completeList[lastEndTime + 1] = {
@@ -56,12 +56,14 @@ const addFillerSpace = (activityList) => {
           duration: nextStartTime - lastEndTime,
           activity: 'idl',
           trackPoints: [],
-          activityGroup: {
-            type: 'filler',
-            startTime: lastEndTime + 1,
-            endTime: nextStartTime - 1,
-            place
-          }
+          place,
+          type: 'filler',
+          // activityGroup: {
+          //   place,
+          //   type: 'filler',
+          //   startTime: lastEndTime + 1,
+          //   endTime: nextStartTime - 1,
+          // }
         }
       : null
     return {time: next, place};
@@ -82,11 +84,13 @@ const normalizeMovesActivities = (seg) =>
       ...act,
       ...actTimes,
       trackPoints: normalizeMovesTrackPoints(act.trackPoints), // :started_at, :included_in, :exercised_at
-      activityGroup: { // how will this be portrayed in a graph? Time <- Segment <- Activity -> Time?
-        ...segTimes,
-        type: seg.type,
-        place: normalizeMovesAPILocation(seg.place) || {} // remove because startTime will reference to Locations table
-      }
+      type: seg.type,
+      place: normalizeMovesAPILocation(seg.place)(seg.startTime) || {},
+      // activityGroup: { // how will this be portrayed in a graph? Time <- Segment <- Activity -> Time?
+      //   ...segTimes,
+      //   type: seg.type,
+      //   place: normalizeMovesAPILocation(seg.place) || {} // remove because startTime will reference to Locations table
+      // }
     };
   }) : [];
 
@@ -108,10 +112,11 @@ export const normalizeStorylineData = (stories = []) =>
     const actsWithLocationTimereference = _.mapValues(activities, (act) => ({
       ...act,
       trackPoints: act.trackPoints ? Object.keys(act.trackPoints) : [],
-      activityGroup: {
-        ...act.activityGroup,
-        place: act.activityGroup.startTime
-      }
+      place: act.place.time
+      // activityGroup: {
+      //   ...act.activityGroup,
+      //   place: act.activityGroup.startTime
+      // }
     }));
 
     const dayWithActivities = {
@@ -122,6 +127,7 @@ export const normalizeStorylineData = (stories = []) =>
       locations
     };
     const fullSummary = createDailySummary(dayWithActivities);
+    console.log('acts', activities, locations);
     return {...dayWithActivities, summary: fullSummary};
   }) : [];
 
