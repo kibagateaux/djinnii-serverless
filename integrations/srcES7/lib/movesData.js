@@ -29,23 +29,7 @@ const createLocationsList = (activities) => {
   }, {}) : {}
 };
 
-const normalizeMovesActivities = (seg) =>
-  seg.activities ? seg.activities.map(act => {
-    // check that start/end exisits, find some way to extrapolate if not
-    const actTimes = _getTimesInUnix(act.startTime, act.endTime);
-    const segTimes = _getTimesInUnix(seg.startTime, seg.endTime);
-    const normAct = {
-      ...act,
-      ...actTimes,
-      trackPoints: normalizeMovesTrackPoints(act.trackPoints),
-      activityGroup: {
-        ...segTimes,
-        type: seg.type, 
-        place: normalizeMovesAPILocation(seg.place)
-      }
-    };
-    return normAct;
-  }) : [];
+
 
 const addFillerSpace = (activityList) => {
   let completeList = {}
@@ -77,7 +61,7 @@ const addFillerSpace = (activityList) => {
   return completeList
 };
 
-export const createActivitiesList = (activities) => {
+const createActivitiesList = (activities) => {
   // returns object of all the days activities
   // key = unixStartTime, value = activity obj
   const activityList = activities ? 
@@ -90,45 +74,55 @@ export const createActivitiesList = (activities) => {
   return organizedCompleteList;
 };
 
+const normalizeMovesActivities = (seg) =>
+  seg.activities ? seg.activities.map(act => {
+    // check that start/end exists, find some way to extrapolate if not
+    const actTimes = _getTimesInUnix(act.startTime, act.endTime);
+    const segTimes = _getTimesInUnix(seg.startTime, seg.endTime); 
+    const normAct = {
+      ...act,
+      ...actTimes,
+      trackPoints: normalizeMovesTrackPoints(act.trackPoints), // :started_at, :included_in, :exercised_at
+      activityGroup: { // how will this be portrayed in a graph? Time <- Segment <- Activity -> Time?
+        ...segTimes,
+        type: seg.type,
+        place: normalizeMovesAPILocation(seg.place) // remove because timestamp will reference to Locations table
+      }
+    };
+    return normAct;
+  }) : [];
+
 export const normalizeStorylineData = (stories = []) =>
-// should take all day segments and return flat object
+// should take all day segments and return flatter object
   stories ? stories.map((day) => {
     const {date, lastUpdate, summary} = day;
     const normSeg = day.segments ? day.segments
       .map(seg => normalizeMovesActivities(seg)) // double array being created here
-      .filter(seg => seg.length > 0)
-      .reduce((ledger, seg) => {
-        return [...ledger, ...seg]
-      }, []) : []; // gets rid of empty segments
+      .filter(seg => seg.length > 0) // gets rid of empty segments
+      .reduce((ledger, seg) => ([...ledger, ...seg]), []) : [];
 
     const unixDate = _getFirstMSInDay(_formatToUnix(date));
     const unixLastUpdate = _formatToUnix(lastUpdate); // last update not changed because we are simply reformatting
-    
-    // create activities, stats, and locations timestamp ledger
+    // create activities, and locations timestamp ledger
     const activities = createActivitiesList(normSeg);
     const locations = createLocationsList(activities);
-    // const stats = createStatsList(activities); // complicated because needs to pull stats from DB to incorp other API stats
 
-    const dayWithActivities = {
+    return {
       date: unixDate,
       lastUpdate: unixLastUpdate,
       summary,
       activities,
       locations
     };
-    const fullSummary = createDailyLedger(dayWithActivities);
-    return {...dayWithActivities, summary: fullSummary};
   }) : [];
 
 
-export const createDailyLedger = (day) => {
-  const {summary, activities, lastUpdate, date, stats} = day;
+export const createDailySummary = (day) => {
+  const {summary, activities, lastUpdate, date} = day;
   const activityList = activities ? Object.keys(activities) : [];
-  const statsList = stats ? Object.keys(stats) : [];
   const locationList = createLocationLedger(activities);
   return {
-    overview: summary,
-    stats: statsList,
+    summary,
     activities: activityList, // although everything IS an activity it will get exhaustive once adding in purchases, messaging, meals, ect.
     locations: locationList,
     lastUpdate,  // last update not changed because we are simply reformatting

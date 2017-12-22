@@ -2,8 +2,7 @@ import AWS from 'aws-sdk';
 import Moves from 'react-native-moves-api';
 import _ from 'lodash';
 import {
-  createActivitiesList,
-  createDailyLedger,
+  createDailySummary,
   normalizeStorylineData
 } from '../../lib/movesData';
 import {blobify} from '../../lib/helpers';
@@ -36,13 +35,19 @@ export const getMovesStorylineData = (event, context, callback) => {
               const normalizedData = normalizeStorylineData(res.data)
               // FIXME send normalized data to diffing functions instead of everything below e.g. stats calculation and updating DB directly
               
+
+              // can be used to store indexes of users Activities and Locations
+              // const dailySummaries = normalizedData.reduce((ledger, day) => (
+              //   {...ledger, [day.date]: createDailySummary(day)}));
+
+
               const newData = ["activities", "stats", "locations"]
                 .reduce((newData, key) => ({
                   ...newData, 
                   [key]: normalizedData.reduce((ledger, day) => 
                     ({...ledger, ...day[key]}))})
                 , {}); // compiles full list of new data from each day to update to DB
-                console.log('newData', newData);
+                // console.log('newData', newData);
               
               // update MetaData table with daily summaries 
               // update Activities with activities
