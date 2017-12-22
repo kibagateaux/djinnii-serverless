@@ -88,12 +88,12 @@ export const getMovesStorylineData = (event, context, callback) => {
             })
         } else {
           // they haven't authenticated Moves yet so use my personal data to fake it
-          const invokeParams = {
+          // const invokeParams = {
 
-          };
-          Lambda.invokeAsync(params, (error, results) => {
+          // };
+          // Lambda.invokeAsync(params, (error, results) => {
 
-          })
+          // })
         }
         
       } else {

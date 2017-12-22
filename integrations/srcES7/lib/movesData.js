@@ -15,9 +15,6 @@ const normalizeMovesTrackPoints = (trackPoints) =>
       const trackTime = _formatToUnix(time);
       return {...points, [trackTime]: {lat, lon, time:trackTime}}}, {}) : null;
 
-const createLocationLedger = (activities) =>
-  activities ? Object.keys(createLocationsList(activities)) : []
-
 const createLocationsList = (activities) => {
   return activities ? Object.keys(activities).reduce((list, time) => {
     const {trackPoints, activityGroup} = activities[time];
@@ -58,6 +55,7 @@ const addFillerSpace = (activityList) => {
           endTime: nextStartTime - 1, // end right before next act
           duration: nextStartTime - lastEndTime,
           activity: 'idl',
+          trackPoints: [],
           activityGroup: {
             type: 'filler',
             startTime: lastEndTime + 1,
@@ -106,7 +104,7 @@ export const normalizeStorylineData = (stories = []) =>
     // create activities, and locations timestamp ledger
     const activities = createActivitiesList(normSeg);
     const locations = createLocationsList(activities);
-    console.log('type of acts', typeof activities);
+
     const actsWithLocationTimereference = _.mapValues(activities, (act) => ({
       ...act,
       trackPoints: act.trackPoints ? Object.keys(act.trackPoints) : [],
@@ -116,20 +114,22 @@ export const normalizeStorylineData = (stories = []) =>
       }
     }));
 
-    return {
+    const dayWithActivities = {
       date: unixDate,
       lastUpdate: unixLastUpdate,
       summary,
       activities: actsWithLocationTimereference,
       locations
     };
+    const fullSummary = createDailySummary(dayWithActivities);
+    return {...dayWithActivities, summary: fullSummary};
   }) : [];
 
 
 export const createDailySummary = (day) => {
-  const {summary, activities, lastUpdate, date} = day;
+  const {summary, activities, locations, lastUpdate, date} = day;
   const activityList = activities ? Object.keys(activities) : [];
-  const locationList = createLocationLedger(activities);
+  const locationList = locations ? Object.keys (locations) : [];
   return {
     summary,
     activities: activityList, // although everything IS an activity it will get exhaustive once adding in purchases, messaging, meals, ect.
