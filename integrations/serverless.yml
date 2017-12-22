@@ -127,9 +127,8 @@ functions:
       runtime: nodejs6.10
       service: integrations
     environment:
-      DYNAMODB_TOKENS_TABLE: djinii-mobilehub-1897344653-Tokens
+      DYNAMODB_META_DATA_TABLE: djinii-mobilehub-1897344653-User_Meta_Data
       DYNAMODB_ACTIVITIES_TABLE: djinii-mobilehub-1897344653-Activities
-      DYNAMODB_STATS_TABLE: djinii-mobilehub-1897344653-stats
       DYNAMODB_LOCATIONS_TABLE: djinii-mobilehub-1897344653-Locations
       MOVES_CLIENT_ID: kdiz90L264WQ72Sc7OO0_0IUM4ZRrcB6
     events:
