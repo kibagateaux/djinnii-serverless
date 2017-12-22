@@ -131,6 +131,7 @@ functions:
       DYNAMODB_ACTIVITIES_TABLE: djinii-mobilehub-1897344653-Activities
       DYNAMODB_STATS_TABLE: djinii-mobilehub-1897344653-stats
       DYNAMODB_LOCATIONS_TABLE: djinii-mobilehub-1897344653-Locations
+      MOVES_CLIENT_ID: kdiz90L264WQ72Sc7OO0_0IUM4ZRrcB6
     events:
       - http:
           path: /moves/storyline/{userId}

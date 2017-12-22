@@ -13,23 +13,21 @@ import {DB, batchWrite} from '../../lib/database';
 // this is so data is updated even if thy don't have to app and adds discrete discipline to data management 
 
 export const getMovesStorylineData = (event, context, callback) => {
-  console.log("event", event);
   const {userId} = event.pathParameters;
   console.log('userId', userId);
   if(userId) {
     const queryParams = {
-      TableName: process.env.DYNAMODB_TOKENS_TABLE,
+      TableName: process.env.DYNAMODB_TOKENS_TABLE, // pull from user_meta_data talbe
       Key: {userId: "+13472418464"}
     };
-    DB.get(queryParams, (error, results) => {
-    if (!error && results.Item && results.Item.moves) {  // if has tokens get data; TODO add if !results.Item.moves, init oauth
+    DB.get(queryParams, (error, results) => { // from meta_data table is Item.integrations.moves
+    if (!error && results.Item && results.Item.moves) {  // TODO add if !results.Item.moves, init oauth
       const {access_token, refresh_token} = results.Item.moves; // add lastUpdateAt. only update if > 8 hours or something
       const moves = new Moves({
-        client_id: process.env.MOVES_API_KEY || "kdiz90L264WQ72Sc7OO0_0IUM4ZRrcB6", // manually added in AWS console not in .yaml file
+        client_id: process.env.MOVES_CLIENT_ID || "kdiz90L264WQ72Sc7OO0_0IUM4ZRrcB6", // manually added in AWS console not in .yaml file
         access_token,
         refresh_token
       });
-    
       moves.get('/user/storyline/daily?pastDays=7&trackPoints=true')
         .then((res) => {
           const normalizedData = normalizeStorylineData(res.data)
