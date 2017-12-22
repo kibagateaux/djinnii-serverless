@@ -4,29 +4,40 @@ import {
   _sortByTime,
   _getFirstMSInDay
 } from './time';
+import _ from 'lodash';
 
 const normalizeMovesAPILocation = (place) =>
   place ? {id: place.id, ...place.location, type: place.type } : null
 
 const normalizeMovesTrackPoints = (trackPoints) => 
-  trackPoints ? 
+  trackPoints ?
     trackPoints.reduce((points, {time, lat, lon}) => {
       const trackTime = _formatToUnix(time);
       return {...points, [trackTime]: {lat, lon, time:trackTime}}}, {}) : null;
 
 const createLocationLedger = (activities) =>
-  activities ? Object.keys(activities).reduce((ledger, time) => {
-    const act = activities[time];
-    const locationTimes = act.trackPoints ? Object.keys(act.trackPoints) : [];
-    const nonDuplicateLocations = locationTimes.filter((time) => ledger.indexOf(time) !== -1)
-    return [...ledger, ...locationTimes];
-  }, []) : [];
+  activities ? Object.keys(createLocationsList(activities)) : []
 
 const createLocationsList = (activities) => {
   return activities ? Object.keys(activities).reduce((list, time) => {
-    const act = activities[time];
-    return act.trackPoints ? {...list, ...act.trackPoints} : {...list};
+    const {trackPoints, activityGroup} = activities[time];
+    const placeTime = _.isEmpty(activityGroup.place) ?
+      {} : 
+      {[activityGroup.startTime]: activityGroup.place}; // if act happened at a specific place track that
+    return trackPoints ? {...list, ...trackPoints, ...placeTime} : {...list};
   }, {}) : {}
+};
+
+const createActivitiesList = (activities) => {
+  // returns object of all the days activities
+  // key = unixStartTime, value = activity obj
+  const activityList = activities ? 
+    activities.reduce((ledger, act) => 
+      ({...ledger, [act.startTime]: act}), {}) : {};
+
+  const fillerActs = addFillerSpace(activityList);
+  const organizedCompleteList = _sortByTime({...fillerActs, ...activityList}); // organized by time? Expression or reality!?!?
+  return organizedCompleteList;
 };
 
 
@@ -47,11 +58,11 @@ const addFillerSpace = (activityList) => {
           endTime: nextStartTime - 1, // end right before next act
           duration: nextStartTime - lastEndTime,
           activity: 'idl',
-          place,
           activityGroup: {
             type: 'filler',
             startTime: lastEndTime + 1,
-            endTime: nextStartTime - 1
+            endTime: nextStartTime - 1,
+            place
           }
         }
       : null
@@ -61,35 +72,24 @@ const addFillerSpace = (activityList) => {
   return completeList
 };
 
-const createActivitiesList = (activities) => {
-  // returns object of all the days activities
-  // key = unixStartTime, value = activity obj
-  const activityList = activities ? 
-    activities.reduce((ledger, act) => 
-      ({...ledger, [act.startTime]: act}), {}) : {};
 
-  const fillerActs = addFillerSpace(activityList);
-  const organizedCompleteList = _sortByTime({...fillerActs, ...activityList});
-  // organized by time? Expression or reality!?!?
-  return organizedCompleteList;
-};
 
 const normalizeMovesActivities = (seg) =>
   seg.activities ? seg.activities.map(act => {
     // check that start/end exists, find some way to extrapolate if not
     const actTimes = _getTimesInUnix(act.startTime, act.endTime);
     const segTimes = _getTimesInUnix(seg.startTime, seg.endTime); 
-    const normAct = {
+    const trackPoints = Object.keys(normalizeMovesTrackPoints(act.trackPoints));
+    return {
       ...act,
       ...actTimes,
       trackPoints: normalizeMovesTrackPoints(act.trackPoints), // :started_at, :included_in, :exercised_at
       activityGroup: { // how will this be portrayed in a graph? Time <- Segment <- Activity -> Time?
         ...segTimes,
         type: seg.type,
-        place: normalizeMovesAPILocation(seg.place) // remove because timestamp will reference to Locations table
+        place: normalizeMovesAPILocation(seg.place) || {} // remove because startTime will reference to Locations table
       }
     };
-    return normAct;
   }) : [];
 
 export const normalizeStorylineData = (stories = []) =>
@@ -106,12 +106,21 @@ export const normalizeStorylineData = (stories = []) =>
     // create activities, and locations timestamp ledger
     const activities = createActivitiesList(normSeg);
     const locations = createLocationsList(activities);
+    console.log('type of acts', typeof activities);
+    const actsWithLocationTimereference = _.mapValues(activities, (act) => ({
+      ...act,
+      trackPoints: act.trackPoints ? Object.keys(act.trackPoints) : [],
+      activityGroup: {
+        ...act.activityGroup,
+        place: act.activityGroup.startTime
+      }
+    }));
 
     return {
       date: unixDate,
       lastUpdate: unixLastUpdate,
       summary,
-      activities,
+      activities: actsWithLocationTimereference,
       locations
     };
   }) : [];

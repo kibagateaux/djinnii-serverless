@@ -39,6 +39,7 @@ export const getMovesStorylineData = (event, context, callback) => {
               // can be used to store indexes of users Activities and Locations
               // const dailySummaries = normalizedData.reduce((ledger, day) => (
               //   {...ledger, [day.date]: createDailySummary(day)}));
+              // console.log('daily sums', dailySummaries);
 
 
               const newData = ["activities", "stats", "locations"]
@@ -53,14 +54,14 @@ export const getMovesStorylineData = (event, context, callback) => {
               // update Activities with activities
               // update Locations with locations
 
-              const dbWrites = Object.keys(newData).map((resource) => {
-                const data = newData[resource];
-                const ledger = Object.keys(data).map((time) => data[time]);
-                const blobs = blobify(ledger);
-                const table = process.env[`DYNAMODB_${_.toUpper(resource)}_TABLE`];
-                return (blobs[0].length > 0) ? // checks that there is at least one item to put
-                  blobs.map((blob) => batchWrite(table, blob, userId)) : null;
-              });
+              // const dbWrites = Object.keys(newData).map((resource) => {
+              //   const data = newData[resource];
+              //   const ledger = Object.keys(data).map((time) => data[time]);
+              //   const blobs = blobify(ledger);
+              //   const table = process.env[`DYNAMODB_${_.toUpper(resource)}_TABLE`];
+              //   return (blobs[0].length > 0) ? // checks that there is at least one item to put
+              //     blobs.map((blob) => batchWrite(table, blob, userId)) : null;
+              // });
     
               // don't think using results from writes is useful but this is how to handle it
               // .reduce((ledger, writes) => [...ledger, ...writes], []);
@@ -76,6 +77,7 @@ export const getMovesStorylineData = (event, context, callback) => {
                   "Access-Control-Request-Method": "GET",
                   "Access-Control-Allow-Origin": "*"
                 },
+                // body: {}
                 body: JSON.stringify(normalizedData),
               };
               callback(null, response);
