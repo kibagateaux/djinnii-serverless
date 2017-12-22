@@ -5,7 +5,8 @@
 * WHY? - Teaches growth mindset to create positive feedback cycles between different aspects of your life. Based on scientific (sleep impacts, screen time, biofeedback) and behavioural design studies (nudge principles, gamification, intrinsic motivation).
 * Time Based - Everything is designed around time to see how people change overtime and maintain immutable data.
 * “Abstraction of Self” - Is it you or its own being? Given all data about you, is it possible to recreate a virtual replica?
-* Core Components of a Health Human - Purpose, Nutrition, Emotion, Social, Financial, Physical Activity, Mental Activity, Sleep ...more? (Human Performance Institute)
+* KEEP DATA RAW & SIMPLE. Do not add interpretation, structure, or anything beyond what is necessary to describe the fundamental object and what it represents.
+* Core Components of a Health Human - Purpose, Nutrition, Emotion, Social, Financial, Physical Activity, Mental Activity, Environment ...more? (Human Performance Institute)
 
 # Development
 In terminal change directory into service you are working on (e.g. `cd integrations/`) and run `serverles offline start` to deploy Lambda functions locally. This means that everything is being run off of your own computer and not servers in the cloud for faster feedback and so we don't pay. Everything is "hot-loaded" so anytime you save a file then the code you are running is automatically updated.

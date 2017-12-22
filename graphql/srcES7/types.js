@@ -68,10 +68,17 @@ export default `
   }
   type Time {
     time: Int!
-    ${""/* All array of because multiple sources of data will be kept and many sources for mesages to come from for instance*/}
-    activity: [Activity!]
+    ${""/* All array of because multiple sources of data will be kept
+          many sources can input at same time e.g. mesaging platforms
+          shouldnt these all be "types" of activities    
+
+          Other Time based would be Location (which I have already you derp),
+          Weather, Stat, Emotion, Chemistry, 
+
+    */}
+    activity: [Activity!] @relation
     message: [Message!]
-    payment: [Payment!]
+    payment: [Payment!] 
     purchase: [Payment!]
   }
 
