@@ -14,7 +14,7 @@ const moves = new Moves({
 export const handleMovesOAuth = (event, context, callback) => {
  const params = event.queryStringParameters || {};
  const {code, state} = params;
- if (code) {
+ if (code && state) {
    moves.token(code, () => ({})) // callback because I didn't remove required
     .then((res) => {
       const {access_token, refresh_token} = res.data;
@@ -34,7 +34,7 @@ export const handleMovesOAuth = (event, context, callback) => {
           InvocationType: "Event", 
           Payload: JSON.stringify(data),
          };
-         // this fails in local testing because of time offsets
+         // this fails in local testing because of time offsets because calls real lambda not local
         lambda.invoke(params, (error, data) => {
           if(!error) {
             console.log('update tokens success', data);

@@ -36,8 +36,6 @@ export const getMovesStorylineData = (event, context, callback) => {
               const normalizedData = normalizeStorylineData(res.data)
               // FIXME send normalized data to diffing functions instead of everything below e.g. stats calculation and updating DB directly
               
-              // call recalculate stats from timestamp
-              
               const newData = ["activities", "stats", "locations"]
                 .reduce((newData, key) => ({
                   ...newData, 
@@ -49,6 +47,7 @@ export const getMovesStorylineData = (event, context, callback) => {
               // update MetaData table with daily summaries 
               // update Activities with activities
               // update Locations with locations
+
               const dbWrites = Object.keys(newData).map((resource) => {
                 const data = newData[resource];
                 const ledger = Object.keys(data).map((time) => data[time]);
@@ -81,13 +80,13 @@ export const getMovesStorylineData = (event, context, callback) => {
               callback(error)
             })
         } else {
-          // they haven't authenticated Moves yet so use my personal data to simulate
-          // const invokeParams = {
+          // they haven't authenticated Moves yet so use my personal data to fake it
+          const invokeParams = {
 
-          // };
-          // Lambda.invokeAsync(params, (error, results) => {
+          };
+          Lambda.invokeAsync(params, (error, results) => {
 
-          // })
+          })
         }
         
       } else {
