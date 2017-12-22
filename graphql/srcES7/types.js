@@ -44,9 +44,38 @@ export default `
     time: TimeInput!
   }
 
+  type Message {
+    text: String
+    image: String
+    video: String
+  }
+
+  input Message {}
+  interface MonetaryTransaction {
+    price: Int!
+    quantity: Int
+    items: [String]
+  }
+  type Payment implenets MonetaryTransaction {
+    price: Int!
+    quantity: Int
+    items: [String]
+  }
+  type Purchase implements MonetaryTransaction {
+    price: Int!
+    quantity: Int
+    items: [String]
+  }
   type Time {
     time: Int!
+    ${""/* All array of because multiple sources of data will be kept and many sources for mesages to come from for instance*/}
+    activity: [Activity!]
+    message: [Message!]
+    payment: [Payment!]
+    purchase: [Payment!]
   }
+
+
   input TimeInput {
     time: Int!
   }
