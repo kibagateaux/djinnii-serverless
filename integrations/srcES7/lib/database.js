@@ -1,13 +1,12 @@
 import AWS from 'aws-sdk';
-import {
-
-} from 'lodash/fp';
 
 AWS.config.update({
   region: "us-east-1"
 });
 
-export const DB = new AWS.DynamoDB.DocumentClient(); // FIXME: set standard version
+export const DB = new AWS.DynamoDB.DocumentClient({
+  region: "us-east-1",
+}); // FIXME: set standard version
 
 export const batchWrite = (table, items=[], userId) => {
   // console.log('put', items)
