@@ -25,14 +25,14 @@ Disconnect of the Modern Man (Why)	5\
 Incorporating Service Design	6\
 Our Design Principles	6\
 Why a Graph Based Data Model	6\
-Why a Time Based Data Model	7\
-Complex Systems & Agent Based Models	7\
-Application of Genetic Algorithms	7\
-Use Cases	7\
-Business Model	7\
-Social Implications	7\
-Ethics	7\
-Bibliography	9\
+Why a Time Based Data Model	8\
+Complex Systems & Agent Based Models	8\
+Application of Genetic Algorithms	8\
+Use Cases	8\
+Business Model	9\
+Social Implications	9\
+Ethics	9\
+Bibliography	10\
 \pard\pardeftab720\partightenfactor0
 
 \f0\b\fs32 \cf2 \strokec2 \page \pard\pardeftab720\partightenfactor0
@@ -214,7 +214,35 @@ Surrealism - we are literally creating an alternate universe and we must present
 \f2\b\fs32 \cf2 \strokec2 Why a Graph Based Data Model\
 \pard\pardeftab720\partightenfactor0
 
-\f1\b0\fs22 \cf2 \strokec2 Correlations, recommendations, and time distortion\
+\f1\b0\fs22 \cf2 \strokec2 \
+One of the main challenges we will face is how to manage our data. We will have hundreds if not thousands of input sources for every user that will need to be stored in a way that allows us to see how each data point is related to each other and easily access related data points without much hassle. If you think about a single second you have data about the weather, what activity the user is doing, who they are with, their heart rate, etc. This is a handful just to write down, how do we keep the depth of context about this data that exists not just in the data itself but in how the data is related to each other?  For this we utilize graphical databases which are designed to record the points in a network and the relationships between them.\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+This is one of the most critical technical details of our implementation. This type of data model allows us to see correlations and hidden relationships between behavior models. It is quite trivial to say how often does someone exercise and do there spending habits change in relation to the time since they last worked out, something that can be cumbersome with a traditional SQL or NoSQL database.\
+\
+Another key advantage of using a graphical database is being able to utilize the body of work done in the field of pure mathematics on graphs. Using these simple  mathematical formulas and equations we can perform queries and analysis models on our data that are simply not possible using statistical analysis that is largely prevalent. One of the most basic principles of graph analysis is isomorphism which means having the same structure. To be isomorphic we do not care what the values of each node and relationship in a graph is, so long as the graphs as a whole have the same shape. When analyzing our data we can use this principle of isomorphism to find recurring patterns in a user\'92s behavioral patterns. We don\'92t necessarily have to find data that are strictly equal, merely data that share a structural pattern. Using the example from 
+\f0\b \cf2 \strokec2 Figure 1.1 
+\f1\b0 \cf2 \strokec2 if we want to find a routine we do not look for something that occurs every day at 08:00 AM, we look for data points that occurs with the same pattern. This will lead to many graphs being matched that do not occur in the morning and thus we can find similarities across time that are not readily apparent if you are looking for specific values. With these additional matches outside of the user\'92s morning routine we can expand our pattern search to see if other patterns occur related to this initial pattern. From here we can discover behavioral patterns that are not related to any particular activity or time but inherit in the individual themselves.\
+\
+One of the more conventional use cases for graphical databases are for recommendation engines such as when Netflix recommends movies you might want to watch. For us we can use this to feed GA that recommend actions that will help users achieve their goals. We can take the behavioral patterns of a user called Amir that has some desirable quality of a second user called Yuri who wants to exercise three times a week like Jef. We use isomorphism to generalize Amir\'92s behavioral pattern into an abstract pattern and compare it to Yuri\'92s abstracted behavioral pattern. Isomorphic comparisons do not care about the values so it does not matter that Amir\'92s exercise pattern revolves around driving to the gym to lift weights after work because it also matches his eating and sleep patterns so it is totally acceptable that Yuri\'92s exercise pattern revolves around cycling tours on nights or weekends. So in order to change Yuri\'92s exercise pattern we essential recommend that she adopt Amir\'92s behavioral pattern. For this to work we must find every instance where Yuri\'92s pattern comes up and find some way to adapt it to the new pattern. This makes intuitive sense because changing one part of your life creates outstanding impacts on other aspects of your life, whether you are conscious of it or not. Thus the holistic approach we take to health & wellness is deeply embedded in the conceptual and computational models in our data structures.\
+\
+Correlations, recommendations, and time distortion\
 Pattern recognition and prediction with isomorphic graphs\
 \
 \pard\pardeftab720\partightenfactor0
