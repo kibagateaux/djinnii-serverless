@@ -2,9 +2,6 @@ import AWS from 'aws-sdk';
 import Moves from 'react-native-moves-api';
 import axios from 'axios';
 const lambda = new AWS.Lambda({apiVersion: '2015-03-31'});
-
-AWS.config.correctClockSkew = true;
-
 const moves = new Moves({
   client_secret: process.env.MOVES_CLIENT_SECRET,
   client_id: process.env.MOVES_CLIENT_ID,
@@ -15,7 +12,7 @@ export const handleMovesOAuth = (event, context, callback) => {
  const params = event.queryStringParameters || {};
  const {code, state} = params;
  if (code && state) {
-   moves.token(code, () => ({})) // callback because I didn't remove required
+   moves.token(code, () => ({})) // callback because I didn't remove require! in library refactor
     .then((res) => {
       const {access_token, refresh_token} = res.data;
       const stateParams = state.split(' ');
@@ -34,11 +31,18 @@ export const handleMovesOAuth = (event, context, callback) => {
           InvocationType: "Event", 
           Payload: JSON.stringify(data),
          };
-         // this fails in local testing because of time offsets because calls real lambda not local
+         // this fails in local testing because of time offsets
         lambda.invoke(params, (error, data) => {
           if(!error) {
-            console.log('update tokens success', data);
+            console.log('handle moves success', data);
+            const response = {
+              statusCode: 303,
+              headers: {location: "https://malikwormsby.com"}, // FIXME: get deeplinks to work
+              data: {}
+            }
+            callback(null, response)
           } else {
+            callback(error, null)
             console.log('update tokens error', error);
           }
         });
@@ -52,16 +56,6 @@ export const handleMovesOAuth = (event, context, callback) => {
         //     console.log('Moves error updating tokens', error);
         //   });
       }
-      const response = {
-        statusCode: 303,
-        headers: {
-          location: "djinnii://moves/init-auth"
-        },
-        data: {}
-      }
-      callback(null, response)
-      // maybe should be conditional redirect depending on response from update tokens
-      // that would only be necessary if tokens/query code fail but this is all automated by servers so probs unnecessary
     })
     .catch((err) => {
       console.log('auth fail', err);

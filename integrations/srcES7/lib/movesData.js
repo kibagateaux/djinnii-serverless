@@ -35,7 +35,9 @@ const createActivitiesList = (activities) => {
 };
 
 
-
+// should this be kished on backend?
+// violates "interpretation" law as we don't know what they are actually doing and making assumptions
+// can easily be handled on front end if necessary but adds noise and write operations
 const addFillerSpace = (activityList) => {
   let completeList = {}
   const activityTimes = activityList ? Object.keys(activityList) : {};

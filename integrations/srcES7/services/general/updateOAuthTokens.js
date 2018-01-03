@@ -41,8 +41,7 @@ export const updateOAuthTokens = (event, context, callback) => {
         if(!putError) {
           const response = {
             statusCode: 200,
-            headers: {
-            },
+            headers: {},
             data: putData
           }
           console.log("update tokens success", response)
