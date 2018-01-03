@@ -42,7 +42,11 @@ export const updateOAuthTokens = (event, context, callback) => {
           const response = {
             isBase64Encoded: false,
             statusCode: 200,
-            headers: {},
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Request-Method": "*",
+              "Access-Control-Allow-Origin": "*"
+            },
             data: JSON.stringify(putData)
           }
           console.log("update tokens success", response)

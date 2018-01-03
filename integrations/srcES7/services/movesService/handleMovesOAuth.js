@@ -38,7 +38,12 @@ export const handleMovesOAuth = (event, context, callback) => {
             const response = {
               isBase64Encoded: false,
               statusCode: 303,
-              headers: {location: "https://emochi.app.link/moves/init-auth"}, // FIXME: get deeplinks to work
+              headers: {
+                "location": "https://emochi.app.link/moves/init-auth",
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "GET",
+                "Access-Control-Allow-Origin": "*"
+              }, // FIXME: get deeplinks to work
               data: JSON.stringify({})
             };
             callback(null, response)
