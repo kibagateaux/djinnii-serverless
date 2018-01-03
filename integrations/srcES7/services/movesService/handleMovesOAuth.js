@@ -36,14 +36,15 @@ export const handleMovesOAuth = (event, context, callback) => {
           if(!error) {
             console.log('handle moves success', data);
             const response = {
+              isBase64Encoded: false,
               statusCode: 303,
               headers: {location: "https://emochi.app.link/moves/init-auth"}, // FIXME: get deeplinks to work
-              data: {}
-            }
+              data: JSON.stringify({})
+            };
             callback(null, response)
           } else {
             callback(error, null)
-            console.log('update tokens error', error);
+            console.log('handle moves error', error);
           }
         });
 

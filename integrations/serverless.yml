@@ -101,6 +101,7 @@ functions:
       - http:
           path: /auth/moves
           method: get
+          # integration: lambda_proxy Hopefully this fixes API Gateway 502
           request:
             parameters:
               querystrings:
@@ -119,6 +120,8 @@ functions:
       - http:
           path: /updateTokens
           method: post
+          # integration: lambda_proxy
+          
 
   getMovesStorylineData:
     handler: src/services/movesService.getMovesStorylineData

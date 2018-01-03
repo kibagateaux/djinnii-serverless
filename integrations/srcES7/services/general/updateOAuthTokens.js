@@ -40,15 +40,16 @@ export const updateOAuthTokens = (event, context, callback) => {
       DB.put(putParams, (putError, putData) => {
         if(!putError) {
           const response = {
+            isBase64Encoded: false,
             statusCode: 200,
             headers: {},
-            data: putData
+            data: JSON.stringify(putData)
           }
           console.log("update tokens success", response)
           callback(null, response);
         } else {
           console.log("update Tokens failed", putError);
-          callback(putError, putParams);
+          callback(putError);
         }
       })
     })
