@@ -37,7 +37,7 @@ export const handleMovesOAuth = (event, context, callback) => {
             console.log('handle moves success', data);
             const response = {
               statusCode: 303,
-              headers: {location: "https://malikwormsby.com"}, // FIXME: get deeplinks to work
+              headers: {location: "https://emochi.app.link/moves/init-auth"}, // FIXME: get deeplinks to work
               data: {}
             }
             callback(null, response)
