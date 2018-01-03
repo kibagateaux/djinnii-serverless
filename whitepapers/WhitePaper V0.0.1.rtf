@@ -1,6 +1,7 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue-Bold;\f1\fnil\fcharset0 HelveticaNeue;\f2\fnil\fcharset0 ArialUnicodeMS;
-\f3\fnil\fcharset0 Georgia-Bold;\f4\fnil\fcharset0 HelveticaNeue-Italic;}
+\f3\fnil\fcharset0 Georgia-Bold;\f4\fnil\fcharset0 HelveticaNeue-Italic;\f5\fnil\fcharset0 HelveticaNeue-BoldItalic;
+\f6\fnil\fcharset0 Georgia;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue255;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c100000;}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid2\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid1}}
@@ -27,13 +28,13 @@ Our Design Principles	6\
 Incorporating Service Design	7\
 Why a Graph Based Data Model	7\
 Why a Time Based Data Model	9\
-Complex Systems & Agent Based Models	9\
-Application of Genetic Algorithms	10\
-Use Cases	10\
-Business Model	10\
-Social Implications	10\
-Ethics	10\
-Bibliography	13\
+Complex Systems & Agent Based Models	11\
+Application of Genetic Algorithms	11\
+Use Cases	11\
+Business Model	12\
+Social Implications	12\
+Ethics	12\
+Bibliography	14\
 \pard\pardeftab720\partightenfactor0
 
 \f2\fs32 \cf2 \strokec2 \page \pard\pardeftab720\partightenfactor0
@@ -46,9 +47,10 @@ Bibliography	13\
 \
 \pard\pardeftab720\qc\partightenfactor0
 
-\fs24 \cf2 \strokec2 \'93What won\'92t change in 10 years?\'94 - Jeff Bezos\
-\
-\
+\fs24 \cf2 \strokec2 \'93What won\'92t change in 10 years?\'94 - Jeff Bezos
+\fs22 \cf2 \strokec2 \
+
+\fs24 \cf2 \strokec2 \
 \pard\pardeftab720\partightenfactor0
 \cf2 \strokec2 \
 People will always want to be better. It is why society progresses at an exponential rate - humans insistently try to outdo ourselves. With more competition and collaboration then ever, we can catalyze this process of personal development.\
@@ -203,7 +205,7 @@ https://en.wikipedia.org/wiki/Social_ecological_model\
 \
 
 \f4\i \cf2 \strokec2 Surrealism
-\f1\i0 \cf2 \strokec2  - We are literally creating an alternate universe and we must present it as such. Great design has story, focusing on surrealism gives full creative mobility to focus on telling that story rather than if it makes sense in our view of the real world. This is so we do not mislead users and also so that they buy into stories told by us, themselves, and third-parties. Surrealism is a complement of abstraction.\
+\f1\i0 \cf2 \strokec2  - We are literally creating an alternate universe and we must present it as such. Great design has story, focusing on surrealism gives full creative mobility to focus on telling that story rather than if it makes sense in our view of the real world. This is so we do not mislead users and also so that they buy into stories told by us, themselves, and third-parties. Surrealism is a complement to our Abstraction and User Interpretation principles.\
 \
 
 \f4\i \cf2 \strokec2 Effective > Efficient
@@ -268,7 +270,8 @@ Another key advantage of using a graphical database is being able to utilize the
 \f1\b0 \cf2 \strokec2 if we want to find a routine we do not look for something that occurs every day at 08:00 AM, we look for data points that occurs with the same pattern. This will lead to many graphs being matched that do not occur in the morning and thus we can find similarities across time that are not readily apparent if you are looking for specific values. With these additional matches outside of the user\'92s morning routine we can expand our pattern search to see if other patterns occur related to this initial pattern. From here we can discover behavioral patterns that are not related to any particular activity or time but inherit in the individual themselves. \
 \pard\pardeftab720\partightenfactor0
 
-\f4\i\fs20 \cf2 \strokec2 Graphic taken from Neo4j.com indicating how graphs can interconnect to add even more context to data\
+\f5\i\b\fs20 \cf2 \strokec2 Figure 1.2 
+\f4\b0 \cf2 \strokec2 Graphic taken from Neo4j.com indicating how graphs can interconnect to add even more context to data\
 \pard\pardeftab720\partightenfactor0
 
 \f1\i0\fs22 \cf2 \strokec2 \
@@ -291,8 +294,55 @@ Pattern recognition and prediction with isomorphic graphs\
 \pard\pardeftab720\partightenfactor0
 
 \f1\b0\fs22 \cf2 \strokec2 \
+In addition to our data being modeled as a graph it is also modeled on time as can be seen in 
+\f0\b \cf2 \strokec2 Figure 1.1
+\f1\b0 \cf2 \strokec2 . This has many adverse affects on how data is structured, how it is utilized, and makes it intuitively understandable to our users in a raw format as opposed to rows of SQL. This is not only because of the visual representation. Time is a key component of human consciencsousness, it is the basis for our understanding of the world and how we function.[10][11] It is engrained in our genetics, our culture, and our thought process. Considering that we are modeling human behaviour this is a logical method of representing a user\'92s data. It gets interesting when we start to graph large sets of this data and how it interrelates through time\
+\
+Time\
+\
+Merriam-Webster says consciousness is \'93sharing another's knowledge or awareness of an inward state or outward fact\'94. What gives us a conscious is that we are able to know ourself and relate our personal experiences to each other and express these experiences to each other. This is the fundamentals behind science and art. Logically speaking it is also the foundation of time.  Time is relational to the person experiencing it and also to itself which is why we have different \'93time zones\'94. Time is existent because each moment of time is related to each other and also because time is itself a relationship of these relations. There is a universal concept of past, present, and future - the past connects to the present which connects to the future, but how is the future connected to the past? You might say it must be connected through the present and this is only possible if the past and future are of the same classification denoted as \'93time\'94 and this means that time is related to itself therefore making time it\'92s own being. If this does not make sense then hopefully this excerpt by S\'f8ren Kierkegaard clears it up:\
+\
+\
+\'93The self is a relation which relates itself to its own self, or it is that in the relation that the relation relates itself to its own self; the self is not the relation but that the relation relates itself to its own self.\'94\
+\
+This aligns with the terminology we use everyday \'93They existed 
+\f4\i \cf2 \strokec2 in
+\f1\i0 \cf2 \strokec2  that time\'94 signifying the in relationships of the data structure or \'93Not enough time 
+\f4\i \cf2 \strokec2 in
+\f1\i0 \cf2 \strokec2  the day\'94 day being itself a relation to time exemplifying the relation to itself.\
+\
+\
+With the abstract notation of graph theory this makes time the equivalent of any other human user in our database and thus we can analyze the behaviours of time. This does not require any  special algorithms or creating a replica database to augment the data structure and run specific queries all it requires is a simple change of perspective. To those not familiar with graph theory these may look like completely different graphs but they are in fact exactly the same. So instead of looking at our data and seeing we have a user that got messages at this time we see a time that has a user and messages.\
+   \
+  \
+\
+\
+\
+   \
+  \
+ \
+  \
+ \
+\
+\
+\
+   \
+\
+   \
+\
+\
+\
+\
+\
+\
+\
+With this perspective of our data model we can run analysis that can more effectively demonstrate how people and events transgress over time because time is the subject of our focus. When applied to genetic algorithms this allows us to incorporate time as factor in how we see individuals progress and interact with others. This is critical. Time is a finite resource in life and if our models do not understand this, or at the very least recognize it, then they will not be effective at producing real change. If we calculate that a user can fulfill their dreams and become X if they do Y and Z that doesn\'92t do much if the plan we create for them takes three eons. \
+\
+Conversely we can run millions of calculations a second and life does not run at this speed so they must know that the artificial systems that they are operating in must wait for feedback from the real world before \
+\
+\
 Naturally Immutable data\
-Timeline of development\
+Timeline of development + path graph\
 Illusion or nah\
 \
 \
@@ -416,8 +466,15 @@ Bibliography\
 [7] {\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Genetic_algorithm"}}{\fldrslt \cf2 \ul \ulc2 \strokec2 https://en.wikipedia.org/wiki/Genetic_algorithm}}\
 [8] {\field{\*\fldinst{HYPERLINK "https://www.mathworks.com/help/matlab/ref/graph.isisomorphic.html?s_tid=gn_loc_drop"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://www.mathworks.com/help/matlab/ref/graph.isisomorphic.html?s_tid=gn_loc_drop}}\
 [9] {\field{\*\fldinst{HYPERLINK "https://neo4j.com/product/"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://neo4j.com/product/}}\
+[10] \'93Wherever we shall look for it in the physiology or chemistry of the brain, we shall have to look for something more complex than pacemakers. We must look for a system that combines timer(s) with inhibitory regulators. Adjusting to or estimating duration for an animal organism is not simply putting landmarks in the flow of time; it means retaining and deferring action.\'93 (pg 222) {\field{\*\fldinst{HYPERLINK "http://www.sciencedirect.com/science?_ob=PdfExcerptURL&_imagekey=3-s2.0-B9780080254890500156-main.pdf&_piikey=B9780080254890500156&_cdi=306112&_orig=PublicationURL&_zone=rslt_list_item&_fmt=abst&_eid=3-s2.0-B9780080254890500156&_isbn=9780080254890&_user=12975512&md5=0766cc015145f0c335ae407c93c47fe1&ie=/excerpt.pdf"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 http://www.sciencedirect.com/science?_ob=PdfExcerptURL&_imagekey=3-s2.0-B9780080254890500156-main.pdf&_piikey=B9780080254890500156&_cdi=306112&_orig=PublicationURL&_zone=rslt_list_item&_fmt=abst&_eid=3-s2.0-B9780080254890500156&_isbn=9780080254890&_user=12975512&md5=0766cc015145f0c335ae407c93c47fe1&ie=/excerpt.pdf}}\
 \
-\
+\pard\pardeftab720\partightenfactor0
+
+\f6\fs20 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs22 \cf2 \strokec2 [11] \'93Reward function appears to be modulated by the circadian system, but little is known about the neural basis of this interaction\'85The present study measured neural reward activation in the context of a validated reward task at 10.00 h, 14.00 h, and 19.00 h in healthy human males.\'94 {\field{\*\fldinst{HYPERLINK "http://www.jneurosci.org/content/37/37/8895"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 http://www.jneurosci.org/content/37/37/8895}}\
+w\
 \
 \
 \
