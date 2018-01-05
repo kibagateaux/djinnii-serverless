@@ -17,13 +17,14 @@ In terminal change directory into service you are working on (e.g. `cd integrati
 
 - **cljs-serverless** - AWS Lambda functions written in ClojureScript using [cljs-lambda](https://github.com/nervous-systems/cljs-lambda/tree/master/cljs-lambda) and [Serverless framework](https://serverless.com/)
 
-- **integrations** - AWS Lambda functions written in JavaScript. A quick port from front-end code toget app live to handle app integration logic such as OAuth, data normalizing, and database updates.
+- **integrations** - AWS Lambda functions written in JavaScript using [Serverless framework](https://serverless.com/). A quick port from front-end code toget app live to handle app integration logic such as OAuth, data normalizing, and database updates.
 
 
 # Notes
 If lambda needs permissions, add roles to it's policy in IAM console.
 If Lambda is inexplicably returning 502s, make sure respoonse codes are configured in API Gateway
 # TODOS
-Change DynamoDB "Tokens" table to "Integrations" to handle more metadata such as lastDataUpdate.
+Confirm Android setup https://developers.facebook.com/docs/facebook-login/android/  && https://github.com/facebook/react-native-fbsdk
+Integrate Facebook login into AWS Cognito following this guide https://docs.aws.amazon.com/cognito/latest/developerguide/facebook.html
 # Documentation
 FIXME: I need to be documented so people know how to use me!
