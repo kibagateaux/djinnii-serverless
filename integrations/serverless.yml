@@ -94,6 +94,7 @@ functions:
     description: Handles authorization process for Moves app
     tags:
       runtime: nodejs6.10
+      service: integrations      
     environment:
       MOVES_CLIENT_SECRET: ctvltqaFM1y6BaEe1IdE7_c7St82X6sHmIuD4597QAQr4zl930o23F8mnF3t7NEn
       MOVES_CLIENT_ID: kdiz90L264WQ72Sc7OO0_0IUM4ZRrcB6
@@ -101,7 +102,8 @@ functions:
       - http:
           path: /auth/moves
           method: get
-          # integration: lambda_proxy Hopefully this fixes API Gateway 502
+          integration: lambda
+          cors: true
           request:
             parameters:
               querystrings:
@@ -120,7 +122,6 @@ functions:
       - http:
           path: /updateTokens
           method: post
-          # integration: lambda_proxy
           
 
   getMovesStorylineData:
@@ -166,12 +167,11 @@ functions:
     tags:
       runtime: nodejs6.10
       service: integrations
-    environment:
     events: 
       - http:
           path: /user/aggregate-data/
           method: post
-                
+
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

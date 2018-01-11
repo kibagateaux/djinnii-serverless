@@ -9,8 +9,7 @@ const moves = new Moves({
 
 // no reason why majority of this code can't be abstracted to general OAuth handleing Lambda which redirects here
 export const handleMovesOAuth = (event, context, callback) => {
- const params = event.queryStringParameters || {};
- const {code, state} = params;
+ const {code, state} = event.query;
  if (code && state) {
    moves.token(code, () => ({})) // callback because I didn't remove require! in library refactor
     .then((res) => {
@@ -25,29 +24,19 @@ export const handleMovesOAuth = (event, context, callback) => {
           accessToken: access_token,
           refreshToken: refresh_token
         };
-
-        var params = {
+        const params = {
           FunctionName: "jinni-integrations-dev-updateOAuthTokens", 
           InvocationType: "Event", 
           Payload: JSON.stringify(data),
-         };
-         // this fails in local testing because of time offsets
+        };
         lambda.invoke(params, (error, data) => {
-          if(!error) {
-            console.log('handle moves success', data);
-            const response = {
-              statusCode: 301,
-              headers: {Location: "https://emochi.app.link"}, // FIXME: get deeplinks to work
-              data: ""
-            };
-            console.log('handle redirect', response);
-            callback(null, response)
-          } else {
-            console.log('handle moves error', error);
-            callback(error, null)
-          }
+          if(error) callback(error, null);
         });
       }
+
+      const redirectError = new Error("[301] JinniIntegrations.Redirect : Resource permanently moved");
+      redirectError.name = "https://emochi.app.link";
+      callback(redirectError, null);
     })
     .catch((err) => {
       console.log('auth fail', err);
