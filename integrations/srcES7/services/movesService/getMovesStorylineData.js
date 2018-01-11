@@ -23,6 +23,7 @@ export const getMovesStorylineData = (event, context, callback) => {
     };
     DB.get(queryParams, (error, results) => {
       if (!error && results.Item) {
+        console.log('get moves', results.Item.integrations.moves, results.Item.integrations.Moves);
         const {accessToken, refreshToken} = results.Item.integrations ? 
           results.Item.integrations.moves : {}; // add lastUpdateAt. only update if > 8 hours or something
         if (accessToken) {

@@ -89,6 +89,19 @@ iamRoleStatements:
 
 functions:
 
+  updateOAuthTokens: 
+    handler: src/services/general.updateOAuthTokens
+    description: Updates user's oauth tokens for an integration in user meta data table
+    tags:
+      runtime: nodejs6.10
+      service: integrations
+    environment:
+      DYNAMO_USER_TABLE: djinii-mobilehub-1897344653-User_Meta_Data
+    events:
+      - http:
+          path: /updateTokens
+          method: post
+
   handleMovesOAuth:
     handler: src/services/movesService.handleMovesOAuth
     description: Handles authorization process for Moves app
@@ -107,22 +120,8 @@ functions:
           request:
             parameters:
               querystrings:
-                code: true
-                state: true
-
-  updateOAuthTokens: 
-    handler: src/services/general.updateOAuthTokens
-    description: Updates user's oauth tokens for an integration in user meta data table
-    tags:
-      runtime: nodejs6.10
-      service: integrations
-    environment:
-      DYNAMO_USER_TABLE: djinii-mobilehub-1897344653-User_Meta_Data
-    events:
-      - http:
-          path: /updateTokens
-          method: post
-          
+                code: false
+                state: false
 
   getMovesStorylineData:
     handler: src/services/movesService.getMovesStorylineData
@@ -143,6 +142,48 @@ functions:
             parameters:
               paths:
                 userId: true
+
+  handleFitbitOAuth:
+    handler: src/services/fitbit.handleFitbitOAuth
+    description: Handles authorization process for Fitbit app
+    tags:
+      runtime: nodejs6.10
+      service: integrations      
+    environment:
+      FITBIT_CLIENT_SECRET: a282db32405987bbafe61caa3370d2e6
+      FITBIT_CLIENT_ID: 22CPBN
+    events:
+      - http:
+          path: /auth/fitbit
+          method: get
+          integration: lambda
+          cors: true
+          request:
+            parameters:
+              querystrings:
+                code: true
+                state: true
+
+  getFitbitActivities:
+    handler: src/services/fitbit.getFitbitActivities
+    description: Gets Fitbit activities data
+    tags:
+      runtime: nodejs6.10
+      service: integrations
+    environment:
+      FITBIT_CLIENT_SECRET: a282db32405987bbafe61caa3370d2e6
+      FITBIT_CLIENT_ID: 22CPBN
+      DYNAMODB_META_DATA_TABLE: djinii-mobilehub-1897344653-User_Meta_Data
+    events:
+      - http:
+          path: /fitbit/activities/{userId}/{accessToken}
+          method: get
+          cors: true
+          request:
+            parameters:
+              paths:
+                userId: true
+                accessToken: true
 
   updateAllDataSources:
     handler: handler.general.updateAllDataSources
