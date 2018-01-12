@@ -176,14 +176,23 @@ functions:
       DYNAMODB_META_DATA_TABLE: djinii-mobilehub-1897344653-User_Meta_Data
     events:
       - http:
-          path: /fitbit/activities/{userId}/{accessToken}
+          path: /fitbit/activities/{userId}
           method: get
           cors: true
           request:
             parameters:
               paths:
                 userId: true
-                accessToken: true
+      - http:
+          path: /fitbit/activities/{userId}/{beforeDate}
+          method: get
+          cors: true
+          rquest:
+            parameters:
+              paths:
+                userId: true
+                beforeDate: true
+
 
   updateAllDataSources:
     handler: handler.general.updateAllDataSources
