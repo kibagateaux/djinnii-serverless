@@ -2,6 +2,7 @@ import {
   integrationNames,
   integrationCategories
 } from './integrationConstants';
+import {mapValues} from 'lodash';
 
 const {
   MOVES_APP,
@@ -15,9 +16,25 @@ const {
   SLEEP_TRACKING,
   GOAL_TRACKING,
   BIOMETRICS,
-
+  SOCIAL_MEDIA,
+  MESSAGING
 } = integrationCategories;
 
+const calculateDataScore = (dataMap = {}) =>
+  (evaluatorFunc = calculateDataQuality) => evaluatorFunc(dataMap)
+
+const getAvgDataScore = (dataMap = {}) => {
+  console.log('get avg data score', dataMap);
+  const dataPointCount = Object.keys(dataMap).length;
+  const totalScore = mapValues(dataMap, (n) => {console.log('n', n); return n});
+  console.log('totals', totalScore);
+  // const avgScore = totalScore / dataPointCount;
+  // console.log('calc data q', dataMap, totalScore, avgScore);
+  return totalScore
+};
+
+const calculateDataQuality = (dataMap) =>
+  calculateDataScore(dataMap)(getAvgDataScore);
 // can probably turn this into standardized schema like GQL
 
 const integrationIndex = {
@@ -36,36 +53,52 @@ const integrationIndex = {
         ACTIVITY_TRACKING, 
         LOCATION_TRACKING,
       ]
+    },
+    [FACEBOOK]: {
+      categories: [
+        SOCIAL_MEDIA,
+        MESSAGING,
+      ]
     }
   },
-  LOCATION_TRACKING: [
-    { // GPS is not documented for WebAPI but should be availbale, will see once have Fitbit for testing
+  [LOCATION_TRACKING]: {
+    [FITBIT]: { // GPS is not documented for WebAPI but should be availbale, will see once have Fitbit for testing
       integrationName: FITBIT,
       category: ACTIVITY_TRACKING,
+      lambdaName: "",
       requestURL: "/fitbit/activities/{userId}/{logId}",
       valuesReturned: {
         // time: 0? 
         lat: 100,
         lon: 100,
       }
+      ,
+      get dataQualityScore() {
+        return calculateDataQuality(this.valuesReturned);
+      }
     },
-    {
+    [MOVES_APP]: {
       integrationName: MOVES_APP,
-      requestURL: "/moves/storyline/{userId}",
       category: ACTIVITY_TRACKING,      
+      lambdaName: "",
+      requestURL: "/moves/storyline/{userId}",
       valuesReturned: {
         time: 100,
         lat: 100,
         lon: 100,
         placeId: 20,
+      },
+      get dataQualityScore() {
+        return calculateDataQuality(this.valuesReturned);
       }
     },
-  ],
-  ACTIVITY_TRACKING: [
-    {
+  },
+  [ACTIVITY_TRACKING]: {
+    [MOVES_APP]: {
       integrationName: MOVES_APP,
-      requestURL: "/moves/storyline/{userId}",
       category: ACTIVITY_TRACKING,      
+      lambdaName: "",
+      requestURL: "/moves/storyline/{userId}",
       valuesReturned: {
         startTime: 100,
         endTime: 100,
@@ -74,12 +107,16 @@ const integrationIndex = {
         lat: 100,
         lon: 100,
         placeId: 20,
-        distance: 80
+        distance: 80,
+        get dataQualityScore() {
+          return calculateDataQuality(this.valuesReturned);
+        }
       }
     },
-    { // GPS is not documented for WebAPI but should be availbale, will see once have Fitbit for testing
+    [FITBIT]: { // GPS is not documented for WebAPI but should be availbale, will see once have Fitbit for testing
       integrationName: FITBIT,
       category: ACTIVITY_TRACKING,
+      lambdaName: "",      
       requestURL: "/fitbit/activities/{userId}",
       valuesReturned: {
         startTime: 100,
@@ -93,13 +130,17 @@ const integrationIndex = {
         // technically these are a second API call but they fall under activity tracking
         lat: 100,
         lon: 100,
+      },
+      get dataQualityScore() {
+        return calculateDataQuality(this.valuesReturned);
       }
     }
-  ],
-  BIOMETRICS: [
-    {
+  },
+  [BIOMETRICS]: {
+    [FITBIT]: {
       integrationName: FITBIT,
       category: BIOMETRICS,
+      lambdaName: "",      
       requestURL: "",
       valuesReturned: {
         height: 80,
@@ -108,10 +149,50 @@ const integrationIndex = {
         weightMetric: 100,
         walkingStrideLength: 75,
         runningStrideLength: 75
+      },
+      get dataQualityScore() {
+        return calculateDataQuality(this.valuesReturned);
       }
     }
-  ]
+  }
 };
 
 
 export default integrationIndex
+
+
+
+// Schema
+
+`
+inteface Index {
+  list: [IntegrationSummary!]!
+}
+
+enum IntegrationList {
+  FITBIT,
+  FACEBOOK,
+  MOVES_APP
+}
+
+enum IntegrationCategory {
+  ACTIVITY_TRACKING,
+  LOCATION_TRACKING,
+  SLEEP_TRACKING,
+  GOAL_TRACKING,
+  BIOMETRICS,
+  SOCIAL_MEDIA,
+  MESSAGING
+}
+
+type Integration {
+  category: IntegrationCategory
+
+}
+
+type IntegrationSummary {
+  name: IntegrationList
+  categories: [IntegrationCategoryList]
+}
+
+`
