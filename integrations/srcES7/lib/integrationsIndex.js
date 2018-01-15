@@ -24,13 +24,11 @@ const calculateDataScore = (dataMap = {}) =>
   (evaluatorFunc = calculateDataQuality) => evaluatorFunc(dataMap)
 
 const getAvgDataScore = (dataMap = {}) => {
-  console.log('get avg data score', dataMap);
-  const dataPointCount = Object.keys(dataMap).length;
-  const totalScore = mapValues(dataMap, (n) => {console.log('n', n); return n});
-  console.log('totals', totalScore);
-  // const avgScore = totalScore / dataPointCount;
-  // console.log('calc data q', dataMap, totalScore, avgScore);
-  return totalScore
+  const dataPointsCount = Object.keys(dataMap).length;
+  const totalScore = Object.keys(dataMap)
+    .reduce((total, key) => dataMap[key] + total, 0);
+  const avgScore = totalScore / dataPointsCount;
+  return avgScore + dataPointsCount; // + dataPoint skews it towards apps that return more data reducing amount of calls needed
 };
 
 const calculateDataQuality = (dataMap) =>
@@ -164,7 +162,7 @@ export default integrationIndex
 
 // Schema
 
-`
+const indexSchema = `
 inteface Index {
   list: [IntegrationSummary!]!
 }
@@ -175,7 +173,7 @@ enum IntegrationList {
   MOVES_APP
 }
 
-enum IntegrationCategory {
+enum IntegrationCategoryList {
   ACTIVITY_TRACKING,
   LOCATION_TRACKING,
   SLEEP_TRACKING,
@@ -186,13 +184,18 @@ enum IntegrationCategory {
 }
 
 type Integration {
-  category: IntegrationCategory
+  category: IntegrationCategoryList!
+}
 
+type DataItem {
+  key: String!
+  value: Int! 
 }
 
 type IntegrationSummary {
-  name: IntegrationList
-  categories: [IntegrationCategoryList]
+  name: IntegrationList!
+  categories: [IntegrationCategoryList!]!
+  returnedValues: [DataItem!]!
 }
 
 `

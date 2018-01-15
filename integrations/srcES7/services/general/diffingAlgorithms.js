@@ -23,7 +23,17 @@ export const sortIntegrationsByDataQuality = (index) => (integrations) => {
   // find missing required values in top relevant intg. and recur find in subsequent intg till all values satisfied.
   // reduce into single array of obj with Lambda call + normalized values needed from intg.
   
-  const categoryMap = sortIntegrationsByCategory(index)(integrations)
+  const categoryMap = sortIntegrationsByCategory(index)(integrations);
+  const weightedIntegrationsCategoryMap = mapKeys(categoryMap, (intgs, cat) => {
+    console.log('weight ints', intgs, cat);
+    const weights = intgs.map((intg) => {
+      const weight = (index[cat] || {})[intg] ?
+        index[cat][intg].dataQualityScore : 0;
+      console.log('intg', intg, weight);
+    });
+    console.log('wieghts', weights);
+    return {};
+  });
   // const integrationsSortedByDataQuality = mapKeys(categoryMap, (intgs, category) => {
   //   console.log('srt by data', category, index[category]);
   //   const integrationScores = intgs.map((intg) => {
@@ -38,6 +48,6 @@ export const sortIntegrationsByDataQuality = (index) => (integrations) => {
   // })
 }
 
-const catSort = sortIntegrationsByCategory(integrationIndex)([FITBIT, MOVES_APP]);
-console.log('cat sort', catSort);
+// const catSort = sortIntegrationsByCategory(integrationIndex)([FITBIT, MOVES_APP]);
+// console.log('cat sort', catSort);
 sortIntegrationsHOF(sortIntegrationsByDataQuality)(integrationIndex)([FITBIT, MOVES_APP])
