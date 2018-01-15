@@ -174,6 +174,7 @@ functions:
       FITBIT_CLIENT_SECRET: a282db32405987bbafe61caa3370d2e6
       FITBIT_CLIENT_ID: 22CPBN
       DYNAMODB_META_DATA_TABLE: djinii-mobilehub-1897344653-User_Meta_Data
+      DYNAMODB_ACTIVITIES_TABLE: djinii-mobilehub-1897344653-Activities      
     events:
       - http:
           path: /fitbit/activities/{userId}

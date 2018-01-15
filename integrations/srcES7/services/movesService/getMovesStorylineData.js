@@ -35,7 +35,7 @@ export const getMovesStorylineData = (event, context, callback) => {
           moves.get(`/user/storyline/daily?pastDays=${daysToUpdate}&trackPoints=true`)
             .then((res) => {
               const normalizedData = normalizeStorylineData(res.data)
-              // FIXME send normalized data to diffing functions instead of everything below e.g. stats calculation and updating DB directly
+              // FIXME send normalized data to SQS for diffing algo or whatever gets implemented instead of everything below
               
               const resources = ["activities", "locations"];
               const aggregatedDataByResource = resources
