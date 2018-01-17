@@ -26,9 +26,9 @@ const calculateDataScore = (dataMap = {}) =>
 const getAvgDataScore = (dataMap = {}) => {
   const dataPointsCount = Object.keys(dataMap).length;
   const totalScore = Object.keys(dataMap)
-    .reduce((total, key) => dataMap[key] + total, 0);
+    .reduce((total, key) => Number(dataMap[key]) + total, 0);
   const avgScore = totalScore / dataPointsCount;
-  return avgScore + dataPointsCount; // + dataPoint skews it towards apps that return more data reducing amount of calls needed
+  return Number(avgScore + dataPointsCount); // + dataPoint skews it towards apps that return more data reducing amount of calls needed
 };
 
 const calculateDataQuality = (dataMap) =>
@@ -36,7 +36,7 @@ const calculateDataQuality = (dataMap) =>
 // can probably turn this into standardized schema like GQL
 
 const integrationIndex = {
-  list: {
+  integrationsList: {
     [FITBIT]: {
       categories: [
         ACTIVITY_TRACKING, 
@@ -59,6 +59,35 @@ const integrationIndex = {
       ]
     }
   },
+  categoryDependencies: {
+    [LOCATION_TRACKING]: [
+      "time",
+      "latitude",
+      "longitude",
+    ],
+    [ACTIVITY_TRACKING]: [
+      "activity",
+      "startTime",
+      "endTime",
+    ],
+    [SLEEP_TRACKING]: [
+      "startTime",
+      "endTime"
+    ],
+    [GOAL_TRACKING]: [
+      "title",
+      "purpose"
+    ],
+    [MESSAGING]: [
+
+    ],
+    [SOCIAL_MEDIA]: [
+
+    ],
+    [BIOMETRICS]: [
+      
+    ]
+  },
   [LOCATION_TRACKING]: {
     [FITBIT]: { // GPS is not documented for WebAPI but should be availbale, will see once have Fitbit for testing
       integrationName: FITBIT,
@@ -67,8 +96,8 @@ const integrationIndex = {
       requestURL: "/fitbit/activities/{userId}/{logId}",
       valuesReturned: {
         // time: 0? 
-        lat: 100,
-        lon: 100,
+        latitude: 100,
+        longitude: 100,
       }
       ,
       get dataQualityScore() {
@@ -82,8 +111,8 @@ const integrationIndex = {
       requestURL: "/moves/storyline/{userId}",
       valuesReturned: {
         time: 100,
-        lat: 100,
-        lon: 100,
+        latitude: 100,
+        longitude: 100,
         placeId: 20,
       },
       get dataQualityScore() {
@@ -102,13 +131,10 @@ const integrationIndex = {
         endTime: 100,
         activity: 100,
         calories: 100,
-        lat: 100,
-        lon: 100,
-        placeId: 20,
-        distance: 80,
-        get dataQualityScore() {
-          return calculateDataQuality(this.valuesReturned);
-        }
+        distance: 80
+      },
+      get dataQualityScore() {
+        return calculateDataQuality(this.valuesReturned);
       }
     },
     [FITBIT]: { // GPS is not documented for WebAPI but should be availbale, will see once have Fitbit for testing
@@ -118,16 +144,14 @@ const integrationIndex = {
       requestURL: "/fitbit/activities/{userId}",
       valuesReturned: {
         startTime: 100,
-        duration: 100,
+        endTime: 100, // technically returns startTime and duration but endTime will be extrapolated in aggregator normalizer
         heartRate: 100,
         activity: 100,
         source: 100,
         calories: 100,
         distance: 80,
+        // This arbitrary value skews rating towards Fitbit in current algo
         integrationItemID: 100, // can use to retrieve more data from fitbit API e.g. GPS data during activity
-        // technically these are a second API call but they fall under activity tracking
-        lat: 100,
-        lon: 100,
       },
       get dataQualityScore() {
         return calculateDataQuality(this.valuesReturned);
@@ -147,6 +171,34 @@ const integrationIndex = {
         weightMetric: 100,
         walkingStrideLength: 75,
         runningStrideLength: 75
+      },
+      get dataQualityScore() {
+        return calculateDataQuality(this.valuesReturned);
+      }
+    }
+  },
+  [SLEEP_TRACKING]: {
+    [FITBIT]: {
+      integrationName: FITBIT,
+      category: SLEEP_TRACKING,
+      lambdaName: "",      
+      requestURL: "",
+      valuesReturned: {
+      
+      },
+      get dataQualityScore() {
+        return calculateDataQuality(this.valuesReturned);
+      }
+    }
+  },
+  [GOAL_TRACKING]: {
+    [FITBIT]: {
+      integrationName: FITBIT,
+      category: GOAL_TRACKING,
+      lambdaName: "",      
+      requestURL: "",
+      valuesReturned: {
+      
       },
       get dataQualityScore() {
         return calculateDataQuality(this.valuesReturned);
