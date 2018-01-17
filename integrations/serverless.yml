@@ -202,7 +202,7 @@ functions:
       runtime: nodejs6.10
       service: integrations
     environment:
-      DYNAMODB_TOKENS_TABLE: djinii-mobilehub-1897344653-Tokens
+      DYNAMODB_META_TABLE_TABLE: djinii-mobilehub-1897344653-User_Meta_Data
     events: 
       - http:
           path: /user/update-all-data/{userId}
