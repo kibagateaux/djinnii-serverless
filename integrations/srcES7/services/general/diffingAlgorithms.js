@@ -1,6 +1,7 @@
 import integrationIndex from '../../lib/integrationsIndex';
 import {integrationNames} from '../../lib/integrationConstants';
 import {mapValues, filter, flatten} from 'lodash';
+import integrationsIndex from '../../lib/integrationsIndex';
 
 const {FITBIT, MOVES_APP,FACEBOOK} = integrationNames;
 
@@ -22,19 +23,19 @@ const sortIntegrationsByCategory = (integrations) => (
 
 /**
  * @name sortIntegrationsByDataQuality
- * @desc Takes array of all user enabled integrations and adds a weight for each integration by category
+ * @desc Takes array of all user enabled integrations and adds a fitnes for each integration by category
  * @param {Object} index - index of integration categories, values, API calls, and other metadata
  * @param {Array} integrations - Array of available integrations for a user
  * @returns {Object} - returns categories with array of integrations and their associated data quality score
 */
 const sortIntegrationsByDataQuality = (categoryMap) => {
-  const weightedIntegrationsList = mapValues(categoryMap, (intgs, cat) => (
-    intgs ? intgs.reduce((weights, intg) => {
-      const weight = (integrationIndex[cat] || {})[intg] ?
+  const fittedIntegrationsList = mapValues(categoryMap, (intgs, cat) => (
+    intgs ? intgs.reduce((fitnessScores, intg) => {
+      const fitness = (integrationIndex[cat] || {})[intg] ?
         integrationIndex[cat][intg].dataQualityScore : 0
-      return [...weights, [intg, weight]];
+      return [...fitnessScores, [intg, fitness]];
     }, {}) : {}), {});
-  return weightedIntegrationsList;
+  return fittedIntegrationsList;
 };
 
 /**
@@ -55,17 +56,19 @@ const sortIntegrationsByDataQuality = (categoryMap) => {
  */
 export const fillCategoryDataDependencies = (category = "") =>
   (availableIntegrations = []) => (integrationCalls = []) => {
+    // I broke this woops
+    const dataRequirements = integrationIndex.categoryDependencies[category];
+
     const fulfilledRequirements = integrationCalls
       .reduce((list, intg) => (intg.length > 0 ?
         [...list, ...intg[1]] : [...list]), []);
-
     if ((dataRequirements.length === fulfilledRequirements.length)
         || availableIntegrations.length === 0) {
       return integrationCalls
     } else {
-      const weightSortedIntg = availableIntegrations
+      const fitnessSortedIntg = availableIntegrations
         .sort((intg1, intg2) => intg2[1] - intg1[1]);
-      const [primeIntgName, primeIntgWeight] = weightSortedIntg[0];
+      const [primeIntgName, primeIntgFitness] = fitnessSortedIntg[0];
       const intgIndex = integrationIndex[category][primeIntgName] || {};
       const remainingRequirements = dataRequirements
         .filter((req) => !fulfilledRequirements.includes(req));
@@ -88,20 +91,23 @@ export const fillCategoryDataDependencies = (category = "") =>
  * @name constructDataAggregatorPipeline
  * @desc Builds an array of all the api calls needed to aggregate all of a user's integrated data
  * @param {Object} index - index of integration categories, values, API calls, and other metadata 
- * @param {Object} integrationsList - Categories with weighted integrations {[category]: [[intg, weight], [intg, weight]]}
+ * @param {Object} integrationsList - Categories with fitness scored integrations {[category]: [[intg, fitness], [intg, fitness]]}
  * @returns {Object} - returns categories with array of integration calls that satisfy data requirements
 */
 export const constructDataAggregatorPipeline = (integrationsList) => {
   const categoryMap = sortIntegrationsByCategory(integrationsList);
-  console.log('consrtuct data pipeline', integrationsList, categoryMap);
-  const weightedIntegrationsList = sortIntegrationsByDataQuality(categoryMap);
-  const dataCalls = mapValues(weightedIntegrationsList, (weights, category) =>
-    fillCategoryDataDependencies(category)
-      (integrationsList[category])());
+  const fittedIntegrationsList = sortIntegrationsByDataQuality(categoryMap);
+  const dataCalls = mapValues(fittedIntegrationsList, (fitnessScores, category) => {
+    return fillCategoryDataDependencies(category)
+      (fittedIntegrationsList[category])([])
+  });
 
   const pipeline = Object.keys(dataCalls)
     .reduce((list, category) => [...list, ...dataCalls[category]], [])
     .filter((call) => call[1].length > 0) // removes calls that dont' request data
 
+    console.log('data aggregator pipeline', pipeline);
   return pipeline;
 };
+
+constructDataAggregatorPipeline([FITBIT, MOVES_APP]);
