@@ -1,12 +1,12 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;\f1\fnil\fcharset0 HelveticaNeue-Bold;\f2\fnil\fcharset0 HelveticaNeue;
 \f3\fnil\fcharset0 ArialUnicodeMS;\f4\fnil\fcharset0 Georgia-Bold;\f5\fnil\fcharset0 Georgia;
-\f6\fnil\fcharset0 HelveticaNeue-BoldItalic;\f7\fnil\fcharset0 HelveticaNeue-Italic;\f8\fswiss\fcharset0 Helvetica-Bold;
+\f6\fnil\fcharset0 HelveticaNeue-Italic;\f7\fnil\fcharset0 HelveticaNeue-BoldItalic;\f8\fswiss\fcharset0 Helvetica-Bold;
 }
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue255;\red38\green38\blue38;
-\red255\green255\blue255;}
-{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c100000;\cssrgb\c20000\c20000\c20000;
-\cssrgb\c100000\c100000\c100000;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red38\green38\blue38;\red255\green255\blue255;
+\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c20000\c20000\c20000;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c0\c0\c100000;}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid2\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid1}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
 \margl1440\margr1440
@@ -34,32 +34,34 @@ Table of Contents\
 \pard\tqr\tx8928\pardeftab720\li240\sa120\partightenfactor0
 
 \fs24 \cf2 \strokec2 Table of Contents	1\
-Executive Summary	2\
-Overview	2\
-Internal System Diagram	3\
-Consumer View Of System	4\
-Business View Of System	5\
-B2C Business Model And Use Cases	6\
-B2B Business Model And Use Cases	7\
-Philosophy & Methodology	9\
+1 Executive Summary	3\
+2 Overview	3\
+3 System Design	4\
+3.1 Internal System Diagram	4\
+3.2 Consumer View Of System	5\
+3.3 Business View Of System	6\
+4 Philosophy & Methodology	7\
+5 Business Proposition	8\
+5.1 B2C Business Model And Use Cases	8\
+5.2 B2B Business Model And Use Cases	9\
 Definitions	10\
-Design Principles	11\
-Disconnect of the Modern Man	12\
+6 Design Principles	11\
+7 Disconnect of the Modern Man	12\
 Service Design	14\
 Why a Graph Based Data Model	14\
 Why a Time Based Data Model	16\
 Complex Systems & Agent Based Models	18\
 Application of Genetic Algorithms	18\
 Marketing Platform and Zero Knowledge Analytics	18\
-Roadmap Draft	18\
+Roadmap Draft	19\
 Social Implications	19\
 Ethics	19\
-Bibliography	20\
+Bibliography	21\
 \pard\pardeftab720\partightenfactor0
 
 \f3\fs32 \cf2 \strokec2 \page \pard\pardeftab720\partightenfactor0
 
-\f4\b\fs36 \cf2 \strokec2 Executive Summary\
+\f4\b\fs36 \cf2 \strokec2 1 Executive Summary\
 \pard\pardeftab720\partightenfactor0
 
 \f2\b0\fs24 \cf2 \strokec2 Jinni is a software system that can simulate human behavior at the individual and societal level in a virtual environment by aggregating massive amounts of real-world data from people\'92s everyday lifestyles. Taking data returned by these virtual simulations we can influence real-world behavior to help people achieve their purpose in life by promoting self-reflection and self-actualization.
@@ -69,7 +71,7 @@ Bibliography	20\
 \fs22 \cf2 \strokec2 \
 \pard\pardeftab720\partightenfactor0
 
-\f4\b\fs32 \cf2 \strokec2 Overview\
+\f4\b\fs32 \cf2 \strokec2 2 Overview\
 \pard\pardeftab720\partightenfactor0
 
 \f2\b0\fs24 \cf2 \strokec2 In this paper we will be going over the business model, purpose, and technical advantages of the Jinni system.\
@@ -97,113 +99,37 @@ Users will be in constant communication with their simulation in a process combi
 \fs22 \cf2 \strokec2 \
 \pard\pardeftab720\qc\partightenfactor0
 
-\f1\b\fs36 \cf2 \strokec2 Internal System Diagram 
+\f4\b\fs36 \cf2 \strokec2 3 System Design\
+3.1 Internal System Diagram
+\f1 \cf2 \strokec2  
 \fs24 \cf2 \strokec2 \
 
-\fs36 \cf2 \strokec2 Consumer View Of System 
-\fs24 \cf2 \strokec2 \
+\f4\fs36 \cf2 \strokec2 3.2 Consumer View Of System\
 \
+\pard\pardeftab720\qc\partightenfactor0
 
-\fs36 \cf2 \strokec2 \
-Business View Of System\page \pard\pardeftab720\partightenfactor0
+\f1 \cf2 \strokec2  
+\fs24 \cf2 \strokec2 \
+\pard\pardeftab720\qc\partightenfactor0
+
+\f4\fs36 \cf2 \strokec2 3.3 Business View Of System\
+\pard\pardeftab720\qc\partightenfactor0
+
+\f1\fs24 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
 
 \f2\b0\fs22 \cf2 \strokec2 \
 \pard\pardeftab720\qc\partightenfactor0
 
 \f1\b\fs36 \cf2 \strokec2 \
-B2C Business Model And Use Cases\
 \pard\pardeftab720\partightenfactor0
 
-\f2\b0\fs22 \cf2 \strokec2  
-\fs24 \cf2 \strokec2 \
-\pard\tx1150\pardeftab720\partightenfactor0
-
-\f1\b \cf2 \strokec2 \
-visualization \
-\pard\pardeftab720\partightenfactor0
-
-\f2\b0 \cf2 \strokec2 Digital avatar created and managed directly by Jinni based on your real-world data. Can be used to represent data in an intuitive manner and show how continual habits affect you. Avatar is customized automatically through connected data feeds. This can be licensed and put into any medium - mobile app, AR/VR, stickers, custom clothing.\
-\
-\pard\tx1150\pardeftab720\partightenfactor0
-
-\f1\b \cf2 \strokec2 Social\
-\pard\pardeftab720\partightenfactor0
-
-\f2\b0 \cf2 \strokec2 Your avatar is a friend, someone to talk and decompress the day. It also serves as a  subconscious learning mechanism as the avatar\'92s behaviour is based on your own. It uses historical conversational data to learn empathy and modify it\'92s behavior to best consult on achieving your purpose.\
-\
-\pard\tx1150\pardeftab720\partightenfactor0
-
-\f1\b \cf2 \strokec2 \
-GamING\
-\pard\pardeftab720\partightenfactor0
-
-\f2\b0 \cf2 \strokec2 RPGs can use personal exercise data to alter in-game stats or unlock certain achievements by combining virtual and real world accomplishments.\
- \
-\pard\pardeftab720\partightenfactor0
-
-\fs22 \cf2 \strokec2 \
-\pard\pardeftab720\qc\partightenfactor0
-
-\f1\b\fs36 \cf2 \strokec2 B2B Business Model And Use Cases
-\fs24 \cf2 \strokec2 \
-\pard\tx1150\pardeftab720\partightenfactor0
-\cf2 \strokec2 \
- \
-\
-Calm Technology\
-\pard\pardeftab720\partightenfactor0
-
-\f2\b0 \cf2 \strokec2 Creating context for IoT devices to interact with you in an appropriate manner using your holistic profile and real time data generated by nearby Things.\
-\
-\pard\tx1150\pardeftab720\partightenfactor0
-
-\f1\b \cf2 \strokec2 Marketing
-\fs20 \cf2 \strokec2 \
-\pard\pardeftab720\partightenfactor0
-
-\f2\b0\fs24 \cf2 \strokec2 Using our unique data model combined with user\'92s life purpose we can target ads that are entirely beneficial, have multi-dimensional context not available to competitors, and can target singular needs of an individual in real time all backed by zero-knowledge analytics so user\'92s privacy is not at risk.\
-\
-\pard\tx1150\pardeftab720\partightenfactor0
-
-\f1\b \cf2 \strokec2 Environmental\
-\pard\pardeftab720\partightenfactor0
-
-\f2\b0 \cf2 \strokec2 Environments impact is real and unrelenting. It takes cooperative action by individuals, corporations, and governments. Using the profile we generate for you all parties can use data to understand your behaviour and help mitigate your impact.\
-\pard\tx1150\pardeftab720\partightenfactor0
-
-\f6\i\b \cf2 \strokec2 \
-\pard\tx1150\pardeftab720\partightenfactor0
-
-\f1\i0 \cf2 \strokec2 Social & Medical Research\
-\pard\pardeftab720\partightenfactor0
-
-\f2\b0 \cf2 \strokec2 The intricate connections we create between disparate data points allows unprecedented analytics and research for social impact. Both public and private institutions will be able to discover, experiment, and innovate using a wealth of personal data backed using zero-knowledge systems so our user\'92s privacy is not at risk.\
-\page It can\'92t feel what you feel but it lives the same life. It gives you a second perspective on life, acts a therapist, integrates with coaching bots, \
- 1d. Calm Technology -\
-Using all the data to create context within a persons life for digital devices and other human beings. If you connect you Alex to your avatar then it can respond based on your activities for the day or how you generally feel\
-\
- \
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\pard\pardeftab720\partightenfactor0
-{\field{\*\fldinst{HYPERLINK "https://visualpharm.com/free-icons/genie-595b40b65ba036ed117d4145"}}{\fldrslt 
-\fs22 \cf3 \ul \ulc3 \strokec3 https://visualpharm.com/free-icons/genie-595b40b65ba036ed117d4145}}\
-\
+\f2\b0\fs24 \cf2 \strokec2 \
 \
 \pard\pardeftab720\partightenfactor0
 
-\f1\b\fs32 \cf2 \strokec2 \
-\pard\pardeftab720\partightenfactor0
-
+\f4\b\fs32 \cf2 \strokec2 4
+\f1 \cf2 \strokec2  
 \f4 \cf2 \strokec2 Philosophy & Methodology\
 \pard\pardeftab720\partightenfactor0
 
@@ -219,13 +145,98 @@ Using all the data to create context within a persons life for digital devices a
 \fs24 \cf2 \strokec2 These questions have been asked and answered in a myriad of ways using mathematics, philosophy, biology, religion, and every other intellectual institution that human society has come to create. The answers change based on who you are and most importantly they are constantly evolving in unforeseeable ways. How can we resolve this once and for all? Now more than ever these questions bear down on our conscious because we as a society have fulfilled the lower layers of Maslow\'92s hierarchy so our entire lives will be devoted to the goal of attaining self-actualization - the pursuit of objective truth, creativity, and honing our unique capabilities as individuals. This is necessary because as tasks become automated and abstracted away from conscience human labor (a healthy symptom of technology and societal progress that has always existed) we must learn to manage our inherent potential and applying it to wholesome and fruitful causes.\
 \
 This is not unique behavior to human beings; it is present in all forms of life whether organic or inorganic. As with all natural laws we can postulate a theorem that describes this law of self-actualization much like the laws of gravity describe how bodies move at all levels of the universe (excluding quantum theory of course). These formulas have been developed by combining the fields of biology and computer science into a discipline called evolutionary computation and we will utilize a small subset of this practice called 
-\f7\i \cf2 \strokec2 Genetic Algorithms 
+\f6\i \cf2 \strokec2 Genetic Algorithms 
 \f2\i0 \cf2 \strokec2 (GA)[0].\
 \
 GA are a way to compute ingenious answers to ill-defined problems with no clear solution. They are not a specific set of equations but rather a philosophy and way of thinking about how a system of perpetually self-evolving equations. Replace \'93equations\'94 with \'93people\'94 in the last sentence and you have a description of how human society works. We will use this similarity between the purpose and structure of GA and civilization to create what are called artificial societies to simulate human behavior and identify patterns that lead to optimal outcomes for both the individuals and the society as a whole. For an in-depth discussion on GA and artificial societies see Section 7 + 8.\
 \
 \'93How do we plan on helping others achieve their purpose in life when we all struggle to do it in our own lives?\'94 is a critical question that will be immediately addressed. Today our society is building an omnipresent monoculture through standardized education and a global ecosystem. We will augment social ecologic architecture so that each human is powerful in their own unique so that together we can progress towards a future of unbounded potential combining our disparate creative, intellectual exploits. In order to facilitate individuality and achieve this optimal social ecologic architecture we will use GA to simulate behavior at a micro and macro level to personalize education, skills, social behavior, and other characteristics of living beings. We will use outcomes from our artificial society to nudge people to do actions that lead them down the path of their ultimate goal.\
 \
+\
+\pard\pardeftab720\qc\partightenfactor0
+
+\f4\b\fs36 \cf2 \strokec2 5 Business Proposition\
+\
+5.1 B2C Business Model And Use Cases\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs22 \cf2 \strokec2 \
+ \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 \strokec2 \
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \strokec2 \
+\
+5.1a visualization \
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf2 \strokec2 Digital avatar created and managed directly by Jinni based on your real-world data. Can be used to represent data in an intuitive manner and show how continual habits affect you. Avatar is customized automatically through connected data feeds. This can be licensed and put into any medium - mobile app, AR/VR, stickers, custom clothing.\
+ \
+\
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \strokec2 5.1b Social\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf2 \strokec2 Your avatar is a friend, someone to talk and decompress the day. It also serves as a  subconscious learning mechanism as the avatar\'92s behaviour is based on your own. It uses historical conversational data to learn empathy and modify it\'92s behavior to best consult on achieving your purpose.\
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \strokec2 \
+5.1c GamING\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf2 \strokec2 RPGs can use personal exercise data to alter in-game stats or unlock certain achievements by combining virtual and real world accomplishments.\
+\
+\
+\pard\pardeftab720\qc\partightenfactor0
+
+\f1\b\fs36 \cf2 \strokec2 5.2 B2B Business Model And Use Cases
+\fs24 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf2 \strokec2 \
+ \
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \strokec2 5.2a Calm Technology\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf2 \strokec2 Creating context for IoT devices to interact with you in an appropriate manner using your holistic profile and real time data generated by nearby Things.\
+\
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \strokec2 5.2b Marketing
+\fs20 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs24 \cf2 \strokec2 Using our unique data model combined with user\'92s life purpose we can target ads that are entirely beneficial, have multi-dimensional context not available to competitors, and can target singular needs of an individual in real time all backed by zero-knowledge analytics so user\'92s privacy is not at risk.\
+\
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \strokec2 5.2c Environmental\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf2 \strokec2 Environments impact is real and unrelenting. It takes cooperative action by individuals, corporations, and governments. Using the profile we generate for you all parties can use data to understand your behaviour and help mitigate your impact.\
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f7\i\b \cf2 \strokec2 \
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\i0 \cf2 \strokec2 5.2d Social & Medical Research\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf2 \strokec2 The intricate connections we create between disparate data points allows unprecedented analytics and research for social impact. Both public and private institutions will be able to discover, experiment, and innovate using a wealth of personal data backed using zero-knowledge systems so our user\'92s privacy is not at risk.\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs22 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 \strokec2 \
 \
 \
 \
@@ -238,44 +249,44 @@ GA are a way to compute ingenious answers to ill-defined problems with no clear 
 \pard\tx20\tx200\pardeftab720\li180\fi-180\partightenfactor0
 \ls1\ilvl0
 \fs24 \cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}
-\f7\i \cf2 \expnd0\expndtw0\kerning0
+\f6\i \cf2 \expnd0\expndtw0\kerning0
 \up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Graph
 \f2\i0 \cf2 \strokec2  - A\'a0diagram\'a0representing\'a0a\'a0system\'a0of\'a0connections\'a0and\'a0interrelations [2]\
 \ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}
-\f7\i \cf2 \expnd0\expndtw0\kerning0
+\f6\i \cf2 \expnd0\expndtw0\kerning0
 \up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Self Actualization
 \f2\i0 \cf2 \strokec2  - The motive to realize one's full potential. Expressing one's\'a0creativity, quest for\'a0spiritual enlightenment, pursuit of\'a0knowledge, and the desire to give to and/or positively transform society are examples of self-actualization. [3]\
 \ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}\cf2 \expnd0\expndtw0\kerning0
 \up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Abstraction - Perceiving something as a general quality or characteristic, apart from concrete realities and specific objects; Something\'a0visionary\'a0and\'a0unrealistic; [4]\
 \ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}
-\f7\i \cf2 \expnd0\expndtw0\kerning0
+\f6\i \cf2 \expnd0\expndtw0\kerning0
 \up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Service Design
 \f2\i0 \cf2 \strokec2  [5]\
 \pard\tx180\tx360\pardeftab720\li360\fi-360\partightenfactor0
 \ls1\ilvl1\cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}
-\f7\i \cf2 \expnd0\expndtw0\kerning0
+\f6\i \cf2 \expnd0\expndtw0\kerning0
 \up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Value Based 
 \f2\i0 \cf2 \strokec2 - Providing services by exchanging other services or commodities instead monetary instruments.\
 \ls1\ilvl1\cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}
-\f7\i \cf2 \expnd0\expndtw0\kerning0
+\f6\i \cf2 \expnd0\expndtw0\kerning0
 \up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Core -> Enabling -> Enhancing Services
 \f2\i0 \cf2 \strokec2  - Core services are what drive your business. Enabling Services allow more access to core services while Ehancing Services provide additional value to Core Services.\
 \ls1\ilvl1\cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}
-\f7\i \cf2 \expnd0\expndtw0\kerning0
+\f6\i \cf2 \expnd0\expndtw0\kerning0
 \up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Design Principles
 \f2\i0 \cf2 \strokec2  - A set of ideals and philosophies that form the basis of all product/service design in every aspects (e.g. user-interface, database, product eco-system)\
 \pard\tx20\tx200\pardeftab720\li180\fi-180\partightenfactor0
 \ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}
-\f7\i \cf2 \expnd0\expndtw0\kerning0
+\f6\i \cf2 \expnd0\expndtw0\kerning0
 \up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Evolutionary Computation
 \f2\i0 \cf2 \strokec2  [6]\
 \pard\tx180\tx360\pardeftab720\li360\fi-360\partightenfactor0
 \ls1\ilvl1\cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}
-\f7\i \cf2 \expnd0\expndtw0\kerning0
+\f6\i \cf2 \expnd0\expndtw0\kerning0
 \up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Genetic Algorithms
 \f2\i0 \cf2 \strokec2  - A system of equations commonly used to generate high-quality solutions to\'a0optimization\'a0and\'a0search problems\'a0by relying on bio-inspired operators such as\'a0mutation,\'a0crossover\'a0and\'a0selection. They are used for problems where you don't know how to find a good solution [7]\
 \ls1\ilvl1\cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}
-\f7\i \cf2 \expnd0\expndtw0\kerning0
+\f6\i \cf2 \expnd0\expndtw0\kerning0
 \up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Exosystem 
 \f2\i0 \cf2 \strokec2 - Social ecology theory where individuals change their behavior based on the context and environment they are in, specifically how intimate they are with the people around them.\
 \pard\pardeftab720\partightenfactor0
@@ -291,45 +302,46 @@ GA are a way to compute ingenious answers to ill-defined problems with no clear 
 \fs22 \cf2 \strokec2 \
 \pard\pardeftab720\partightenfactor0
 
-\f4\b\fs32 \cf2 \strokec2 Design Principles\
+\f1\b\fs32 \cf2 \strokec2 6 
+\f4 \cf2 \strokec2 Design Principles\
 \pard\pardeftab720\partightenfactor0
 
 \f2\b0\fs22 \cf2 \strokec2 \
 \pard\pardeftab720\partightenfactor0
 
-\f7\i\fs24 \cf2 \strokec2 Abstraction
+\f6\i\fs24 \cf2 \strokec2 Abstraction
 \f2\i0 \cf2 \strokec2  - Abstraction should be applied whenever reasonable at all levels of a product or service, from UI design to systems design. The more abstracted the more we understand about the underlying model and the more applicable the abstraction can be to other areas of the service.\
 \
 
-\f7\i \cf2 \strokec2 User Interpretation
+\f6\i \cf2 \strokec2 User Interpretation
 \f2\i0 \cf2 \strokec2  - Only a user can know what they feel, who they are, etc. We can not interpret their data for them. We should represent it for them in as raw a format while concise and explanatory as possible and let them take it from there. For example instead of saying we recommend these books, we say you liked these books and others that liked that like these. Although it is the same thing, we are not imposing our own opinion on and user which is fine for something as basic as a book recommendation but is inaccurate and unethical when augmenting life habits.\
 \
 
-\f7\i \cf2 \strokec2 Surrealism
+\f6\i \cf2 \strokec2 Surrealism
 \f2\i0 \cf2 \strokec2  - We are literally creating an alternate universe and we must present it as such. Great design has story, focusing on surrealism gives full creative mobility to focus on telling that story, rather than if it makes sense in our view of the real world. This is so we do not mislead users and also so that they buy into stories told by us, themselves, and third-parties. Surrealism is a complement to our Abstraction and User Interpretation principles.\
 \
 
-\f7\i \cf2 \strokec2 Effective > Efficient
+\f6\i \cf2 \strokec2 Effective > Efficient
 \f2\i0 \cf2 \strokec2  - Effectiveness is a marker of how well you achieved your end goal, efficiency is a marker of how good your process is. You can be highly effective and not very efficient and you can also be highly efficient without being at all effective. Processes will always change so if you focus on the end goal you are guaranteed great results even if they take a longer or cost slightly more but you will always be updating to improve efficiencies anyways.\
 \pard\pardeftab720\partightenfactor0
 \cf2 \strokec2 \
 \pard\pardeftab720\partightenfactor0
 
-\f7\i \cf2 \strokec2 Systems Thinking 
+\f6\i \cf2 \strokec2 Systems Thinking 
 \f2\i0 \cf2 \strokec2 - Be cognizant that everything is interrelated. How you design your mobile app will affect how users will use the web app, the way you design your API will affect how others have to build their applications if they use it, and if you make someones day bad they will likely make someone else\'92s day bad in return.
-\f7\i \cf2 \strokec2 \
+\f6\i \cf2 \strokec2 \
 \pard\pardeftab720\partightenfactor0
 
 \f2\i0\fs22 \cf2 \strokec2 \
 \
 \pard\pardeftab720\partightenfactor0
 
-\f7\i \cf2 \strokec2 Open & Transparent 
+\f6\i \cf2 \strokec2 Open & Transparent 
 \f2\i0 \cf2 \strokec2 - Services and the protocols/data that operate them should always be accessible to all.  Making services available through various mediums forces a modular systems approach and consider design beyond a superficial graphics level. This is good business, ethical, design and practice.\
 \
 \pard\pardeftab720\sl732\sa366\partightenfactor0
 
-\f8\b\fs63\fsmilli31579 \cf4 \cb5 \strokec4 Bias Toward Action\
+\f8\b\fs63\fsmilli31579 \cf3 \cb4 \strokec3 Bias Toward Action\
 \
 \pard\pardeftab720\partightenfactor0
 
@@ -345,11 +357,12 @@ GA are a way to compute ingenious answers to ill-defined problems with no clear 
 \fs24 \cf2 \strokec2 \
 \pard\pardeftab720\partightenfactor0
 
-\f7\i\b0\fs22 \cf2 \strokec2 \
+\f6\i\b0\fs22 \cf2 \strokec2 \
 Abstract Philosophies \
 \pard\pardeftab720\partightenfactor0
 
-\f4\i0\b\fs32 \cf2 \strokec2 Disconnect of the Modern Man\
+\f7\b\fs32 \cf2 \strokec2 7 
+\f4\i0 \cf2 \strokec2 Disconnect of the Modern Man\
 \pard\pardeftab720\partightenfactor0
 
 \f2\b0\fs22 \cf2 \strokec2 \
@@ -385,7 +398,7 @@ https://en.wikipedia.org/wiki/Social_ecological_model\
 \
 \pard\pardeftab720\partightenfactor0
 
-\f7\i \cf2 \strokec2 Practical Philosophies\
+\f6\i \cf2 \strokec2 Practical Philosophies\
 \pard\pardeftab720\partightenfactor0
 
 \f4\i0\b\fs32 \cf2 \strokec2 Service Design\
@@ -419,9 +432,9 @@ This is one of the most critical technical details of our implementation. This t
 \
 \pard\pardeftab720\partightenfactor0
 
-\f7\i \cf2 \strokec2 \'93Trends like social, mobile, analytics and cloud \'96 as well as tomorrow\'92s aspirations towards autonomy, IoT and deep neural networks \'96 are all dependent on increasing data connectedness. And yet, it remains extremely difficult for modern data stacks based on SQL and NoSQL to divine how data elements are related\'85Yesterday's breakthrough applications were driven by big data \'96 tomorrow's breakthrough applications will be driven by connected data.\'94 
+\f6\i \cf2 \strokec2 \'93Trends like social, mobile, analytics and cloud \'96 as well as tomorrow\'92s aspirations towards autonomy, IoT and deep neural networks \'96 are all dependent on increasing data connectedness. And yet, it remains extremely difficult for modern data stacks based on SQL and NoSQL to divine how data elements are related\'85Yesterday's breakthrough applications were driven by big data \'96 tomorrow's breakthrough applications will be driven by connected data.\'94 
 \f2\i0 \cf2 \strokec2 Neo4j, largest graph database company in the world[9]
-\f7\i \cf2 \strokec2 \
+\f6\i \cf2 \strokec2 \
 \pard\pardeftab720\partightenfactor0
 
 \f2\i0 \cf2 \strokec2 \
@@ -432,8 +445,8 @@ Another key advantage of using a graphical database is being able to utilize the
  \
 \pard\pardeftab720\partightenfactor0
 
-\f6\i\b\fs20 \cf2 \strokec2 Figure 1.2 
-\f7\b0 \cf2 \strokec2 Graphic taken from Neo4j.com indicating how graphs can interconnect to add even more context to data\
+\f7\i\b\fs20 \cf2 \strokec2 Figure 1.2 
+\f6\b0 \cf2 \strokec2 Graphic taken from Neo4j.com indicating how graphs can interconnect to add even more context to data\
 \pard\pardeftab720\partightenfactor0
 
 \f2\i0\fs22 \cf2 \strokec2 \
@@ -468,9 +481,9 @@ Merriam-Webster says consciousness is \'93sharing another's knowledge or awarene
 \'93The self is a relation which relates itself to its own self, or it is that in the relation that the relation relates itself to its own self; the self is not the relation but that the relation relates itself to its own self.\'94\
 \
 This aligns with the terminology we use everyday \'93They existed 
-\f7\i \cf2 \strokec2 in
+\f6\i \cf2 \strokec2 in
 \f2\i0 \cf2 \strokec2  that time\'94 signifying the in relationships of the data structure or \'93Not enough time 
-\f7\i \cf2 \strokec2 in
+\f6\i \cf2 \strokec2 in
 \f2\i0 \cf2 \strokec2  the day\'94 day being itself a relation to time exemplifying the relation to itself.\
 \
 With the abstract notation of graph theory this makes time the equivalent of any other human user in our database and thus we can analyze the behaviours of time. This does not require any  special algorithms or creating a replica database to augment the data structure and run specific queries all it requires is a simple change of perspective. To those not familiar with graph theory these may look like completely different graphs but they are in fact exactly the same. So instead of looking at our data and seeing we have a user that got messages at this time we see a time that has a user and messages.\
@@ -544,7 +557,7 @@ Chaos theory of evolution = {\field{\*\fldinst{HYPERLINK "https://www.newscienti
 \f1\b\fs32 \cf2 \strokec2 Marketing Platform and Zero Knowledge Analytics\
 \pard\pardeftab720\partightenfactor0
 {\field{\*\fldinst{HYPERLINK "https://scholar.google.com/scholar?q=zero+knowledge+analytics&hl=en&as_sdt=0&as_vis=1&oi=scholart&sa=X&ved=0ahUKEwiFwKuTqMnYAhUQ3YMKHRB-C6QQgQMIJzAA"}}{\fldrslt 
-\f2\b0\fs22 \cf3 \ul \ulc3 \strokec3 https://scholar.google.com/scholar?q=zero+knowledge+analytics&hl=en&as_sdt=0&as_vis=1&oi=scholart&sa=X&ved=0ahUKEwiFwKuTqMnYAhUQ3YMKHRB-C6QQgQMIJzAA}}
+\f2\b0\fs22 \cf5 \ul \ulc5 \strokec5 https://scholar.google.com/scholar?q=zero+knowledge+analytics&hl=en&as_sdt=0&as_vis=1&oi=scholart&sa=X&ved=0ahUKEwiFwKuTqMnYAhUQ3YMKHRB-C6QQgQMIJzAA}}
 \f2\b0\fs22 \cf2 \strokec2 \
 \
 \
@@ -624,23 +637,23 @@ Chaos theory of evolution = {\field{\*\fldinst{HYPERLINK "https://www.newscienti
 Bibliography\
 \pard\pardeftab720\partightenfactor0
 
-\f2\b0\fs22 \cf2 \strokec2 [0] {\field{\*\fldinst{HYPERLINK "http://geneticprogramming.com/software/"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 http://geneticprogramming.com/software/}}\
+\f2\b0\fs22 \cf2 \strokec2 [0] {\field{\*\fldinst{HYPERLINK "http://geneticprogramming.com/software/"}}{\fldrslt \cf5 \ul \ulc5 \strokec5 http://geneticprogramming.com/software/}}\
 [2] {\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)"}}{\fldrslt \cf2 \ul \ulc2 \strokec2 https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)}}\
 [3] {\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Self-actualization"}}{\fldrslt \cf2 \ul \ulc2 \strokec2 https://en.wikipedia.org/wiki/Self-actualization}}\
 [4] {\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Abstraction%23As_used_in_different_disciplines"}}{\fldrslt \cf2 \ul \ulc2 \strokec2 https://en.wikipedia.org/wiki/Abstraction#As_used_in_different_disciplines}}\
 [5] {\field{\*\fldinst{HYPERLINK "https://www.interaction-design.org/literature/article/the-principles-of-service-design-thinking-building-better-services"}}{\fldrslt \cf2 \ul \ulc2 \strokec2 https://www.interaction-design.org/literature/article/the-principles-of-service-design-thinking-building-better-services}}\
 [6] {\field{\*\fldinst{HYPERLINK "https://www.technologyreview.com/s/422809/when-the-butterfly-effect-took-flight/"}}{\fldrslt \cf2 \ul \ulc2 \strokec2 https://www.technologyreview.com/s/422809/when-the-butterfly-effect-took-flight/}}\
 [7] {\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Genetic_algorithm"}}{\fldrslt \cf2 \ul \ulc2 \strokec2 https://en.wikipedia.org/wiki/Genetic_algorithm}}\
-[8] {\field{\*\fldinst{HYPERLINK "https://www.mathworks.com/help/matlab/ref/graph.isisomorphic.html?s_tid=gn_loc_drop"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://www.mathworks.com/help/matlab/ref/graph.isisomorphic.html?s_tid=gn_loc_drop}}\
-[9] {\field{\*\fldinst{HYPERLINK "https://neo4j.com/product/"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://neo4j.com/product/}}\
-[10] \'93Wherever we shall look for it in the physiology or chemistry of the brain, we shall have to look for something more complex than pacemakers. We must look for a system that combines timer(s) with inhibitory regulators. Adjusting to or estimating duration for an animal organism is not simply putting landmarks in the flow of time; it means retaining and deferring action.\'93 (pg 222) {\field{\*\fldinst{HYPERLINK "http://www.sciencedirect.com/science?_ob=PdfExcerptURL&_imagekey=3-s2.0-B9780080254890500156-main.pdf&_piikey=B9780080254890500156&_cdi=306112&_orig=PublicationURL&_zone=rslt_list_item&_fmt=abst&_eid=3-s2.0-B9780080254890500156&_isbn=9780080254890&_user=12975512&md5=0766cc015145f0c335ae407c93c47fe1&ie=/excerpt.pdf"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 http://www.sciencedirect.com/science?_ob=PdfExcerptURL&_imagekey=3-s2.0-B9780080254890500156-main.pdf&_piikey=B9780080254890500156&_cdi=306112&_orig=PublicationURL&_zone=rslt_list_item&_fmt=abst&_eid=3-s2.0-B9780080254890500156&_isbn=9780080254890&_user=12975512&md5=0766cc015145f0c335ae407c93c47fe1&ie=/excerpt.pdf}}\
+[8] {\field{\*\fldinst{HYPERLINK "https://www.mathworks.com/help/matlab/ref/graph.isisomorphic.html?s_tid=gn_loc_drop"}}{\fldrslt \cf5 \ul \ulc5 \strokec5 https://www.mathworks.com/help/matlab/ref/graph.isisomorphic.html?s_tid=gn_loc_drop}}\
+[9] {\field{\*\fldinst{HYPERLINK "https://neo4j.com/product/"}}{\fldrslt \cf5 \ul \ulc5 \strokec5 https://neo4j.com/product/}}\
+[10] \'93Wherever we shall look for it in the physiology or chemistry of the brain, we shall have to look for something more complex than pacemakers. We must look for a system that combines timer(s) with inhibitory regulators. Adjusting to or estimating duration for an animal organism is not simply putting landmarks in the flow of time; it means retaining and deferring action.\'93 (pg 222) {\field{\*\fldinst{HYPERLINK "http://www.sciencedirect.com/science?_ob=PdfExcerptURL&_imagekey=3-s2.0-B9780080254890500156-main.pdf&_piikey=B9780080254890500156&_cdi=306112&_orig=PublicationURL&_zone=rslt_list_item&_fmt=abst&_eid=3-s2.0-B9780080254890500156&_isbn=9780080254890&_user=12975512&md5=0766cc015145f0c335ae407c93c47fe1&ie=/excerpt.pdf"}}{\fldrslt \cf5 \ul \ulc5 \strokec5 http://www.sciencedirect.com/science?_ob=PdfExcerptURL&_imagekey=3-s2.0-B9780080254890500156-main.pdf&_piikey=B9780080254890500156&_cdi=306112&_orig=PublicationURL&_zone=rslt_list_item&_fmt=abst&_eid=3-s2.0-B9780080254890500156&_isbn=9780080254890&_user=12975512&md5=0766cc015145f0c335ae407c93c47fe1&ie=/excerpt.pdf}}\
 \
 \pard\pardeftab720\partightenfactor0
 
 \f5\fs20 \cf2 \strokec2 \
 \pard\pardeftab720\partightenfactor0
 
-\f2\fs22 \cf2 \strokec2 [11] \'93Reward function appears to be modulated by the circadian system, but little is known about the neural basis of this interaction\'85The present study measured neural reward activation in the context of a validated reward task at 10.00 h, 14.00 h, and 19.00 h in healthy human males.\'94 {\field{\*\fldinst{HYPERLINK "http://www.jneurosci.org/content/37/37/8895"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 http://www.jneurosci.org/content/37/37/8895}}\
+\f2\fs22 \cf2 \strokec2 [11] \'93Reward function appears to be modulated by the circadian system, but little is known about the neural basis of this interaction\'85The present study measured neural reward activation in the context of a validated reward task at 10.00 h, 14.00 h, and 19.00 h in healthy human males.\'94 {\field{\*\fldinst{HYPERLINK "http://www.jneurosci.org/content/37/37/8895"}}{\fldrslt \cf5 \ul \ulc5 \strokec5 http://www.jneurosci.org/content/37/37/8895}}\
 w\
 \
 \
