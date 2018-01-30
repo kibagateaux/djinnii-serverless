@@ -13,6 +13,7 @@ const mutations = requireAll({
 const normalizeCypher = (cypher) => 
 // for some reason this doesn't remove \n s
   trim(replace(cypher, /\\n/g, ''))
+  // trim(replace(cypher, /[\\n]/, ''));
 
 const flattenFiles = (fileExports, fileName) => 
   fileExports.default ? 
@@ -23,5 +24,3 @@ const flattenedMutations = flatMapDeep(mutations, flattenFiles)
   .reduce((ms, m) => {
     const name = Object.keys(m)[0];
     return {...ms, [name]: m[name]}}, {});
-
-export default flattenedMutations;

@@ -17,6 +17,7 @@ const getResolverSchemaNames = (schema) =>
     .map((match) => match[1]) : [];
 
 
+/* Query automation */
 const queryNames = getResolverSchemaNames(querySchema);
 
 // @desc takes list of query names and creates object of methods with Neo4j integration 
@@ -26,11 +27,13 @@ const Query = queryNames.reduce((qs, q) =>({
     neo4jgraphql(obj, args, cts, resolveInfo)
 }), {});
 
+
+
+/* Mutation Automation */
 const mutationNames = getResolverSchemaNames(mutationSchema);
 
-console.log('mut names', mutationNames);
+// @desc takes list of mutation names, compares against available mutations, and creates [mutation]: (cypher params) with Cypher 
 const Mutation = mutationNames.reduce((ms, m) => {
-  console.log('red mut', m, mutationCyphers[m]);
   if (m && mutationCyphers[m]) {
     return {
       ...ms, 
@@ -43,15 +46,6 @@ const Mutation = mutationNames.reduce((ms, m) => {
     throw new Error("Mutations names must be consistent for schema and file where they are stored. Check for typos");
   }
 }, {});
-// for Mutations
-// import MutationsCypher from ./mutations
-// import helpers from ./neo4j
-// imort mutationSchema from './type-definitions/Mutation
-// requireAll(Mutations)
-// compare mutation schema to mutation cypher and only take those where names for both
-// MutationName = mutationSchema
-// factorFun(MutationName)
-// Mutation {...factoriedFuncs}
 
 export default {
   Query,
