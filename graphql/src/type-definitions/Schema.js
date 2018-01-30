@@ -1,1 +1,1 @@
-Object.defineProperty(exports,"__esModule",{value:true});exports.default="\n  schema {\n    query: Query\n  }\n";
+Object.defineProperty(exports,"__esModule",{value:true});exports.default="\n  schema {\n    query: Query\n    mutation: Mutation\n  }\n";

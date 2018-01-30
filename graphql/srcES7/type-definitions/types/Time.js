@@ -37,6 +37,13 @@ export default `
     id: ID @cypher(statement: "WITH {this} AS this RETURN ID(this)")
     activities: [Activity] @relation(name: "ACTED", direction: "OUT")
     user: User @relation(name: "EXISTED_AT", direction: "IN")
+
+    ${""/* All resources are array of because multiple sources of data will be kept
+      many sources can input at same time e.g. mesaging platforms
+      shouldnt these all be "types" of activities    
+      Other Time based would be Location (which I have already you derp),
+      Weather, Stat, Emotion, Chemistry, 
+  */}
   }
 `
 
