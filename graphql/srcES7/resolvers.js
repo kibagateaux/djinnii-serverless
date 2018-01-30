@@ -43,6 +43,7 @@ const Mutation = mutationNames.reduce((ms, m) => {
       }
     }
   } else {
+    console.log('mutation fail', m, mutationCyphers[m]);
     throw new Error("Mutations names must be consistent for schema and file where they are stored. Check for typos");
   }
 }, {});

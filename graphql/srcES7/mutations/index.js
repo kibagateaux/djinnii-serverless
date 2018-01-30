@@ -24,3 +24,5 @@ const flattenedMutations = flatMapDeep(mutations, flattenFiles)
   .reduce((ms, m) => {
     const name = Object.keys(m)[0];
     return {...ms, [name]: m[name]}}, {});
+
+export default flattenedMutations
