@@ -8,3 +8,6 @@ export default `
     calories: Int
   }
 `;
+
+
+export const timeRelationName = "ACTED_AT";

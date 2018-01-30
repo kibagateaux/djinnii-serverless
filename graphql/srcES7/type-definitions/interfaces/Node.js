@@ -1,5 +1,6 @@
 export default `
   interface Node {
-    time: Int!
+    time: Time!
+    id: ID @cypher(statement: "WITH {this} AS this RETURN ID(this)")
   }
 `;

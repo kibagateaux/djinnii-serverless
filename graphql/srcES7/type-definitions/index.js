@@ -1,20 +1,15 @@
-import types from './types';
-import interfaces from './interfaces';
+import requireAll from 'require-all';
+import _ from 'lodash'
+const typeDefs = requireAll({
+  dirname     :  __dirname,
+  recursive   : true
+});
 
-console.log('types', [...types, ...interfaces]);
+const flattenFiles = (fileExports) =>
+  fileExports.default ?
+    [fileExports.default] :
+    [_.flatMapDeep(fileExports, flattenFiles)];
 
-export default [...types, ...interfaces];
+const flattenedTypes = _.flatMapDeep(typeDefs, flattenFiles);
+export default flattenedTypes;
 
-
-
-// import path from 'path';
-// import requireAll from 'require-all';
-// import _ from 'lodash'
-// const types = requireAll(__dirname);
-// const flatTypes = _.flatMapDeep(types, (value, key) => {
-//   console.log('flattern', value, key);
-//   return _.isEmpty(value) ? null : 
-// })
-// console.log('type defs', flatTypes);
-
-// export default flatTypes;

@@ -1,1 +1,1 @@
-Object.defineProperty(exports,"__esModule",{value:true});exports.default="\n  interface Node {\n    time: Int!\n  }\n";
+Object.defineProperty(exports,"__esModule",{value:true});exports.default="\n  interface Node {\n    time: Time!\n    id: ID @cypher(statement: \"WITH {this} AS this RETURN ID(this)\")\n  }\n";

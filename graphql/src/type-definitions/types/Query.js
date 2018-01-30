@@ -1,1 +1,0 @@
-Object.defineProperty(exports,"__esModule",{value:true});exports.default="\n  type Query {\n    User(id: ID): User\n    UserActivities(id: ID, type: String, startTime: Int): [Activity]\n  }\n";
