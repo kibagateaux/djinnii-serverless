@@ -1,1 +1,1 @@
-Object.defineProperty(exports,"__esModule",{value:true});exports.default="\n  type Query {\n    AllUsers: [User]!\n    User(id: ID): User\n    UserActivities(id: ID, type: String, startTime: Int): [Activity]\n  }\n";
+Object.defineProperty(exports,"__esModule",{value:true});exports.default="\n  type Query {\n    AllAvatars: [Avatar]!\n    Avatar(id: ID): Avatar\n    AvatarActivities(id: ID, type: String, startTime: Int): [Activity]\n  }\n";

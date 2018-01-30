@@ -1,5 +1,5 @@
 export default `
-  input UserInput {
+  input AvatarInput {
     firstName: String
   }
 `;

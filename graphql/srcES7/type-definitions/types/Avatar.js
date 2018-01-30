@@ -1,8 +1,9 @@
+// User's are avatars because then Avatar's have Avatars
+// this makes it easier to reason about relation between them
 export default `
-  type User {
+  type Avatar {
     firstName: String
     id: ID @cypher(statement: "WITH {this} AS this RETURN ID(this)")
-    avatarName: String
     age: Int
     purpose: [String]
     overallRating: Float

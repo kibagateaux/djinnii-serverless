@@ -1,8 +1,6 @@
 import {neo4jgraphql} from 'neo4j-graphql-js';
 import requireAll from 'require-all';
-import {
-  isString
-} from 'lodash';
+import {isString} from 'lodash';
 
 import {createCypherMutation, withSession} from './neo4j';
 import querySchema from './type-definitions/Query';
@@ -10,11 +8,13 @@ import mutationSchema from './type-definitions/Mutation';
 import mutationCyphers from './mutations';
 
 const getResolverSchemaNames = (schema) =>
-  isString(schema) ? schema
-    .split('\n')
-    .map((q) => /([A-Za-z]+)(?=[:|(])[\s\S]*/mg.exec(q), []) // gets queryname from beginning of line
-    .filter(is => is) // filters null matches
-    .map((match) => match[1]) : [];
+  isString(schema) 
+    ? schema
+      .split('\n')
+      .map((q) => /([A-Za-z]+)(?=[:|(])[\s\S]*/mg.exec(q), []) // gets query name from beginning of line
+      .filter(is => is) // filters null matches
+      .map((match) => match[1])
+    : [];
 
 
 /* Query automation */
@@ -37,10 +37,8 @@ const Mutation = mutationNames.reduce((ms, m) => {
   if (m && mutationCyphers[m]) {
     return {
       ...ms, 
-      [m]: (_, params) => {
-        console.log('MUTATION', mutationCyphers[m], params );
-        return withSession(createCypherMutation(mutationCyphers[m])(params))
-      }
+      [m]: (_, params) =>
+        withSession(createCypherMutation(mutationCyphers[m])(params))
     }
   } else {
     console.log('mutation fail', m, mutationCyphers[m]);

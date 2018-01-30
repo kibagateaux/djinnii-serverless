@@ -8,4 +8,4 @@ const assureUser = `MATCH (u:User {uid: {data}.uid})
 //   SET need.nodeId = ID(need)
 //   RETURN need`;
 
-export default `CREATE (u:User $user)-[:EXISTED_AT]->(ts:Time $time) RETURN u`;
+export default `CREATE (u:Avatar $avatar)-[:EXISTED_AT]->(ts:Time $time) RETURN u`;

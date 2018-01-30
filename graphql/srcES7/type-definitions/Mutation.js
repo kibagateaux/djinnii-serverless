@@ -1,6 +1,6 @@
 export default `
   type Mutation {
-    CreateNewUser(user: UserInput, time: TimeInput) : User
+    CreateNewAvatar(avatar: AvatarInput, time: TimeInput) : Avatar
     CreateNewActivity(activity: ActivityInput) : Activity
   }
 `;
