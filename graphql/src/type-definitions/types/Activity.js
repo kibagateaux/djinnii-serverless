@@ -1,0 +1,1 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.default="\n  type Activity {\n    type: String\n    startTime: Int\n    endTime: Int\n    duration: Int\n    distance: Int\n    calories: Int\n  }\n";

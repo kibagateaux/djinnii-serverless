@@ -1,0 +1,1 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.default="\n  interface Node {\n    time: Int!\n  }\n";

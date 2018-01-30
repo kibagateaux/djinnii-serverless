@@ -1,0 +1,1 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.default="\n  type User {\n    id: ID!\n    avatarName: String\n    age: Int\n    purpose: [String]\n    overallRating: Float\n  }\n";

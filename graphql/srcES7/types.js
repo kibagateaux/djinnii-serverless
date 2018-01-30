@@ -7,6 +7,7 @@ export default `
     overallRating: Float
     avatar: Avatar
   }
+  
   type Activity {
     type: String
     startTime: Int
