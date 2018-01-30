@@ -1,9 +1,10 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import typeDefs from './types';
-import resolvers from './resolvers.js';
+import resolvers from './resolvers';
+import types from './type-definitions';
+// import typeDefs from './types'; // this works
 
 console.log('schema', typeof typeDefs);
 export default makeExecutableSchema({
-  typeDefs,
+  typeDefs: types,
   resolvers
 });
