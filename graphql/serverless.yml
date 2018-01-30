@@ -37,6 +37,14 @@ functions:
       - http:
           path: /
           method: get
+          request: 
+            parameters:
+              querystrings:
+                query: false
+      - http:
+          path: /
+          method: post
+
   GraphQLInspector:
     handler: src/handler.GraphQLInspectorHandler
     events:
