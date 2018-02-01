@@ -45,7 +45,8 @@ Table of Contents\
 5.2 B2B Business Model And Use Cases	9\
 6 Roadmap	10\
 7 Why a Graph Based Data Model	10\
-8 Why a Time Based Data Model	13\
+8 Why a Time Based Data Model	12\
+9 Conclusion 	13\
 Bibliography	14\
 \pard\pardeftab720\partightenfactor0
 
@@ -229,10 +230,10 @@ eMochi will directly manage a universal virtual avatar for each user and third-p
 \f2\b0 \cf2 \strokec2 The intricate connections we create between disparate data points allows unprecedented analytics and research for social impact. Both public and private institutions will be able to research, experiment, and innovate using a wealth of personal data backed by zero-knowledge systems so our user\'92s privacy is not at risk.\
 \pard\pardeftab720\partightenfactor0
 
-\f1\b\fs32 \cf2 \strokec2 \
+\fs22 \cf2 \strokec2 \
 \pard\pardeftab720\partightenfactor0
 
-\f4 \cf2 \strokec2 6 Roadmap\
+\f4\b\fs32 \cf2 \strokec2 6 Roadmap\
 \pard\pardeftab720\partightenfactor0
 
 \f2\b0\fs22 \cf2 \strokec2 \
@@ -279,7 +280,6 @@ eMochi will directly manage a universal virtual avatar for each user and third-p
 \pard\pardeftab720\partightenfactor0
 
 \fs22 \cf2 \strokec2 \
-\
 \pard\pardeftab720\partightenfactor0
 
 \f4\b\fs32 \cf2 \strokec2 7 Why a Graph Based Data Model\
@@ -288,9 +288,9 @@ eMochi will directly manage a universal virtual avatar for each user and third-p
 \f2\b0\fs22 \cf2 \strokec2 \
 \pard\pardeftab720\partightenfactor0
 
-\fs24 \cf2 \strokec2 One of the main challenges we will face is how to manage our data. We will have hundreds if not thousands of data aggregation sources for every user that will need to be stored in a way that allows us to see how each data point is related to each other. The data from one second can have the weather, what activity the user is doing, who they are with, their heart rate, etc. How do we keep the depth of context about this data that exists not just in the data itself but in how the data is related to each other?  For this we utilize graphical databases which are specifically designed to for these types of problems.\
+\fs24 \cf2 \strokec2 One of the main challenges we will face is how to manage this plethora of data. We will have hundreds if not thousands of data aggregation sources for every user that will need to be stored in a way that allows us to see how they are related to each other in a meaningful way. The data from any one second can have the weather, what activity the you are doing, who you are with, your heart rate, etc. How do we keep the depth of context about this data that exists not just in the data itself but in how the data is related to each other? For this we utilize graphical databases which are specifically designed to for these types of problems.\
 \
-This is one of the most critical technical details of our implementation. This type of data model allows us to see correlations and hidden relationships between behaviour models both within an individual person and between two or more people (how does Mom\'92s actions affect the family). We can easily see how often someone exercises and how there spending habits change in relation to the time since they last worked out and which gym they went to, something that can be cumbersome with a traditional SQL or NoSQL database.\
+This is one of the most critical technical details of our implementation. This allows us to see correlations and direct relationships between behaviour of individuals and between two or more people (how does Mom\'92s actions affect the family). We can easily see how often someone exercises and how there buying habits change in relation to the time since they last worked out and which gym they went to, something that can be cumbersome with a traditional SQL or NoSQL database.\
 \
 \
 \
@@ -310,15 +310,16 @@ This is one of the most critical technical details of our implementation. This t
 \pard\pardeftab720\partightenfactor0
 
 \f6\i \cf2 \strokec2 \'93Trends like social, mobile, analytics and cloud \'96 as well as tomorrow\'92s aspirations towards autonomy, IoT and deep neural networks \'96 are all dependent on increasing data connectedness. And yet, it remains extremely difficult for modern data stacks based on SQL and NoSQL to divine how data elements are related\'85Yesterday's breakthrough applications were driven by big data \'96 tomorrow's breakthrough applications will be driven by connected data.\'94 
-\f2\i0 \cf2 \strokec2 Neo4j, largest graph database company in the world[9]
+\f2\i0 \cf2 \strokec2 Neo4j, largest graph database company in the world[6]
 \f6\i \cf2 \strokec2 \
 \pard\pardeftab720\partightenfactor0
 
 \f2\i0 \cf2 \strokec2 \
 \
-Another key advantage of using a graphical database is being able to utilize the body of work done in the field of pure mathematics on graphs. Using these simple mathematical formulas and equations we can perform queries and analysis models on our data that are simply not possible using statistical analysis that is largely prevalent. One of the most basic tools of graph analysis is isomorphism which means two graphs have the same structure. To be isomorphic we do not care what the values of each node and relationship in a graph is, so long as the graphs as a whole have the same shape. When analyzing our data we can use this principle of isomorphism to find a user\'92s behavioural patterns.[8] We don\'92t necessarily have to find data that are strictly equal, merely data that share the same relationships between their members. Using the example from 
+Another key advantage of using graphical databases is being able to utilize the body of work done in the field of pure mathematics on graphs. Using these simple mathematical formulas and equations we can query and analyze our data that are simply not possible using statistical analysis that is largely prevalent. One of the most basic tools of graph analysis is isomorphism[7] which sees if the pattern of two graphs is the same, disregarding their actual values. When analyzing our data we can use this principle of isomorphism to find a user\'92s behavioural patterns. We don\'92t necessarily have to find behavior that are strictly equal just with common patterns. Using the example from 
 \f1\b \cf2 \strokec2 Figure 7.1 
-\f2\b0 \cf2 \strokec2 if we want to find a routine we do not look for something that occurs every day at 08:00 AM, we look for data points that occurs with the same pattern. This will lead to many graphs being matched that do not occur in the morning and thus we can find similarities across time that are not readily apparent if you are looking for specific values. With these additional matches outside of the user\'92s morning routine we can expand our pattern search to see if other patterns occur related to this initial pattern. From here we can discover behavioural patterns that are not related to any particular activity or time but inherit in the individual themselves.\
+\f2\b0 \cf2 \strokec2 if we want to find a routine we do not look for your exercise and location at exactly 08:00 AM every day, we look for other behaviors that occur with the same pattern. This will lead to many graphs being matched that do not occur in the morning and thus we can find similarities across time that are not readily apparent if you are looking for specific values. With these additional matches outside of the user\'92s morning routine we can expand our pattern search to find larger patterns. Now we have recurring behavioural patterns that are not related to any particular activity or time but inherit in the individual themselves.\
+\
  \
 \pard\pardeftab720\partightenfactor0
 
@@ -328,13 +329,12 @@ Another key advantage of using a graphical database is being able to utilize the
 
 \f2\i0 \cf2 \strokec2 \
 \
-One of the more conventional use cases for graphical databases are for recommendation engines such as when Netflix recommends movies you might want to watch. For us we can use this to feed GP that recommend actions to users that will help achieve their goals. Like any recommendation service we look for similarities between the current user and the  the rest of the users in the database and then recommending any discrepancies. For movies this would work by seeing movies you have liked and then finding other users that liked the same movies and then recommending any movies to you that you haven\'92t watched yet that similar users have liked. There are three objects at play here, a movie, watching a movie, and liking a movie. A movie can exist without watching it, watching a movie does not mean that you like it, and liking a movie means you watched it. In our behaviour recommendation engine our three objects will be a particular behaviour, the action of that behaviour, and the purpose it serves. We will recommend by comparing the purpose of your behaviours to the purpose of others\'92 behaviour and then recommending the action of certain behaviours that accomplish the same purpose in others. The following example will help explain.\
+We can use your unique personal pattern for one of the conventional use cases of graphical databases - recommendation engines. Like any recommendation service we look for similarities between you and others with similar goals and purposes to give you suggestions to decide on. These recommendations are based on our GP simulations and what actions will generally benefit you and your purpose. Let\'92s look at an example.\
 \
-We can take the behavioural patterns of a man named Amir that has the desirable behaviour of a woman called Yuri who wants to exercise three times a week like Amir. We can use isomorphism to compare Amir\'92s behavioural pattern with to Yuri\'92s. Isomorphic comparisons do not care about the values so it does not matter that Amir\'92s exercise pattern revolves around driving to the gym to lift weights after work or that Yuri\'92s exercise pattern revolves around cycling tours on nights or weekends, the general pattern will be the same. So in order to change Yuri\'92s exercise pattern we recommend that she adopt Amir\'92s behavioural pattern, not the behaviours themselves. For this to work we must find every instance where Yuri\'92s pattern comes up and find some way to adapt it to the new pattern. This makes intuitive sense because changing one small part of your life creates outstanding impacts on other aspects of your life. This is evidence that the holistic approach we take to health & wellness is deeply embedded in the conceptual, computational, and data models of our system.\
+A man named Amir has some desirable behaviour that a woman called Yuri wants which is exercising three times a week. We can use isomorphism to compare Amir\'92s behavioural pattern with Yuri\'92s. Isomorphic comparisons do not care about the values so it does not matter that Amir exercises by driving to the gym to lift weights after work and Yuri exercises by doing cycling tours on nights and weekends. So in order to get Yuri exercising three times a week instead of once we recommend that she adopt Amir\'92s behavioural pattern, not the behaviours themselves. For this to work we must find every instance where Yuri\'92s pattern comes up and find some way to adapt it to Amir\'92s pattern. This makes sense because changing one small part of your life creates outstanding impacts on other aspects of your life. Moreover it helps Yuri improve other areas of her life, not just exercise. This is one way we incorporate our holistic approach  to health & wellness and deeply embed it in the conceptual, computational, and data models of our system.\
 \pard\pardeftab720\partightenfactor0
 
 \fs22 \cf2 \strokec2 \
-\
 \
 \pard\pardeftab720\partightenfactor0
 
@@ -346,53 +346,21 @@ We can take the behavioural patterns of a man named Amir that has the desirable 
 
 \fs24 \cf2 \strokec2 In addition to our data being modeled as a graph it is also modeled on time as can be seen in 
 \f1\b \cf2 \strokec2 Figure 7.1
-\f2\b0 \cf2 \strokec2 . Time is a key component of human consciousness, it is the basis for our understanding of the world and how we function.[10][11] It is engrained in our genetics, our culture, and our thought process. Considering that we are modeling human behaviour this is a logical method of representing a user\'92s data. This has many adverse affects on how data is structured, how it is utilized, and makes it intuitively understandable to our users in a raw format as opposed to rows of SQL. This is because of the visual representation and the explicit relationships between data points. It gets interesting when we start to graph large sets of this data and how they interrelate through time. Time is relational to the person experiencing it and also to itself which is why we have different \'93time zones\'94 and \'93hours in days\'94. Time is existent because each moment of time is related to each other and also because time itself is the actual relationship of these relations.\
-\
-With the abstract notation of graph theory this makes time the equivalent of any other human user in our database and thus we can analyze the behaviours of time. This does not require any  special algorithms or creating a replica database to augment the data structure and run specific queries all it requires is a simple change of perspective. To those not familiar with graph theory these may look like completely different graphs but they are in fact exactly the same. So instead of looking at our data and seeing we have a user that got messages at this time we see a time that has a user and messages.\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
+\f2\b0 \cf2 \strokec2 . Time is a key component of human consciousness, it is the basis for our understanding of the world and how we function[8][9]. It is engrained in our genetics, our culture, and our thought process. Considering that we are modeling human behaviour this is a logical method of representing a user\'92s data. This has many adverse affects on how data is structured, how it is utilized, and also makes it intuitively understandable to our users in a raw format as opposed to rows of SQL because of the explicit relationships and visual representation of graphs.\
  \
 \
 \
+With this perspective of our data model we can run analysis that can more effectively determine how people and events transgress over time. When apply time centric formatting on GP this allows us to incorporate time as factor in how we see individuals progress, interact with others, and solutions to life problems in our artificial society simulations. This is critical. Time is a finite resource in life and if our models do not understand this, or at the very least recognize it, then they will not be effective at producing real change. Change is in people is our object but people can only change with time so studying time must also be one of our objectives.\
 \
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-With this perspective of our data model we can run analysis that can more effectively determine how people and events transgress over time because time is the subject of our focus. When applied to genetic algorithms this allows us to incorporate time as factor in how we see individuals progress, interact with others, and solutions to their life problems. This is critical. Time is a finite resource in life and if our models do not understand this, or at the very least recognize it, then they will not be effective at producing real change.\
+\pard\pardeftab720\partightenfactor0
+
+\f4\b\fs32 \cf2 \strokec2 9 Conclusion \
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs24 \cf2 \strokec2 Inputting time centric graph notation of human behavioral patterns into genetic programs has never been done before and the results are unknown. Our mission of social impact and catalyzing human excellency using interconnected big data puts eMochi at the leading from of a new age of human society. To initially test our hypothesis that we can use data from your daily activity to influence your behavior we have built a mobile app based virtual avatar. We are seeing how people are interacting with the avatar itself (surprisingly affectionate) and if our current rudimentary system can influence them to exercise more (not enough data for results yet). As we continue developing our interface and and algorithms we will begin testing the deeper, more complex aspects of our theory. With our results so far we are optimistic that our envisioned system is not only technically viable but also desired by health conscious and growth mindset people. The health and wellness industry was valued at $3.7 trillion in 2015[10] and we are poised to take over a large portion of it and increase the total market value in addition.\
 \pard\pardeftab720\partightenfactor0
 
 \fs22 \cf2 \strokec2 \
-\
 \
 \
 \pard\pardeftab720\partightenfactor0
@@ -403,21 +371,11 @@ With this perspective of our data model we can run analysis that can more effect
 \f2\b0\fs22 \cf2 \strokec2 [0] {\field{\*\fldinst{HYPERLINK "https://insidebigdata.com/2017/02/16/the-exponential-growth-of-data/"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://insidebigdata.com/2017/02/16/the-exponential-growth-of-data/}}\
 [1] {\field{\*\fldinst{HYPERLINK "https://www.jjhpi.com/our-difference/"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://www.jjhpi.com/our-difference/}}\
 [2] {\field{\*\fldinst{HYPERLINK "https://books.google.com/books?hl=en&lr=&id=dwTvE44DOgQC&oi=fnd&pg=PA20&dq=A+Theory+of+Human+Motivation&ots=sSoOm35OCg&sig=kIcCWEMMlvaq68VnRm3rZ-UPGL8#v=onepage&q=A%20Theory%20of%20Human%20Motivation&f=false"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://books.google.com/books?hl=en&lr=&id=dwTvE44DOgQC&oi=fnd&pg=PA20&dq=A+Theory+of+Human+Motivation&ots=sSoOm35OCg&sig=kIcCWEMMlvaq68VnRm3rZ-UPGL8#v=onepage&q=A%20Theory%20of%20Human%20Motivation&f=false}}\
-\
-\
-\
-\
 [3] {\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Self-actualization"}}{\fldrslt \cf2 \ul \ulc2 \strokec2 https://en.wikipedia.org/wiki/Self-actualization}}\
 [4] {\field{\*\fldinst{HYPERLINK "http://geneticprogramming.com/software/"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 http://geneticprogramming.com/software/}}\
 [5] {\field{\*\fldinst{HYPERLINK "https://visualpharm.com/free-icons/genie-595b40b65ba036ed117d2d6d"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://visualpharm.com/free-icons/genie-595b40b65ba036ed117d2d6d}}\
-\
-\
-[10] \'93Wherever we shall look for it in the physiology or chemistry of the brain, we shall have to look for something more complex than pacemakers. We must look for a system that combines timer(s) with inhibitory regulators. Adjusting to or estimating duration for an animal organism is not simply putting landmarks in the flow of time; it means retaining and deferring action.\'93 (pg 222) {\field{\*\fldinst{HYPERLINK "http://www.sciencedirect.com/science?_ob=PdfExcerptURL&_imagekey=3-s2.0-B9780080254890500156-main.pdf&_piikey=B9780080254890500156&_cdi=306112&_orig=PublicationURL&_zone=rslt_list_item&_fmt=abst&_eid=3-s2.0-B9780080254890500156&_isbn=9780080254890&_user=12975512&md5=0766cc015145f0c335ae407c93c47fe1&ie=/excerpt.pdf"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 http://www.sciencedirect.com/science?_ob=PdfExcerptURL&_imagekey=3-s2.0-B9780080254890500156-main.pdf&_piikey=B9780080254890500156&_cdi=306112&_orig=PublicationURL&_zone=rslt_list_item&_fmt=abst&_eid=3-s2.0-B9780080254890500156&_isbn=9780080254890&_user=12975512&md5=0766cc015145f0c335ae407c93c47fe1&ie=/excerpt.pdf}}\
-\
-\pard\pardeftab720\partightenfactor0
-
-\f5\fs20 \cf2 \strokec2 \
-\pard\pardeftab720\partightenfactor0
-
-\f2\fs22 \cf2 \strokec2 [11] \'93Reward function appears to be modulated by the circadian system, but little is known about the neural basis of this interaction\'85The present study measured neural reward activation in the context of a validated reward task at 10.00 h, 14.00 h, and 19.00 h in healthy human males.\'94 {\field{\*\fldinst{HYPERLINK "http://www.jneurosci.org/content/37/37/8895"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 http://www.jneurosci.org/content/37/37/8895}}\
+[6] {\field{\*\fldinst{HYPERLINK "https://neo4j.com/product/"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://neo4j.com/product/}}\
+[7] {\field{\*\fldinst{HYPERLINK "https://www.mathworks.com/help/matlab/ref/graph.isisomorphic.html?s_tid=gn_loc_drop"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://www.mathworks.com/help/matlab/ref/graph.isisomorphic.html?s_tid=gn_loc_drop}}\
+[8] \'93Wherever we shall look for it in the physiology or chemistry of the brain, we shall have to look for something more complex than pacemakers. We must look for a system that combines timer(s) with inhibitory regulators. Adjusting to or estimating duration for an animal organism is not simply putting landmarks in the flow of time; it means retaining and deferring action.\'93 (pg 222) {\field{\*\fldinst{HYPERLINK "http://www.sciencedirect.com/science?_ob=PdfExcerptURL&_imagekey=3-s2.0-B9780080254890500156-main.pdf&_piikey=B9780080254890500156&_cdi=306112&_orig=PublicationURL&_zone=rslt_list_item&_fmt=abst&_eid=3-s2.0-B9780080254890500156&_isbn=9780080254890&_user=12975512&md5=0766cc015145f0c335ae407c93c47fe1&ie=/excerpt.pdf"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 http://www.sciencedirect.com/science?_ob=PdfExcerptURL&_imagekey=3-s2.0-B9780080254890500156-main.pdf&_piikey=B9780080254890500156&_cdi=306112&_orig=PublicationURL&_zone=rslt_list_item&_fmt=abst&_eid=3-s2.0-B9780080254890500156&_isbn=9780080254890&_user=12975512&md5=0766cc015145f0c335ae407c93c47fe1&ie=/excerpt.pdf}}\
+[9] \'93Reward function appears to be modulated by the circadian system, but little is known about the neural basis of this interaction\'85The present study measured neural reward activation in the context of a validated reward task at 10.00 h, 14.00 h, and 19.00 h in healthy human males.\'94 {\field{\*\fldinst{HYPERLINK "http://www.jneurosci.org/content/37/37/8895"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 http://www.jneurosci.org/content/37/37/8895}}\
 }
