@@ -16,11 +16,12 @@ export const createCypherMutation = (query) => (args) => (session) =>
   session.run(query, args)
     .then((result) => {
       session.close();
-      console.log("cypher mutation successful", result);
+      console.log("cypher mutation successful", result, session);
       return result;
     })
     .catch((error) => {
-      console.log("error in cypher mutation", error);
+      session.close();
+      console.log("error in cypher mutation", error, session);
       return error;
     })
 

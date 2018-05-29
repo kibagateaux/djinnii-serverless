@@ -1,0 +1,381 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;\f1\fnil\fcharset0 HelveticaNeue-Bold;\f2\fnil\fcharset0 HelveticaNeue;
+\f3\fnil\fcharset0 ArialUnicodeMS;\f4\fnil\fcharset0 Georgia-Bold;\f5\fnil\fcharset0 Georgia;
+\f6\fnil\fcharset0 HelveticaNeue-Italic;\f7\fnil\fcharset0 HelveticaNeue-BoldItalic;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}}
+\margl1440\margr1440
+\hyphauto1\hyphfactor100
+\deftab720
+\pard\pardeftab720\qc\partightenfactor0
+
+\f0\fs24 \cf2 \expnd0\expndtw0\kerning0
+\up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Whitepaper\
+\
+eMochi\
+\
+Self-Actualization \
+Powered By Evolutionary Computation\
+\
+\
+December 12, 2017\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs32 \cf2 \strokec2 \
+Table of Contents\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs22 \cf2 \strokec2 \
+\pard\tqr\tx8928\pardeftab720\li240\sa120\partightenfactor0
+
+\fs24 \cf2 \strokec2 Table of Contents	1\
+1 Executive Summary	2\
+2 Overview	2\
+3 System Design	3\
+3.1 Internal System Diagram	3\
+3.2 Frontend Ecosystem	4\
+3.3 Backend Ecosystem	5\
+4 Philosophy & Methodology	6\
+5 Business Proposition	7\
+5.1 B2C Business Model And Use Cases	7\
+5.2 B2B Business Model And Use Cases	9\
+6 Roadmap	10\
+7 Why a Graph Based Data Model	10\
+8 Why a Time Based Data Model	12\
+9 Conclusion 	13\
+Bibliography	14\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf2 \strokec2 \page \pard\pardeftab720\partightenfactor0
+
+\f4\b\fs36 \cf2 \strokec2 1 Executive Summary\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs24 \cf2 \strokec2 eMochi is a service that simulates human behaviour at the individual and societal level to predict and influence future behaviour. By aggregating massive amounts of real-world data from people\'92s everyday routines to plug into these virtual simulations, we can promote self-actualization and holistic wellness to help people achieve their purpose in life.
+\f5 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs22 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f4\b\fs32 \cf2 \strokec2 2 Overview\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs24 \cf2 \strokec2 In this paper we will be going over the business model, purpose, and technical advantages of our system\'92s implementation.\
+\pard\pardeftab720\partightenfactor0
+
+\fs22 \cf2 \strokec2 \
+\
+\pard\pardeftab720\qc\partightenfactor0
+
+\fs24 \cf2 \strokec2 \'93What won\'92t change in 10 years?\'94 - Jeff Bezos
+\fs22 \cf2 \strokec2 \
+
+\fs24 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \strokec2 \
+People will always want to be better. It is why society progresses at an exponential rate - humans insistently try to outdo ourselves. With more competition and collaboration then ever, we can catalyze this process of personal development.\
+\
+Our mission is to facilitate the process of self-reflection, self-exploration, and self-actualization for people to find their true selves in a manner that is conducive to their personal goals and those of society in a symbiotic manner.\
+\
+This can be achieved by combining data that is naturally generated in your everyday lifestyle from sources like wearables, personal journals, productivity tools, and embedded Internet of Things (IoT) systems[0]. This will all be used to qualitatively and quantitatively aggregate biometric, behavioural, psychologic, geographic, and environmental data to measure your health and wellbeing. We store your data for personal use, to build empathetic interfaces - namely a virtual avatar - and to help other services understand your unique needs.\
+\
+We base health on seven categories: Purpose, Physical, Nutritional, Environmental, Social, Emotional, and Mental[1]. We weigh these categories based on your highest purpose and the role it plays in achieving them. If your goal is to be an astronaut then environmental, physical, and mental factors are more important than social and nutritional. All categories still play a role as none can be neglected without causing deficiencies in other categories.\
+\
+You will be in constant communication with your avatar and simulations in a process combining biofeedback and self-experimentation. Your avatar serves as a subconscious learning mechanism as the avatar\'92s behaviour is based on your own. It is empathetic and will modify it\'92s behaviour to best console you whether managing stress or picking a healthy dinner option. You can interface through multiple channels to guide you through the process of self-actualization for a completely holistic experience.\
+\pard\pardeftab720\partightenfactor0
+
+\f4\b\fs36 \cf2 \strokec2 3 System Design\
+3.1 Internal System Diagram 
+\f1\fs24 \cf2 \strokec2 \
+
+\f4\fs36 \cf2 \strokec2 3.2 Frontend Ecosystem \
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \strokec2 \
+\pard\pardeftab720\qc\partightenfactor0
+
+\f1\fs24 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f4\fs36 \cf2 \strokec2 3.3 Backend Ecosystem\
+\pard\pardeftab720\qc\partightenfactor0
+
+\f1\fs24 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs22 \cf2 \strokec2 \
+\pard\pardeftab720\qc\partightenfactor0
+
+\f1\b\fs36 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs24 \cf2 \strokec2 \
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f4\b\fs32 \cf2 \strokec2 4
+\f1 \cf2 \strokec2  
+\f4 \cf2 \strokec2 Philosophy & Methodology\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs22 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 \strokec2 Our purpose in life is to realize our greatest possible achievements in the world. This is a mission shared not only by every single human being but every living being. What is our greatest achievement? How does this achievement come about? How does one even define their own goals and reach them? And once we have figured out this most fundamental question how do you even begin to track your progress towards realizing it?\
+\pard\pardeftab720\partightenfactor0
+
+\fs22 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 \strokec2 These questions have been asked and answered using mathematics, philosophy, biology, religion, and every other intellectual institution that human society has come to create. The answers change based on who you are and most importantly they are constantly evolving in unforeseeable ways. Now more than ever these questions bear down on our conscious because we as a society have fulfilled the lower layers of Maslow\'92s hierarchy[2] so our entire lives will be devoted to the goal of attaining self-actualization[3] - the pursuit of objective truth, creativity, and honing our unique capabilities as individuals. This is necessary because as tasks become automated and abstracted away from conscience human labor (a healthy symptom of technology and societal progress that has always existed) we must learn to manage our inherent potential and applying it to wholesome and fruitful causes.\
+\
+This is not unique a situation to human beings; it is present in all forms of life whether organic or inorganic. As with all natural laws we can postulate a theorem that describes this law of self-actualization much like the laws of gravity describe how bodies move at all levels of the universe (excluding quantum theory of course). These formulas have been developed by combining the fields of biology and computer science into a discipline called evolutionary computation and we will utilize a small subset of this practice called 
+\f6\i \cf2 \strokec2 Genetic Programming 
+\f2\i0 \cf2 \strokec2 (GP)[4].\
+\
+GP are a way to compute ingenious answers to ill-defined problems with no clear solution. They are not a specific set of equations but rather a philosophy and way of thinking about how a system of perpetually self-evolving programs can improve the next generation. Replace \'93equations\'94 with \'93people\'94 in their description and you have a description of how human society works. We will use this similarity between the purpose and structure of GP and civilization to create what are called artificial societies to simulate human behaviour and identify patterns that lead to optimal outcomes for both the individuals and the society as a whole.\
+\pard\pardeftab720\partightenfactor0
+
+\fs22 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 \strokec2 Today our society is building a monoculture through standardized education and a global ecosystem. We will augment social ecologic architecture so that each human is powerful in their own unique way so that together we can progress towards a future of unbounded potential harmonizing our disparate creative intellectual exploits. In order to facilitate individuality and achieve this optimal social ecologic system we will use GP to mimic education, skills, social behaviour, and other characteristics in artificial societies. Results of our simulation will help people decide which decisions to make that benefits them most in their practice of self-actualization. This is the core service we provide at eMochi which is then built upon and extended using apps, data analytics, and other business outlets in B2B and B2C marketplaces.\
+\
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f4\b\fs36 \cf2 \strokec2 5 Business Proposition\
+\
+5.1 B2C Business Model And Use Cases\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs22 \cf2 \strokec2 \
+ 
+\fs24 \cf2 \strokec2 \
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \strokec2 \
+\
+5.1a visualizations\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf2 \strokec2 Our proprietary data model and software architecture allows any number of visual representations to be made including mobile apps, AR/VR, stickers, and custom clothing.\
+eMochi will directly manage a universal virtual avatar for each user and third-parties are able to create their own using our open API.\
+\
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \strokec2 5.1b Social\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf2 \strokec2 Your avatar is a friend, someone to talk and decompress the day. Your friends can also interact with your avatar, and even your friends\'92 avatars can interact with you and your avatar, they are extensions of you.\
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \strokec2 \
+5.1c GamING\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf2 \strokec2 RPGs can use personal exercise data to alter in-game stats or unlock certain achievements by combining virtual and real world accomplishments. Doctors can gamify chronic disease management or journaling for psychotherapy.\
+\
+\
+ \
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f4\b\fs32 \cf2 \strokec2 5.2 B2B Business Model And Use Cases
+\fs24 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf2 \strokec2  \
+\
+\
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \strokec2 5.2a Calm Technology\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf2 \strokec2 Creating context for IoT devices to interact with you in an appropriate manner using your holistic profile and real time data generated by nearby Things.\
+\
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \strokec2 5.2b Marketing
+\fs20 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs24 \cf2 \strokec2 Using our unique data model combined with user\'92s life purpose we can target ads that are entirely beneficial, have multi-dimensional context not available to competitors, and can target singular needs of an individual in real time all backed by zero-knowledge analytics so user\'92s privacy is not at risk.\
+\
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \strokec2 5.2c Environmental\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf2 \strokec2 Environments impact is real and unrelenting. It takes cooperative action by individuals, corporations, and governments to fix. Using your profile we can help you and organizations mitigate ecological impact.\
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f7\i\b \cf2 \strokec2 \
+\
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\i0 \cf2 \strokec2 5.2d Social & Medical Research\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf2 \strokec2 The intricate connections we create between disparate data points allows unprecedented analytics and research for social impact. Both public and private institutions will be able to research, experiment, and innovate using a wealth of personal data backed by zero-knowledge systems so our user\'92s privacy is not at risk.\
+\pard\pardeftab720\partightenfactor0
+
+\fs22 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f4\b\fs32 \cf2 \strokec2 6 Roadmap\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs22 \cf2 \strokec2 \
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf2 \strokec2 Parable
+\fs20 \cf2 \strokec2  -\
+\pard\tx20\tx209\pardeftab720\li189\fi-190\partightenfactor0
+\ls1\ilvl0
+\f2\b0\fs24 \cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}\cf2 \expnd0\expndtw0\kerning0
+\up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Personal Avatar\
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}\cf2 \expnd0\expndtw0\kerning0
+\up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Fitness + Nutrition Focused.\
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}\cf2 \expnd0\expndtw0\kerning0
+\up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Interactive Chatbot\
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \strokec2 Parabellum
+\fs20 \cf2 \strokec2  - \
+\pard\tx20\tx209\pardeftab720\li189\fi-190\partightenfactor0
+\ls2\ilvl0
+\f2\b0\fs24 \cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}\cf2 \expnd0\expndtw0\kerning0
+\up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Open API\
+\ls2\ilvl0\cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}\cf2 \expnd0\expndtw0\kerning0
+\up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Financial + Social Focused\
+\ls2\ilvl0\cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}\cf2 \expnd0\expndtw0\kerning0
+\up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Genetic Algorithm Development\
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\pard\tx1150\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \strokec2 Zyphos
+\fs20 \cf2 \strokec2  - \
+\pard\tx20\tx209\pardeftab720\li189\fi-190\partightenfactor0
+\ls3\ilvl0
+\f2\b0\fs24 \cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}\cf2 \expnd0\expndtw0\kerning0
+\up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Marketing Platform\
+\ls3\ilvl0\cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}\cf2 \expnd0\expndtw0\kerning0
+\up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Emotional + Mental Focused\
+\ls3\ilvl0\cf2 \kerning1\expnd0\expndtw0 \up0 \nosupersub \ulnone \outl0\strokewidth0 {\listtext	\'95	}\cf2 \expnd0\expndtw0\kerning0
+\up0 \nosupersub \ulnone \outl0\strokewidth0 \strokec2 Genetic Program Development\
+\pard\pardeftab720\partightenfactor0
+
+\fs22 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f4\b\fs32 \cf2 \strokec2 7 Why a Graph Based Data Model\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs22 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 \strokec2 One of the main challenges we will face is how to manage this plethora of data. We will have hundreds if not thousands of data aggregation sources for every user that will need to be stored in a way that allows us to see how they are related to each other in a meaningful way. The data from any one second can have the weather, what activity the you are doing, who you are with, your heart rate, etc. How do we keep the depth of context about this data that exists not just in the data itself but in how the data is related to each other? For this we utilize graphical databases which are specifically designed to for these types of problems.\
+\
+This is one of the most critical technical details of our implementation. This allows us to see correlations and direct relationships between behaviour of individuals and between two or more people (how does Mom\'92s actions affect the family). We can easily see how often someone exercises and how there buying habits change in relation to the time since they last worked out and which gym they went to, something that can be cumbersome with a traditional SQL or NoSQL database.\
+\
+\
+\
+ \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f6\i \cf2 \strokec2 \'93Trends like social, mobile, analytics and cloud \'96 as well as tomorrow\'92s aspirations towards autonomy, IoT and deep neural networks \'96 are all dependent on increasing data connectedness. And yet, it remains extremely difficult for modern data stacks based on SQL and NoSQL to divine how data elements are related\'85Yesterday's breakthrough applications were driven by big data \'96 tomorrow's breakthrough applications will be driven by connected data.\'94 
+\f2\i0 \cf2 \strokec2 Neo4j, largest graph database company in the world[6]
+\f6\i \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\i0 \cf2 \strokec2 \
+\
+Another key advantage of using graphical databases is being able to utilize the body of work done in the field of pure mathematics on graphs. Using these simple mathematical formulas and equations we can query and analyze our data that are simply not possible using statistical analysis that is largely prevalent. One of the most basic tools of graph analysis is isomorphism[7] which sees if the pattern of two graphs is the same, disregarding their actual values. When analyzing our data we can use this principle of isomorphism to find a user\'92s behavioural patterns. We don\'92t necessarily have to find behavior that are strictly equal just with common patterns. Using the example from 
+\f1\b \cf2 \strokec2 Figure 7.1 
+\f2\b0 \cf2 \strokec2 if we want to find a routine we do not look for your exercise and location at exactly 08:00 AM every day, we look for other behaviors that occur with the same pattern. This will lead to many graphs being matched that do not occur in the morning and thus we can find similarities across time that are not readily apparent if you are looking for specific values. With these additional matches outside of the user\'92s morning routine we can expand our pattern search to find larger patterns. Now we have recurring behavioural patterns that are not related to any particular activity or time but inherit in the individual themselves.\
+\
+ \
+\pard\pardeftab720\partightenfactor0
+
+\f7\i\b \cf2 \strokec2 Figure 8.2 
+\f6\b0 \cf2 \strokec2 Graphic taken from Neo4j.com indicating how graphs can interconnect to add additional context to data\
+\pard\pardeftab720\partightenfactor0
+
+\f2\i0 \cf2 \strokec2 \
+\
+We can use your unique personal pattern for one of the conventional use cases of graphical databases - recommendation engines. Like any recommendation service we look for similarities between you and others with similar goals and purposes to give you suggestions to decide on. These recommendations are based on our GP simulations and what actions will generally benefit you and your purpose. Let\'92s look at an example.\
+\
+A man named Amir has some desirable behaviour that a woman called Yuri wants which is exercising three times a week. We can use isomorphism to compare Amir\'92s behavioural pattern with Yuri\'92s. Isomorphic comparisons do not care about the values so it does not matter that Amir exercises by driving to the gym to lift weights after work and Yuri exercises by doing cycling tours on nights and weekends. So in order to get Yuri exercising three times a week instead of once we recommend that she adopt Amir\'92s behavioural pattern, not the behaviours themselves. For this to work we must find every instance where Yuri\'92s pattern comes up and find some way to adapt it to Amir\'92s pattern. This makes sense because changing one small part of your life creates outstanding impacts on other aspects of your life. Moreover it helps Yuri improve other areas of her life, not just exercise. This is one way we incorporate our holistic approach  to health & wellness and deeply embed it in the conceptual, computational, and data models of our system.\
+\pard\pardeftab720\partightenfactor0
+
+\fs22 \cf2 \strokec2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f4\b\fs32 \cf2 \strokec2 8 Why a Time Based Data Model\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs22 \cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf2 \strokec2 In addition to our data being modeled as a graph it is also modeled on time as can be seen in 
+\f1\b \cf2 \strokec2 Figure 7.1
+\f2\b0 \cf2 \strokec2 . Time is a key component of human consciousness, it is the basis for our understanding of the world and how we function[8][9]. It is engrained in our genetics, our culture, and our thought process. Considering that we are modeling human behaviour this is a logical method of representing a user\'92s data. This has many adverse affects on how data is structured, how it is utilized, and also makes it intuitively understandable to our users in a raw format as opposed to rows of SQL because of the explicit relationships and visual representation of graphs.\
+ \
+\
+\
+With this perspective of our data model we can run analysis that can more effectively determine how people and events transgress over time. When apply time centric formatting on GP this allows us to incorporate time as factor in how we see individuals progress, interact with others, and solutions to life problems in our artificial society simulations. This is critical. Time is a finite resource in life and if our models do not understand this, or at the very least recognize it, then they will not be effective at producing real change. Change is in people is our object but people can only change with time so studying time must also be one of our objectives.\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f4\b\fs32 \cf2 \strokec2 9 Conclusion \
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs24 \cf2 \strokec2 Inputting time centric graph notation of human behavioral patterns into genetic programs has never been done before and the results are unknown. Our mission of social impact and catalyzing human excellency using interconnected big data puts eMochi at the leading from of a new age of human society. To initially test our hypothesis that we can use data from your daily activity to influence your behavior we have built a mobile app based virtual avatar. We are seeing how people are interacting with the avatar itself (surprisingly affectionate) and if our current rudimentary system can influence them to exercise more (not enough data for results yet). As we continue developing our interface and and algorithms we will begin testing the deeper, more complex aspects of our theory. With our results so far we are optimistic that our envisioned system is not only technically viable but also desired by health conscious and growth mindset people. The health and wellness industry was valued at $3.7 trillion in 2015[10] and we are poised to take over a large portion of it and increase the total market value in addition.\
+\pard\pardeftab720\partightenfactor0
+
+\fs22 \cf2 \strokec2 \
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs32 \cf2 \strokec2 Bibliography\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0\fs22 \cf2 \strokec2 [0] {\field{\*\fldinst{HYPERLINK "https://insidebigdata.com/2017/02/16/the-exponential-growth-of-data/"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://insidebigdata.com/2017/02/16/the-exponential-growth-of-data/}}\
+[1] {\field{\*\fldinst{HYPERLINK "https://www.jjhpi.com/our-difference/"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://www.jjhpi.com/our-difference/}}\
+[2] {\field{\*\fldinst{HYPERLINK "https://books.google.com/books?hl=en&lr=&id=dwTvE44DOgQC&oi=fnd&pg=PA20&dq=A+Theory+of+Human+Motivation&ots=sSoOm35OCg&sig=kIcCWEMMlvaq68VnRm3rZ-UPGL8#v=onepage&q=A%20Theory%20of%20Human%20Motivation&f=false"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://books.google.com/books?hl=en&lr=&id=dwTvE44DOgQC&oi=fnd&pg=PA20&dq=A+Theory+of+Human+Motivation&ots=sSoOm35OCg&sig=kIcCWEMMlvaq68VnRm3rZ-UPGL8#v=onepage&q=A%20Theory%20of%20Human%20Motivation&f=false}}\
+[3] {\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Self-actualization"}}{\fldrslt \cf2 \ul \ulc2 \strokec2 https://en.wikipedia.org/wiki/Self-actualization}}\
+[4] {\field{\*\fldinst{HYPERLINK "http://geneticprogramming.com/software/"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 http://geneticprogramming.com/software/}}\
+[5] {\field{\*\fldinst{HYPERLINK "https://visualpharm.com/free-icons/genie-595b40b65ba036ed117d2d6d"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://visualpharm.com/free-icons/genie-595b40b65ba036ed117d2d6d}}\
+[6] {\field{\*\fldinst{HYPERLINK "https://neo4j.com/product/"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://neo4j.com/product/}}\
+[7] {\field{\*\fldinst{HYPERLINK "https://www.mathworks.com/help/matlab/ref/graph.isisomorphic.html?s_tid=gn_loc_drop"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://www.mathworks.com/help/matlab/ref/graph.isisomorphic.html?s_tid=gn_loc_drop}}\
+[8] \'93Wherever we shall look for it in the physiology or chemistry of the brain, we shall have to look for something more complex than pacemakers. We must look for a system that combines timer(s) with inhibitory regulators. Adjusting to or estimating duration for an animal organism is not simply putting landmarks in the flow of time; it means retaining and deferring action.\'93 (pg 222) {\field{\*\fldinst{HYPERLINK "http://www.sciencedirect.com/science?_ob=PdfExcerptURL&_imagekey=3-s2.0-B9780080254890500156-main.pdf&_piikey=B9780080254890500156&_cdi=306112&_orig=PublicationURL&_zone=rslt_list_item&_fmt=abst&_eid=3-s2.0-B9780080254890500156&_isbn=9780080254890&_user=12975512&md5=0766cc015145f0c335ae407c93c47fe1&ie=/excerpt.pdf"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 http://www.sciencedirect.com/science?_ob=PdfExcerptURL&_imagekey=3-s2.0-B9780080254890500156-main.pdf&_piikey=B9780080254890500156&_cdi=306112&_orig=PublicationURL&_zone=rslt_list_item&_fmt=abst&_eid=3-s2.0-B9780080254890500156&_isbn=9780080254890&_user=12975512&md5=0766cc015145f0c335ae407c93c47fe1&ie=/excerpt.pdf}}\
+[9] \'93Reward function appears to be modulated by the circadian system, but little is known about the neural basis of this interaction\'85The present study measured neural reward activation in the context of a validated reward task at 10.00 h, 14.00 h, and 19.00 h in healthy human males.\'94 {\field{\*\fldinst{HYPERLINK "http://www.jneurosci.org/content/37/37/8895"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 http://www.jneurosci.org/content/37/37/8895}}\
+}

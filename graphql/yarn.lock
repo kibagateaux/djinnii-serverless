@@ -140,12 +140,6 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-aws-serverless-express@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/aws-serverless-express/-/aws-serverless-express-3.0.2.tgz#38ceb2a5786aa5cfb51033d9c3692fd7972605db"
-  dependencies:
-    binary-case "^1.0.0"
-
 aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
@@ -649,10 +643,6 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-binary-case@^1.0.0:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/binary-case/-/binary-case-1.1.3.tgz#f91d0e3008f1fb0f4043d6594522d66d6d1c8409"
-
 binary-extensions@^1.0.0:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-1.11.0.tgz#46aa1751fb6a2f93ee5e689bb1087d4b14c6c205"
@@ -946,7 +936,7 @@ expand-range@^1.8.1:
   dependencies:
     fill-range "^2.1.0"
 
-express@^4.16.1, express@^4.16.2:
+express@^4.16.1:
   version "4.16.2"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.2.tgz#e35c6dfe2d64b7dca0a5cd4f21781be3299e076c"
   dependencies:
@@ -1158,7 +1148,7 @@ graphql-server-core@^1.1.0:
   dependencies:
     apollo-server-core "^1.3.0"
 
-graphql-server-express@^1.1.2, graphql-server-express@^1.3.0:
+graphql-server-express@^1.1.2:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/graphql-server-express/-/graphql-server-express-1.3.0.tgz#f9276a59c2aedff893fe78869a5bc5dea519f6f7"
   dependencies:
@@ -1545,6 +1535,16 @@ kind-of@^4.0.0:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-4.0.0.tgz#20813df3d712928b207378691a45066fae72dd57"
   dependencies:
     is-buffer "^1.1.5"
+
+lodash-compat@^3.10.2:
+  version "3.10.2"
+  resolved "https://registry.yarnpkg.com/lodash-compat/-/lodash-compat-3.10.2.tgz#c6940128a9d30f8e902cd2cf99fd0cba4ecfc183"
+
+lodash-fp@^0.10.4:
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/lodash-fp/-/lodash-fp-0.10.4.tgz#2a78c654b25a0c46753a20aa786df641c7f82e67"
+  dependencies:
+    lodash-compat "^3.10.2"
 
 lodash.once@^4.0.0:
   version "4.1.1"
@@ -1987,6 +1987,10 @@ request@2.81.0:
     tough-cookie "~2.3.0"
     tunnel-agent "^0.6.0"
     uuid "^3.0.0"
+
+require-all@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/require-all/-/require-all-2.2.0.tgz#b4420c233ac0282d0ff49b277fb880a8b5de0894"
 
 rimraf@2, rimraf@^2.5.1, rimraf@^2.6.1:
   version "2.6.2"
